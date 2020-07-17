@@ -22,7 +22,7 @@ for genre in genres:
 	print("Zanr: ",genre.text)
 print("Autor: ",author)
 print("Anotace: ",annotation.text)
-#pocet stranek recenzi protoze prvni stranka je otevrena s prvnim pristupem na url
+#pocet stranek recenzi
 rewiev_page_count=len(page_soup.findAll("a",{"class":"textlist_item_select_width round_mini"}))+1
 
 rewiev_cnt=0
