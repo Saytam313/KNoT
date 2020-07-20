@@ -1,7 +1,7 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup    
 
-my_url='https://www.cbdb.cz/kniha-533-maly-princ-le-petit-prince?order_comments=time'
+my_url='https://www.cbdb.cz/kniha-195063-10-celostatni-konference-o-predpjatem-betonu?order_comments=time'
 
 #otevre url a precte html zadaneho url
 uClient = uReq(my_url)
@@ -59,4 +59,5 @@ for rewiev_page in range(1,rewiev_page_count+1):
 		print(str(rewiev_cnt)+'\t'+username+'\t'+userid+'\t'+date+'\t'+rating+'\t'+comment+'\n') 
 
 print("pocet recenzi",rewiev_cnt)
-print("prumerne hodnoceni",str(round((rewiev_rating_sum/rewiev_cnt),2))+'%')
+if(rewiev_cnt>0):
+	print("prumerne hodnoceni",str(round((rewiev_rating_sum/rewiev_cnt),2))+'%')
