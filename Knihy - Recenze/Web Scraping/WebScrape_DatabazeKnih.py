@@ -1,5 +1,7 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup    
+import os, sys
+
 
 my_url='https://www.databazeknih.cz/knihy/harry-potter-harry-potter-a-fenixuv-rad-13?str=1'
 
@@ -11,8 +13,19 @@ uClient.close()
 #vyhledani hledanych dat v html
 page_soup = soup(page_html, "html.parser")
 
+Nazev = page_soup.find("h1",{"itemprop":"name"}).text
+
+BookDirPath="../Results/"+Nazev
+if(not os.path.isdir(BookDirPath)):
+	os.mkdir("../Results/"+Nazev);
+
+DatabazeKnihReviews = open("../Results/"+Nazev+"/DatabazeKnihReviews.txt", "w",encoding="utf-8")
+
+
 #pocet stranek recenzi protoze prvni stranka je otevrena s prvnim pristupem na url
 rewiev_page_count=int(page_soup.find("div",{"class":"pager"}).text.split(' ')[-1])
+
+
 
 rewiev_cnt=0
 rewiev_rating_sum=0
@@ -56,8 +69,10 @@ for rewiev_page in range(1,rewiev_page_count+1):
 		else:
 			rewiev_rating_sum+=50 
 
-		print(username+'\t'+str(likes)+'\t'+date+'\t'+str(rating)+'\t'+comment) 
+		DatabazeKnihReviews.write(username+'\t'+str(likes)+'\t'+date+'\t'+str(rating)+'\t'+comment+'\n') 
 
 
-print("pocet recenzi",rewiev_cnt)
-print("prumerne hodnoceni",str(round((rewiev_rating_sum/rewiev_cnt),2))+'%')
+#print("pocet recenzi",rewiev_cnt)
+#print("prumerne hodnoceni",str(round((rewiev_rating_sum/rewiev_cnt),2))+'%')
+
+DatabazeKnihReviews.close()
