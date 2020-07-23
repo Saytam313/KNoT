@@ -75,4 +75,13 @@ for rewiev_page in range(1,rewiev_page_count+1):
 #print("pocet recenzi",rewiev_cnt)
 #print("prumerne hodnoceni",str(round((rewiev_rating_sum/rewiev_cnt),2))+'%')
 
+bookInfo = open("../Results/"+Nazev+"/BookInfo.txt", "a",encoding="utf-8")
+
+
+bookInfo.write("DatabazeKnih - pocet recenzi: "+str(rewiev_cnt)+'\n')
+if(rewiev_cnt>0):
+	bookInfo.write("DatabazeKnih - prumerne hodnoceni: "+str(round((rewiev_rating_sum/rewiev_cnt),2))+'%'+'\n')
+
+bookInfo.close()
+
 DatabazeKnihReviews.close()

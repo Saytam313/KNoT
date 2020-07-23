@@ -75,8 +75,12 @@ for rewiev_page in range(1,rewiev_page_count+1):
 			rewiev_rating_sum+=int(rating[:-1])
 		cbdbReviews.write(str(rewiev_cnt)+'\t'+username+'\t'+userid+'\t'+date+'\t'+rating+'\t'+comment+'\n') 
 
-#cbdbReviews.write("pocet recenzi: "+str(rewiev_cnt))
-#if(rewiev_cnt>0):
-	#cbdbReviews.write("prumerne hodnoceni: "+str(round((rewiev_rating_sum/rewiev_cnt),2))+'%')
+bookInfo = open("../Results/"+Nazev+"/BookInfo.txt", "a",encoding="utf-8")
 
+
+bookInfo.write("cbdb - pocet recenzi: "+str(rewiev_cnt)+'\n')
+if(rewiev_cnt>0):
+	bookInfo.write("cbdb - prumerne hodnoceni: "+str(round((rewiev_rating_sum/rewiev_cnt),2))+'%'+'\n')
+
+bookInfo.close()
 cbdbReviews.close()
