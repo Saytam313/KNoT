@@ -2,7 +2,7 @@ from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup    
 import os, sys
 
-my_url='https://www.cbdb.cz/kniha-10-harry-potter-a-fenixuv-rad-harry-potter-and-the-order-of-the-phoenix?order_comments=time'
+my_url='https://www.cbdb.cz/kniha-365448-jeden-z-nas-someone-we-know?order_comments=time'
 
 #otevre url a precte html zadaneho url
 uClient = uReq(my_url)
@@ -22,11 +22,12 @@ if(isbn is None):
 	isbn='??'
 
 #tisk vyhledanych dat
-BookDirPath="../Results/"+Nazev
+NazevDir = Nazev.translate({ord(i): None for i in '"\/:|<>*?'})
+BookDirPath="../Results/"+NazevDir
 if(not os.path.isdir(BookDirPath)):
-	os.mkdir("../Results/"+Nazev);
+	os.mkdir("../Results/"+NazevDir);
 
-bookInfo = open("../Results/"+Nazev+"/BookInfo.txt", "w",encoding="utf-8")
+bookInfo = open("../Results/"+NazevDir+"/BookInfo.txt", "w",encoding="utf-8")
 
 
 bookInfo.write("Nazev: "+Nazev+'\n')
@@ -40,7 +41,7 @@ bookInfo.close()
 rewiev_page_count=len(page_soup.findAll("a",{"class":"textlist_item_select_width round_mini"}))+1
 
 
-cbdbReviews = open("../Results/"+Nazev+"/cbdbReviews.txt", "w",encoding="utf-8")
+cbdbReviews = open("../Results/"+NazevDir+"/cbdbReviews.txt", "w",encoding="utf-8")
 
 rewiev_cnt=0
 rewiev_rating_sum=0
@@ -73,9 +74,9 @@ for rewiev_page in range(1,rewiev_page_count+1):
 		rewiev_cnt+=1
 		if(rating!="??"):
 			rewiev_rating_sum+=int(rating[:-1])
-		cbdbReviews.write(str(rewiev_cnt)+'\t'+username+'\t'+userid+'\t'+date+'\t'+rating+'\t'+comment+'\n') 
+		cbdbReviews.write(username+'\t'+userid+'\t'+date+'\t'+rating+'\t'+comment+'\n') 
 
-bookInfo = open("../Results/"+Nazev+"/BookInfo.txt", "a",encoding="utf-8")
+bookInfo = open("../Results/"+NazevDir+"/BookInfo.txt", "a",encoding="utf-8")
 
 
 bookInfo.write("cbdb - pocet recenzi: "+str(rewiev_cnt)+'\n')
