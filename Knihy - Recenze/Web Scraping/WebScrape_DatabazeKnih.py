@@ -14,12 +14,13 @@ uClient.close()
 page_soup = soup(page_html, "html.parser")
 
 Nazev = page_soup.find("h1",{"itemprop":"name"}).text
+NazevDir = Nazev.translate({ord(i): None for i in '"\/:|<>*?'})#odstraneni znaku ktere windows nepovoluje v nazvu slozky
 
-BookDirPath="../Results/"+Nazev
+BookDirPath="../Results/"+NazevDir
 if(not os.path.isdir(BookDirPath)):
-	os.mkdir("../Results/"+Nazev);
+	os.mkdir("../Results/"+NazevDir);
 
-DatabazeKnihReviews = open("../Results/"+Nazev+"/DatabazeKnihReviews.txt", "w",encoding="utf-8")
+DatabazeKnihReviews = open("../Results/"+NazevDir+"/DatabazeKnihReviews.txt", "w",encoding="utf-8")
 
 
 #pocet stranek recenzi protoze prvni stranka je otevrena s prvnim pristupem na url
@@ -75,7 +76,7 @@ for rewiev_page in range(1,rewiev_page_count+1):
 #print("pocet recenzi",rewiev_cnt)
 #print("prumerne hodnoceni",str(round((rewiev_rating_sum/rewiev_cnt),2))+'%')
 
-bookInfo = open("../Results/"+Nazev+"/BookInfo.txt", "a",encoding="utf-8")
+bookInfo = open("../Results/"+NazevDir+"/BookInfo.txt", "a",encoding="utf-8")
 
 
 bookInfo.write("DatabazeKnih - pocet recenzi: "+str(rewiev_cnt)+'\n')
