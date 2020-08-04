@@ -2,7 +2,7 @@ from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup    
 import os, sys
 import datetime
-
+import WebScrape_DatabazeKnih.py
 
 def get_date(Datestr):
 	DateList=Datestr.split('. ')
@@ -61,28 +61,14 @@ for line in NewReviewBooks:
 	BookDirPath="../Results/"+NazevDir
 	if(not os.path.isdir(BookDirPath)):
 		os.mkdir("../Results/"+NazevDir);
+		WebScrape_DatabazeKnih.Webscrape(my_url)
+		continue
 
 	DatabazeKnihReviews = open("../Results/"+NazevDir+"/DatabazeKnihReviews.txt", "a",encoding="utf-8")
 
 
 	for review in reviews:
-		'''
-		username=review.div.img["alt"]
-		userid=review.a["href"].split('-')[1]
-		
-		date=review.div.div.span
-		if(get_date(date) < LastUpdateDate):
-			break
 
-		rating=header.img 
-		if(rating is not None): #pripad kde recenze nema hodnoceni
-			rating=header.img["alt"] 
-		else:
-			rating="??"
-
-		comment=review.find("div",{"class":"comment_content"}).text
-		comment=comment.replace('\n',' ')
-		'''
 		username=review.div.a.text
 
 		likes=review.div.div.em
