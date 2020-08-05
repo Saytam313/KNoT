@@ -2,7 +2,7 @@ from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup    
 import os, sys
 import datetime
-import WebScrape_DatabazeKnih.py
+import WebScrape_DatabazeKnih
 
 def get_date(Datestr):
 	DateList=Datestr.split('. ')
@@ -48,7 +48,6 @@ LastUpdateDate = get_date(NewReviewBooks[0])
 NewReviewBooks.pop(0)#odstraneni data posledni aktualizace ze seznamu
 
 for line in NewReviewBooks:
-	
 	my_url='https://www.databazeknih.cz/'+line
 	uClient = uReq(my_url)
 	page_html = uClient.read()
@@ -61,16 +60,19 @@ for line in NewReviewBooks:
 	BookDirPath="../Results/"+NazevDir
 	if(not os.path.isdir(BookDirPath)):
 		os.mkdir("../Results/"+NazevDir);
-		WebScrape_DatabazeKnih.Webscrape(my_url)
+		WebScrape_DatabazeKnih.Webscrape_reviews(my_url)
 		continue
+
+	if('BookInfo.txt' not in os.listdir("../Results/"+NazevDir)):
+		WebScrape_DatabazeKnih.Webscrape_head(page_soup)
 
 	DatabazeKnihReviews = open("../Results/"+NazevDir+"/DatabazeKnihReviews.txt", "a",encoding="utf-8")
 
 
 	for review in reviews:
 
-		username=review.div.a.text
 
+		username=review.div.a.text
 		likes=review.div.div.em
 		if(likes is not None):
 			likes=likes.text

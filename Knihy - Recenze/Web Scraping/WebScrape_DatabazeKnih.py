@@ -10,7 +10,13 @@ def Webscrape_head(page_soup):
 
 	Autor = page_soup.find("span",{"itemprop":"author"}).text
 	Zanry = page_soup.select('a[href*="zanr"]')
-	Anotace = page_soup.find("span",{"class":"start_text"}).text.replace('\n',' ')
+
+	try:
+
+		Anotace = page_soup.find("span",{"class":"start_text"}).text.replace('\n',' ')
+
+	except AttributeError:
+		Anotace = '??'
 
 	BookInfoFile.write("Nazev: "+Nazev+'\n')
 	for genre in Zanry:
@@ -20,7 +26,7 @@ def Webscrape_head(page_soup):
 	BookInfoFile.close()
 
 
-def WebScrape_reviews(my_url):
+def Webscrape_reviews(my_url):
 
 	#otevre url a precte html zadaneho url
 	uClient = uReq(my_url)
@@ -39,11 +45,16 @@ def WebScrape_reviews(my_url):
 
 	if('BookInfo.txt' not in os.listdir("../Results/"+NazevDir)):
 		Webscrape_head(page_soup)
+
 	DatabazeKnihReviews = open("../Results/"+NazevDir+"/DatabazeKnihReviews.txt", "w",encoding="utf-8")
 
 
-	#pocet stranek recenzi protoze prvni stranka je otevrena s prvnim pristupem na url
-	rewiev_page_count=int(page_soup.find("div",{"class":"pager"}).text.split(' ')[-1])
+	#pocet stranek recenzi
+	if('c=all' in my_url):
+		rewiev_page_count=1
+	else:
+		rewiev_page_count=int(page_soup.find("div",{"class":"pager"}).text.split(' ')[-1])
+
 
 
 
@@ -96,11 +107,6 @@ def WebScrape_reviews(my_url):
 	#print("prumerne hodnoceni",str(round((rewiev_rating_sum/rewiev_cnt),2))+'%')
 
 	bookInfo = open("../Results/"+NazevDir+"/BookInfo.txt", "a",encoding="utf-8")
-
-
-	bookInfo.write("DatabazeKnih - pocet recenzi: "+str(rewiev_cnt)+'\n')
-	if(rewiev_cnt>0):
-		bookInfo.write("DatabazeKnih - prumerne hodnoceni: "+str(round((rewiev_rating_sum/rewiev_cnt),2))+'%'+'\n')
 
 	bookInfo.close()
 

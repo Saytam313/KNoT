@@ -2,6 +2,7 @@ from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup    
 import os, sys
 import datetime
+import WebScrape_cbdb
 
 def get_date(Datestr):
 	return datetime.datetime.strptime(Datestr, '%d. %m. %Y, %H:%M')
@@ -26,11 +27,17 @@ for line in NewReviewBooks:
 	NazevDir = Nazev.translate({ord(i): None for i in '"\/:|<>*?'})#odstraneni znaku ktere windows nepovoluje v nazvu slozky
 	BookDirPath="../Results/"+NazevDir
 	if(not os.path.isdir(BookDirPath)):
-		os.mkdir("../Results/"+NazevDir);
+		os.mkdir("../Results/"+NazevDir)
+		WebScrape_cbdb.WebScrape_reviews(my_url)
+		continue
+
+	if('BookInfo.txt' not in os.listdir("../Results/"+NazevDir)):
+		WebScrape_cbdb.Webscrape_head(page_soup)
+
 
 	cbdbReviews = open("../Results/"+NazevDir+"/cbdbReviews.txt", "a",encoding="utf-8")
-
 	rewiev_page_count=len(page_soup.findAll("a",{"class":"textlist_item_select_width round_mini"}))+1	
+
 	for rewiev_page in range(1,rewiev_page_count+1):
 
 		if(rewiev_page!=1):
