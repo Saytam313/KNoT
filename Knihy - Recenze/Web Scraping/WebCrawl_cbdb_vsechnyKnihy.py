@@ -34,6 +34,9 @@ def FindBookUrls(idLow,idHigh):
 			page_soup = soup(page_html, "html.parser")
 			content = page_soup.find("div",{"id":"content"})  
 		page_count=int(content.findAll("a",{"class":"topic_paging_item round_mini"})[-1].text)
+		if(PageId+page_count<idLow):
+			PageId+=page_count
+			continue
 		for page in range(1,page_count+1):
 			if(page!=1):
 				my_url="https://www.cbdb.cz/"+char+'-'+str(page)
