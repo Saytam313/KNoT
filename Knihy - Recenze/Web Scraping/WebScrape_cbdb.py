@@ -44,8 +44,10 @@ def WebScrape_reviews(my_url):
 	#pocet stranek recenzi
 	rewiev_page_count=len(page_soup.findAll("a",{"class":"textlist_item_select_width round_mini"}))+1
 
-
-	cbdbReviews = open("../Results/"+NazevDir+"/cbdbReviews.txt", "w",encoding="utf-8")
+	if(os.path.exists("../Results/"+NazevDir+"/cbdbReviews.txt")):
+		cbdbReviews = open("../Results/"+NazevDir+"/cbdbReviews.txt", "a",encoding="utf-8")		
+	else:
+		cbdbReviews = open("../Results/"+NazevDir+"/cbdbReviews.txt", "w",encoding="utf-8")
 
 	rewiev_cnt=0
 	rewiev_rating_sum=0

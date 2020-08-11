@@ -27,7 +27,8 @@ def Webscrape_head(page_soup):
 
 
 def Webscrape_reviews(my_url):
-
+	if('c=all' not in my_url):
+		my_url = my_url + '?c=all'
 	#otevre url a precte html zadaneho url
 	uClient = uReq(my_url)
 	page_html = uClient.read()
@@ -46,18 +47,18 @@ def Webscrape_reviews(my_url):
 	if('BookInfo.txt' not in os.listdir("../Results/"+NazevDir)):
 		Webscrape_head(page_soup)
 
-	DatabazeKnihReviews = open("../Results/"+NazevDir+"/DatabazeKnihReviews.txt", "w",encoding="utf-8")
 
-
-	#pocet stranek recenzi
-	if('c=all' in my_url):
-		rewiev_page_count=1
+	if(os.path.exists("../Results/"+NazevDir+"/DatabazeKnihReviews.txt")):
+		DatabazeKnihReviews = open("../Results/"+NazevDir+"/DatabazeKnihReviews.txt", "a",encoding="utf-8")
 	else:
-		rewiev_page_count=int(page_soup.find("div",{"class":"pager"}).text.split(' ')[-1])
+
+		DatabazeKnihReviews = open("../Results/"+NazevDir+"/DatabazeKnihReviews.txt", "w",encoding="utf-8")
 
 
 
 
+
+	rewiev_page_count=1
 	rewiev_cnt=0
 	rewiev_rating_sum=0
 	for rewiev_page in range(1,rewiev_page_count+1):
@@ -70,7 +71,7 @@ def Webscrape_reviews(my_url):
 			uClient.close()
 			page_soup = soup(page_html, "html.parser")
 		reviews = page_soup.findAll("div",{"class":"komentars_user komover"})
-		
+		reviews+= page_soup.findAll("div",{"class":"komentars_user_last komover"})
 		for review in reviews:
 			username=review.div.a.text
 
