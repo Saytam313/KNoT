@@ -102,6 +102,7 @@ def Webscrape_reviews(my_url):
 				rewiev_rating_sum+=50 
 
 			DatabazeKnihReviews.write(username+'\t'+str(likes)+'\t'+date+'\t'+str(rating)+'\t'+comment+'\n') 
+		time.sleep(2)#delay mezi pristupy aby nespadl server
 
 
 	#print("pocet recenzi",rewiev_cnt)

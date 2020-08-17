@@ -33,7 +33,13 @@ def FindBookUrls(idLow,idHigh):
 			#vyhledani hledanych dat v html
 			page_soup = soup(page_html, "html.parser")
 			content = page_soup.find("div",{"id":"content"})  
-		page_count=int(content.findAll("a",{"class":"topic_paging_item round_mini"})[-1].text)
+			
+		try:
+			page_count=int(content.findAll("a",{"class":"topic_paging_item round_mini"})[-1].text)
+		except IndexError:
+			page_count=1
+
+
 		if(PageId+page_count<idLow):
 			PageId+=page_count
 			continue
@@ -55,6 +61,7 @@ def FindBookUrls(idLow,idHigh):
 				if(book["href"][0]=='k'):
 					if(idHigh >= PageId >= idLow ):
 						print(str(PageId)+': '+book["href"])
+						
 					elif(PageId > idHigh):
 						exit()
 			PageId+=1

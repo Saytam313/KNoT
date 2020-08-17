@@ -81,6 +81,7 @@ def WebScrape_reviews(my_url):
 			if(rating!="??"):
 				rewiev_rating_sum+=int(rating[:-1])
 			cbdbReviews.write(username+'\t'+userid+'\t'+date+'\t'+rating+'\t'+comment+'\n') 
+		time.sleep(2)#delay mezi pristupy aby nespadl server
 
 	bookInfo = open("../Results/"+NazevDir+"/BookInfo.txt", "a",encoding="utf-8")
 
