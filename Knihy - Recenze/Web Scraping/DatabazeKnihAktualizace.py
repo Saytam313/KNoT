@@ -13,12 +13,12 @@ page_soup = soup(page_html, "html.parser")
 
 NewReviews=page_soup.findAll("a",{"class":"new"})
 
-NewReviewsFile = open("../Results/DatabazeKnihNewReviews.txt", "r",encoding="utf-8")
+NewReviewsFile = open("/mnt/minerva1/nlp/projects/sentiment9/Results/DatabazeKnihNewReviews.txt", "r",encoding="utf-8")
 ExistingReviews=NewReviewsFile.read().splitlines()
 
 NewReviewsFile.close()
 
-NewReviewsFile = open("../Results/DatabazeKnihNewReviews.txt", "a",encoding="utf-8")
+NewReviewsFile = open("/mnt/minerva1/nlp/projects/sentiment9/Results/DatabazeKnihNewReviews.txt", "a",encoding="utf-8")
 
 for Review in NewReviews:
 	ReviewBook=Review["href"].split('#')[0]

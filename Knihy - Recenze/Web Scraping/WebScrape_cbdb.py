@@ -1,27 +1,32 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup    
-import os, sys
+import os, sys, time
 
 def Webscrape_head(page_soup):
 	Nazev = page_soup.h1.text
 	NazevDir = Nazev.translate({ord(i): None for i in '"\/:|<>*?'})
-	BookInfoFile=open("../Results/"+NazevDir+"/BookInfo.txt", "w",encoding="utf-8")
+	BookInfoFile=open("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/BookInfo.txt", "w",encoding="utf-8")
 
 	author = page_soup.find("a",{"itemprop":"author"}).text
 	genres = page_soup.findAll("span",{"itemprop":"genre"})
 	annotation = page_soup.find("div",{"id":"book_annotation"})
-	annotation.b.decompose()
+	if(annotation is not None):
+		annotation.b.decompose()
+		annotation=annotation.text
+	else:
+		annotation = ""
 
 	BookInfoFile.write("Nazev: "+Nazev+'\n')
 	for genre in genres:
 		BookInfoFile.write("Zanr: "+genre.text+'\n')
 	BookInfoFile.write("Autor: "+author+'\n')
-	BookInfoFile.write("Anotace: "+annotation.text+'\n')
+	BookInfoFile.write("Anotace: "+annotation+'\n')
 	BookInfoFile.close()
 
 
 def WebScrape_reviews(my_url):
 	#otevre url a precte html zadaneho url
+	my_url=my_url.encode('utf-8').decode('ascii', 'ignore')
 	uClient = uReq(my_url)
 	page_html = uClient.read()
 	uClient.close()
@@ -32,22 +37,22 @@ def WebScrape_reviews(my_url):
 
 	#tisk vyhledanych dat
 	NazevDir = Nazev.translate({ord(i): None for i in '"\/:|<>*?'})
-	BookDirPath="../Results/"+NazevDir
+	BookDirPath="/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir
 	if(not os.path.isdir(BookDirPath)):
-		os.mkdir("../Results/"+NazevDir);
+		os.mkdir("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir);
 
 
-	if('BookInfo.txt' not in os.listdir("../Results/"+NazevDir)):
+	if('BookInfo.txt' not in os.listdir("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir)):
 		Webscrape_head(page_soup)
 		
 
 	#pocet stranek recenzi
 	rewiev_page_count=len(page_soup.findAll("a",{"class":"textlist_item_select_width round_mini"}))+1
 
-	if(os.path.exists("../Results/"+NazevDir+"/cbdbReviews.txt")):
-		cbdbReviews = open("../Results/"+NazevDir+"/cbdbReviews.txt", "a",encoding="utf-8")		
+	if(os.path.exists("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/cbdbReviews.txt")):
+		cbdbReviews = open("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/cbdbReviews.txt", "a",encoding="utf-8")		
 	else:
-		cbdbReviews = open("../Results/"+NazevDir+"/cbdbReviews.txt", "w",encoding="utf-8")
+		cbdbReviews = open("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/cbdbReviews.txt", "w",encoding="utf-8")
 
 	rewiev_cnt=0
 	rewiev_rating_sum=0
@@ -83,12 +88,7 @@ def WebScrape_reviews(my_url):
 			cbdbReviews.write(username+'\t'+userid+'\t'+date+'\t'+rating+'\t'+comment+'\n') 
 		time.sleep(2)#delay mezi pristupy aby nespadl server
 
-	bookInfo = open("../Results/"+NazevDir+"/BookInfo.txt", "a",encoding="utf-8")
-
-
-	bookInfo.write("cbdb - pocet recenzi: "+str(rewiev_cnt)+'\n')
-	if(rewiev_cnt>0):
-		bookInfo.write("cbdb - prumerne hodnoceni: "+str(round((rewiev_rating_sum/rewiev_cnt),2))+'%'+'\n')
+	bookInfo = open("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/BookInfo.txt", "a",encoding="utf-8")
 
 	bookInfo.close()
 	cbdbReviews.close()

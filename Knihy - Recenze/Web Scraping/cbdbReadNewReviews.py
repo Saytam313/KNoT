@@ -8,7 +8,7 @@ def get_date(Datestr):
 	return datetime.datetime.strptime(Datestr, '%d. %m. %Y, %H:%M')
 
 
-NewReviewsFile = open("../Results/cbdbNewReviews.txt", "r",encoding="utf-8")
+NewReviewsFile = open("/mnt/minerva1/nlp/projects/sentiment9/Results/cbdbNewReviews.txt", "r",encoding="utf-8")
 NewReviewBooks=NewReviewsFile.read().splitlines()
 
 LastUpdateDate = get_date(NewReviewBooks[0])
@@ -35,7 +35,7 @@ for line in NewReviewBooks:
 		WebScrape_cbdb.Webscrape_head(page_soup)
 
 
-	cbdbReviews = open("../Results/"+NazevDir+"/cbdbReviews.txt", "a",encoding="utf-8")
+	cbdbReviews = open("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/cbdbReviews.txt", "a",encoding="utf-8")
 	rewiev_page_count=len(page_soup.findAll("a",{"class":"textlist_item_select_width round_mini"}))+1	
 
 	for rewiev_page in range(1,rewiev_page_count+1):
@@ -73,7 +73,7 @@ for line in NewReviewBooks:
 
 NewReviewsFile.close()
 
-NewReviewsFile = open("../Results/cbdbNewReviews.txt", "w",encoding="utf-8")
+NewReviewsFile = open("/mnt/minerva1/nlp/projects/sentiment9/Results/cbdbNewReviews.txt", "w",encoding="utf-8")
 NewReviewsFile.write(str(datetime.datetime.now().strftime("%d. %m. %Y, %H:%M"))+'\n')
 
 NewReviewsFile.close()

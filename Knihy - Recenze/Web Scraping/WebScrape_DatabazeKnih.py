@@ -1,19 +1,61 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup    
-import os, sys
+import os, sys, datetime
 
+def get_date(Datestr):
+	DateList=Datestr.split('. ')
+	if (len(DateList)==2):
+		MonthNameDict = {	
+		'ledna' : 1,
+		'února' : 2,
+		'března' : 3,
+		'dubna' : 4,
+		'května' : 5,
+		'června' : 6,
+		'července' : 7,
+		'srpna' : 8,
+		'září' : 9,
+		'října' : 10,
+		'listopadu' : 11,
+		'prosince' : 12,
+		}
+		ConvertedDateStr=str(DateList[0])+'|'+str(MonthNameDict[DateList[1]])+'|'+str(datetime.datetime.now().year)
+		return datetime.datetime.strptime(ConvertedDateStr,'%d|%m|%Y')
+	elif(len(DateList)>2):
+		if(len(Datestr.split(','))>0):
+			return datetime.datetime.strptime(Datestr, '%d. %m. %Y, %H:%M')
+
+	else:
+		Today=datetime.datetime.now()
+		DayNameDict = {
+
+		'předevčírem':2,
+		'včera':1,
+		'dnes':0,
+		}
+
+		if(len(Datestr.split('.'))>1):
+			return datetime.datetime.strptime(Datestr,'%d.%m.%Y')
+		else:
+			return datetime.datetime.now()-datetime.timedelta(days=DayNameDict[Datestr])
 
 def Webscrape_head(page_soup):
 	Nazev = page_soup.find("h1",{"itemprop":"name"}).text
 	NazevDir = Nazev.translate({ord(i): None for i in '"\/:|<>*?'})#odstraneni znaku ktere windows nepovoluje v nazvu slozky
-	BookInfoFile=open("../Results/"+NazevDir+"/BookInfo.txt", "w",encoding="utf-8")
+	BookInfoFile=open("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/BookInfo.txt", "w",encoding="utf-8")
 
 	Autor = page_soup.find("span",{"itemprop":"author"}).text
 	Zanry = page_soup.select('a[href*="zanr"]')
 
 	try:
-
-		Anotace = page_soup.find("span",{"class":"start_text"}).text.replace('\n',' ')
+		AnotacePart1 = page_soup.find("span",{"class":"start_text"})
+		if (AnotacePart1 is not None):
+			AnotacePart1=AnotacePart1.text.replace('\n',' ')
+			AnotacePart2 = page_soup.find("span",{"class":"end_text"})
+			AnotacePart2=AnotacePart2.text.replace('\n',' ')
+			Anotace = str(AnotacePart1)+str(AnotacePart2)
+		else:
+			Anotace = page_soup.find("p",{"id":"bdetdesc"}).text.replace('\n',' ')
 
 	except AttributeError:
 		Anotace = '??'
@@ -40,27 +82,25 @@ def Webscrape_reviews(my_url):
 	Nazev = page_soup.find("h1",{"itemprop":"name"}).text
 	NazevDir = Nazev.translate({ord(i): None for i in '"\/:|<>*?'})#odstraneni znaku ktere windows nepovoluje v nazvu slozky
 
-	BookDirPath="../Results/"+NazevDir
+	BookDirPath="/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir
 	if(not os.path.isdir(BookDirPath)):
-		os.mkdir("../Results/"+NazevDir);
+		os.mkdir("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir);
 
-	if('BookInfo.txt' not in os.listdir("../Results/"+NazevDir)):
+	if('BookInfo.txt' not in os.listdir("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir)):
 		Webscrape_head(page_soup)
 
 
-	if(os.path.exists("../Results/"+NazevDir+"/DatabazeKnihReviews.txt")):
-		DatabazeKnihReviews = open("../Results/"+NazevDir+"/DatabazeKnihReviews.txt", "a",encoding="utf-8")
+	if(os.path.exists("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/DatabazeKnihReviews.txt")):
+		DatabazeKnihReviews = open("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/DatabazeKnihReviews.txt", "a",encoding="utf-8")
 	else:
 
-		DatabazeKnihReviews = open("../Results/"+NazevDir+"/DatabazeKnihReviews.txt", "w",encoding="utf-8")
+		DatabazeKnihReviews = open("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/DatabazeKnihReviews.txt", "w",encoding="utf-8")
 
 
 
 
 
 	rewiev_page_count=1
-	rewiev_cnt=0
-	rewiev_rating_sum=0
 	for rewiev_page in range(1,rewiev_page_count+1):
 		if(rewiev_page != 1):
 			#zmena url a precteni
@@ -82,7 +122,7 @@ def Webscrape_reviews(my_url):
 				likes=0
 			date=review.div.div.span
 			if(date is not None):
-				date=date.text
+				date=get_date(date.text)
 			else:
 				date='??'
 
@@ -94,21 +134,11 @@ def Webscrape_reviews(my_url):
 				rating='??'
 			
 			comment=review.div.p.text.replace('\n','')
-			rewiev_cnt+=1
-			if(rating != '??'): #pokud uzivatel neudal hvezdickove hodnoceni, je zapocteno prumerne hodnoceni 50
-
-				rewiev_rating_sum+=int(rating)
-			else:
-				rewiev_rating_sum+=50 
 
 			DatabazeKnihReviews.write(username+'\t'+str(likes)+'\t'+date+'\t'+str(rating)+'\t'+comment+'\n') 
 		time.sleep(2)#delay mezi pristupy aby nespadl server
 
-
-	#print("pocet recenzi",rewiev_cnt)
-	#print("prumerne hodnoceni",str(round((rewiev_rating_sum/rewiev_cnt),2))+'%')
-
-	bookInfo = open("../Results/"+NazevDir+"/BookInfo.txt", "a",encoding="utf-8")
+	bookInfo = open("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/BookInfo.txt", "a",encoding="utf-8")
 
 	bookInfo.close()
 

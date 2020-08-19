@@ -14,12 +14,12 @@ page_soup = soup(page_html, "html.parser")
 CommentArea = page_soup.find("div",{"id":"index_news2_comments_area"}) 
 NewReviews=CommentArea.findAll("a",{"class":"index_news_photos"})
 
-NewReviewsFile = open("../Results/cbdbNewReviews.txt", "r",encoding="utf-8")
+NewReviewsFile = open("/mnt/minerva1/nlp/projects/sentiment9/Results/cbdbNewReviews.txt", "r",encoding="utf-8")
 ExistingReviews=NewReviewsFile.read().splitlines()
 
 NewReviewsFile.close()
 
-NewReviewsFile = open("../Results/cbdbNewReviews.txt", "a",encoding="utf-8")
+NewReviewsFile = open("/mnt/minerva1/nlp/projects/sentiment9/Results/cbdbNewReviews.txt", "a",encoding="utf-8")
 
 for Review in NewReviews:
 	ReviewBook=Review["href"].split('#')[0]

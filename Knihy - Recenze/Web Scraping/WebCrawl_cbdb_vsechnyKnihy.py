@@ -1,6 +1,6 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup    
-
+import WebScrape_cbdb
 #pocet vsech stranek = 2216
 def FindBookUrls(idLow,idHigh):
 	my_url='https://www.cbdb.cz/knihy-0'
@@ -60,7 +60,7 @@ def FindBookUrls(idLow,idHigh):
 			for book in books:
 				if(book["href"][0]=='k'):
 					if(idHigh >= PageId >= idLow ):
-						print(str(PageId)+': '+book["href"])
+						WebScrape_cbdb.WebScrape_reviews("https://www.cbdb.cz/"+book["href"])
 						
 					elif(PageId > idHigh):
 						exit()
