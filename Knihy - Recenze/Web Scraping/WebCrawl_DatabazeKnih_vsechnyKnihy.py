@@ -48,7 +48,7 @@ def FindBookUrls(idLow,idHigh):
 			for kniha in knihy:
 				#print(kniha["href"])
 				if(idHigh >= PageId >= idLow ):
-					WebScrape_DatabazeKnih.Webscrape_reviews("https://www.cbdb.cz/"+kniha["href"])
+					WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
 				elif(PageId > idHigh):
 					exit()
 

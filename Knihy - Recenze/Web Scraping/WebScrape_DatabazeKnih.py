@@ -1,6 +1,6 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup    
-import os, sys, datetime
+import os, sys, datetime, time
 
 def get_date(Datestr):
 	DateList=Datestr.split('. ')
@@ -50,12 +50,12 @@ def Webscrape_head(page_soup):
 	try:
 		AnotacePart1 = page_soup.find("span",{"class":"start_text"})
 		if (AnotacePart1 is not None):
-			AnotacePart1=AnotacePart1.text.replace('\n',' ')
+			AnotacePart1=AnotacePart1.text.replace(chr(13),'').replace('\n',' ')
 			AnotacePart2 = page_soup.find("span",{"class":"end_text"})
-			AnotacePart2=AnotacePart2.text.replace('\n',' ')
+			AnotacePart2=AnotacePart2.text.replace(chr(13),'').replace('\n',' ')
 			Anotace = str(AnotacePart1)+str(AnotacePart2)
 		else:
-			Anotace = page_soup.find("p",{"id":"bdetdesc"}).text.replace('\n',' ')
+			Anotace = page_soup.find("p",{"id":"bdetdesc"}).text.replace(chr(13),'').replace('\n',' ')
 
 	except AttributeError:
 		Anotace = '??'
@@ -133,9 +133,9 @@ def Webscrape_reviews(my_url):
 			else:
 				rating='??'
 			
-			comment=review.div.p.text.replace('\n','')
+			comment=review.div.p.text.replace(chr(13),'').replace('\n',' ')
 
-			DatabazeKnihReviews.write(username+'\t'+str(likes)+'\t'+date+'\t'+str(rating)+'\t'+comment+'\n') 
+			DatabazeKnihReviews.write(username+'\t'+str(likes)+'\t'+str(date)+'\t'+str(rating)+'\t'+comment+'\n') 
 		time.sleep(2)#delay mezi pristupy aby nespadl server
 
 	bookInfo = open("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/BookInfo.txt", "a",encoding="utf-8")

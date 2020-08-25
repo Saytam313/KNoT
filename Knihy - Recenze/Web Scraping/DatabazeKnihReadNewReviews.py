@@ -33,8 +33,6 @@ for line in NewReviewBooks:
 
 
 	for review in reviews:
-
-
 		username=review.div.a.text
 		likes=review.div.div.em
 		if(likes is not None):
@@ -42,15 +40,14 @@ for line in NewReviewBooks:
 		else:
 			likes=0
 		date=review.div.div.span
+
 		if(date is not None):
 			date=date.text
 			date=WebScrape_DatabazeKnih.get_date(date)
 			if(date < LastUpdateDate):
 				break
-
 		else:
 			date='??'
-			break
 
 		rating=review.div.div.img
 		if(rating is not None):
@@ -59,7 +56,7 @@ for line in NewReviewBooks:
 		else:
 			rating='??'
 		
-		comment=review.div.p.text.replace('\n','')
+		comment=review.div.p.text.replace(chr(13),'').replace('\n',' ')
 
 
 		DatabazeKnihReviews.write(username+'\t'+str(date)+'\t'+str(rating)+'\t'+comment+'\n') 
