@@ -1,13 +1,14 @@
 import sys
 import WebCrawl_DatabazeKnih_vsechnyKnihy
-# parallel-ssh -i -A -h Hosts python3 /mnt/minerva1/nlp/projects/sentiment9/Scripts/test.py  \$HOSTNAME
 
-#maxCount = 4510 #celkovy pocet stranek v databazi knih
-maxCount = 10 
+# parallel-ssh -i -t 0 -A -h Hosts python3 /mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py  \$HOSTNAME
+
+#celkovy pocet stranek v databazi knih
+maxCount = 4592
 
 
-#PCcount = 30 #pocet zarizeni na kterych skript pobezi
-PCcount = 5 
+PCcount = 30 #pocet zarizeni na kterych skript pobezi
+#PCcount = 5 
 
 arg=sys.argv[1]
 

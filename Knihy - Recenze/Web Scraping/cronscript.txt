@@ -1,0 +1,12 @@
+#Find New reviews databazeKnih
+0,30 * * * * python3 /mnt/minerva1/nlp/projects/sentiment9/Scripts/DatabazeKnihAktualizace.py
+
+#Find New reviews cbdb
+*/10 * * * * python3 /mnt/minerva1/nlp/projects/sentiment9/Scripts/cbdbAktualizace.py
+
+#read new reviews cbdb
+3 0 * * * python3 /mnt/minerva1/nlp/projects/sentiment9/Scripts/cbdbReadNewReviews.py
+
+#read new reviews Databazeknih
+13 0 * * * python3 /mnt/minerva1/nlp/projects/sentiment9/Scripts/DatabazeKnihReadNewReviews.py
+

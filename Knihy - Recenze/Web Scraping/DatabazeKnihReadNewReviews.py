@@ -19,17 +19,9 @@ for line in NewReviewBooks:
 	reviews = page_soup.findAll("div",{"class":"komentars_user komover"})
 	
 	Nazev = page_soup.find("h1",{"itemprop":"name"}).text
-	NazevDir = Nazev.translate({ord(i): None for i in '"\/:|<>*?'})#odstraneni znaku ktere windows nepovoluje v nazvu slozky
-	BookDirPath="../Results/"+NazevDir
-	if(not os.path.isdir(BookDirPath)):
-		os.mkdir("../Results/"+NazevDir);
-		WebScrape_DatabazeKnih.Webscrape_reviews(my_url)
-		continue
 
-	if('BookInfo.txt' not in os.listdir("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir)):
-		WebScrape_DatabazeKnih.Webscrape_head(page_soup)
 
-	DatabazeKnihReviews = open("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/DatabazeKnihReviews.txt", "a",encoding="utf-8")
+	DatabazeKnihReviews = open("/mnt/minerva1/nlp/projects/sentiment9/Results/Reviews.tsv", "a",encoding="utf-8")
 
 
 	for review in reviews:
@@ -59,7 +51,7 @@ for line in NewReviewBooks:
 		comment=review.div.p.text.replace(chr(13),'').replace('\n',' ')
 
 
-		DatabazeKnihReviews.write(username+'\t'+str(date)+'\t'+str(rating)+'\t'+comment+'\n') 
+		DatabazeKnihReviews.write("DatabazeKnih"+'\t'+Nazev+'\t'+username+'\t'+str(likes)+'\t'+str(date)+'\t'+str(rating)+'\t'+comment+'\n') 
 
 
 

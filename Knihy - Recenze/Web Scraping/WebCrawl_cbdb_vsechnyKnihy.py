@@ -46,8 +46,11 @@ def FindBookUrls(idLow,idHigh):
 		for page in range(1,page_count+1):
 			if(page!=1):
 				my_url="https://www.cbdb.cz/"+char+'-'+str(page)
-
-				uClient = uReq(my_url)
+				try:
+					uClient = uReq(my_url)
+				except:
+					continue
+					
 				page_html = uClient.read()
 				uClient.close()
 

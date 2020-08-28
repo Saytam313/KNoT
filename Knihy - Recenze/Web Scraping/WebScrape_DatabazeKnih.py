@@ -41,8 +41,7 @@ def get_date(Datestr):
 
 def Webscrape_head(page_soup):
 	Nazev = page_soup.find("h1",{"itemprop":"name"}).text
-	NazevDir = Nazev.translate({ord(i): None for i in '"\/:|<>*?'})#odstraneni znaku ktere windows nepovoluje v nazvu slozky
-	BookInfoFile=open("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/BookInfo.txt", "w",encoding="utf-8")
+	BookInfoFile=open("/mnt/minerva1/nlp/projects/sentiment9/Results/BookInfo.tsv", "a",encoding="utf-8")
 
 	Autor = page_soup.find("span",{"itemprop":"author"}).text
 	Zanry = page_soup.select('a[href*="zanr"]')
@@ -50,12 +49,12 @@ def Webscrape_head(page_soup):
 	try:
 		AnotacePart1 = page_soup.find("span",{"class":"start_text"})
 		if (AnotacePart1 is not None):
-			AnotacePart1=AnotacePart1.text.replace(chr(13),'').replace('\n',' ')
+			AnotacePart1=AnotacePart1.text.replace(chr(13),'').replace('\n',' ').replace('  ','').strip()
 			AnotacePart2 = page_soup.find("span",{"class":"end_text"})
-			AnotacePart2=AnotacePart2.text.replace(chr(13),'').replace('\n',' ')
+			AnotacePart2=AnotacePart2.text.replace(chr(13),'').replace('\n',' ').replace('  ','').strip()
 			Anotace = str(AnotacePart1)+str(AnotacePart2)
 		else:
-			Anotace = page_soup.find("p",{"id":"bdetdesc"}).text.replace(chr(13),'').replace('\n',' ')
+			Anotace = page_soup.find("p",{"id":"bdetdesc"}).text.replace(chr(13),'').replace('\n',' ').replace('  ','').strip()
 
 	except AttributeError:
 		Anotace = '??'
@@ -65,6 +64,13 @@ def Webscrape_head(page_soup):
 		BookInfoFile.write("Zanr: "+genre.text+'\n')
 	BookInfoFile.write("Autor: "+Autor+'\n')
 	BookInfoFile.write("Anotace: "+Anotace+'\n')
+
+	genre_list=[]
+	for genre in Zanry:
+		genre_list.append(genre.text)
+
+	BookInfoFile.write(Nazev+'\t'+author+'\t'+','.join(genre_list)+'\t'+Anotace+'\n')
+
 	BookInfoFile.close()
 
 
@@ -80,25 +86,10 @@ def Webscrape_reviews(my_url):
 	page_soup = soup(page_html, "html.parser")
 
 	Nazev = page_soup.find("h1",{"itemprop":"name"}).text
-	NazevDir = Nazev.translate({ord(i): None for i in '"\/:|<>*?'})#odstraneni znaku ktere windows nepovoluje v nazvu slozky
 
-	BookDirPath="/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir
-	if(not os.path.isdir(BookDirPath)):
-		os.mkdir("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir);
+	#Webscrape_head(page_soup)
 
-	if('BookInfo.txt' not in os.listdir("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir)):
-		Webscrape_head(page_soup)
-
-
-	if(os.path.exists("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/DatabazeKnihReviews.txt")):
-		DatabazeKnihReviews = open("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/DatabazeKnihReviews.txt", "a",encoding="utf-8")
-	else:
-
-		DatabazeKnihReviews = open("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/DatabazeKnihReviews.txt", "w",encoding="utf-8")
-
-
-
-
+	DatabazeKnihReviews = open("/mnt/minerva1/nlp/projects/sentiment9/Results/Reviews.tsv", "a",encoding="utf-8")
 
 	rewiev_page_count=1
 	for rewiev_page in range(1,rewiev_page_count+1):
@@ -133,13 +124,9 @@ def Webscrape_reviews(my_url):
 			else:
 				rating='??'
 			
-			comment=review.div.p.text.replace(chr(13),'').replace('\n',' ')
+			comment=review.div.p.text.replace(chr(13),'').replace('\n',' ').replace('  ','').strip()
 
-			DatabazeKnihReviews.write(username+'\t'+str(likes)+'\t'+str(date)+'\t'+str(rating)+'\t'+comment+'\n') 
+			DatabazeKnihReviews.write("DatabazeKnih"+'\t'+Nazev+'\t'+username+'\t'+str(likes)+'\t'+str(date)+'\t'+str(rating)+'\t'+comment+'\n') 
 		time.sleep(2)#delay mezi pristupy aby nespadl server
-
-	bookInfo = open("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/BookInfo.txt", "a",encoding="utf-8")
-
-	bookInfo.close()
 
 	DatabazeKnihReviews.close()

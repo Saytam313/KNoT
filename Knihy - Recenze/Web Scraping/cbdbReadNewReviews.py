@@ -24,18 +24,11 @@ for line in NewReviewBooks:
 	reviews = page_soup.findAll("div",{"class":"comment"})
 
 	Nazev = page_soup.h1.text
-	NazevDir = Nazev.translate({ord(i): None for i in '"\/:|<>*?'})#odstraneni znaku ktere windows nepovoluje v nazvu slozky
-	BookDirPath="../Results/"+NazevDir
-	if(not os.path.isdir(BookDirPath)):
-		os.mkdir("../Results/"+NazevDir)
-		WebScrape_cbdb.WebScrape_reviews(my_url)
-		continue
 
-	if('BookInfo.txt' not in os.listdir("../Results/"+NazevDir)):
-		WebScrape_cbdb.Webscrape_head(page_soup)
+	#WebScrape_cbdb.Webscrape_head(page_soup)
 
 
-	cbdbReviews = open("/mnt/minerva1/nlp/projects/sentiment9/Results/"+NazevDir+"/cbdbReviews.txt", "a",encoding="utf-8")
+	cbdbReviews = open("/mnt/minerva1/nlp/projects/sentiment9/Results/Reviews.tsv", "a",encoding="utf-8")
 	rewiev_page_count=len(page_soup.findAll("a",{"class":"textlist_item_select_width round_mini"}))+1	
 
 	for rewiev_page in range(1,rewiev_page_count+1):
@@ -66,8 +59,8 @@ for line in NewReviewBooks:
 				rating="??"
 
 			comment=review.find("div",{"class":"comment_content"}).text
-			comment=comment.replace('\n',' ')
-			cbdbReviews.write(username+'\t'+userid+'\t'+date+'\t'+rating+'\t'+comment+'\n') 
+
+			cbdbReviews.write("cbdb"+'\t'+Nazev+'\t'+username+'\t'+userid+'\t'+date+'\t'+rating+'\t'+comment.replace('\n',' ').replace(chr(13),'').replace('  ','').strip()+'\n') 
 
 
 

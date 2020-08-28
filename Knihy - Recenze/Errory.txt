@@ -1,0 +1,637 @@
+xmatya11@minerva3:/mnt/minerva1/nlp/projects/sentiment9$ parallel-ssh -i -t 0 -A -h Hosts python3 /mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py  \$HOSTNAME
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password:
+[1] 16:40:35 [FAILURE] knot02 Exited with error code 1
+Stderr: Traceback (most recent call last):
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py", line 18, in <module>
+    WebCrawl_DatabazeKnih_vsechnyKnihy.FindBookUrls((Divcount*(x-1))+1,Divcount*x)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebCrawl_DatabazeKnih_vsechnyKnihy.py", line 51, in FindBookUrls
+    WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 116, in Webscrape_reviews
+    date=get_date(date.text)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 40, in get_date
+    return datetime.datetime.now()-datetime.timedelta(days=DayNameDict[Datestr])
+KeyError: 'odpad!'
+[2] 16:44:58 [FAILURE] knot14 Exited with error code 1
+Stderr: Traceback (most recent call last):
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py", line 18, in <module>
+    WebCrawl_DatabazeKnih_vsechnyKnihy.FindBookUrls((Divcount*(x-1))+1,Divcount*x)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebCrawl_DatabazeKnih_vsechnyKnihy.py", line 51, in FindBookUrls
+    WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 116, in Webscrape_reviews
+    date=get_date(date.text)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 40, in get_date
+    return datetime.datetime.now()-datetime.timedelta(days=DayNameDict[Datestr])
+KeyError: 'odpad!'
+[3] 16:47:37 [FAILURE] knot10 Exited with error code 1
+Stderr: Traceback (most recent call last):
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py", line 18, in <module>
+    WebCrawl_DatabazeKnih_vsechnyKnihy.FindBookUrls((Divcount*(x-1))+1,Divcount*x)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebCrawl_DatabazeKnih_vsechnyKnihy.py", line 51, in FindBookUrls
+    WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 116, in Webscrape_reviews
+    date=get_date(date.text)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 40, in get_date
+    return datetime.datetime.now()-datetime.timedelta(days=DayNameDict[Datestr])
+KeyError: 'odpad!'
+[4] 17:27:43 [SUCCESS] knot07
+[5] 17:48:40 [SUCCESS] knot11
+[6] 17:55:02 [FAILURE] knot04 Exited with error code 1
+Stderr: Traceback (most recent call last):
+  File "/usr/lib/python3.6/urllib/request.py", line 1325, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/usr/lib/python3.6/http/client.py", line 1264, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1310, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1259, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.6/http/client.py", line 976, in send
+    self.connect()
+  File "/usr/lib/python3.6/http/client.py", line 1417, in connect
+    super().connect()
+  File "/usr/lib/python3.6/http/client.py", line 948, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py", line 18, in <module>
+    WebCrawl_DatabazeKnih_vsechnyKnihy.FindBookUrls((Divcount*(x-1))+1,Divcount*x)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebCrawl_DatabazeKnih_vsechnyKnihy.py", line 51, in FindBookUrls
+    WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 81, in Webscrape_reviews
+    uClient = uReq(my_url)
+  File "/usr/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/usr/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.6/urllib/request.py", line 1368, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/usr/lib/python3.6/urllib/request.py", line 1327, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 110] Connection timed out>
+[7] 17:55:02 [FAILURE] knot05 Exited with error code 1
+Stderr: Traceback (most recent call last):
+  File "/usr/lib/python3.6/urllib/request.py", line 1325, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/usr/lib/python3.6/http/client.py", line 1264, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1310, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1259, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.6/http/client.py", line 976, in send
+    self.connect()
+  File "/usr/lib/python3.6/http/client.py", line 1417, in connect
+    super().connect()
+  File "/usr/lib/python3.6/http/client.py", line 948, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py", line 18, in <module>
+    WebCrawl_DatabazeKnih_vsechnyKnihy.FindBookUrls((Divcount*(x-1))+1,Divcount*x)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebCrawl_DatabazeKnih_vsechnyKnihy.py", line 51, in FindBookUrls
+    WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 81, in Webscrape_reviews
+    uClient = uReq(my_url)
+  File "/usr/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/usr/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.6/urllib/request.py", line 1368, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/usr/lib/python3.6/urllib/request.py", line 1327, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 110] Connection timed out>
+[8] 17:55:02 [FAILURE] knot20 Exited with error code 1
+Stderr: Traceback (most recent call last):
+  File "/usr/lib/python3.6/urllib/request.py", line 1325, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/usr/lib/python3.6/http/client.py", line 1264, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1310, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1259, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.6/http/client.py", line 976, in send
+    self.connect()
+  File "/usr/lib/python3.6/http/client.py", line 1417, in connect
+    super().connect()
+  File "/usr/lib/python3.6/http/client.py", line 948, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py", line 18, in <module>
+    WebCrawl_DatabazeKnih_vsechnyKnihy.FindBookUrls((Divcount*(x-1))+1,Divcount*x)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebCrawl_DatabazeKnih_vsechnyKnihy.py", line 51, in FindBookUrls
+    WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 81, in Webscrape_reviews
+    uClient = uReq(my_url)
+  File "/usr/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/usr/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.6/urllib/request.py", line 1368, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/usr/lib/python3.6/urllib/request.py", line 1327, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 110] Connection timed out>
+[9] 17:55:02 [FAILURE] knot17 Exited with error code 1
+Stderr: Traceback (most recent call last):
+  File "/usr/lib/python3.6/urllib/request.py", line 1325, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/usr/lib/python3.6/http/client.py", line 1264, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1310, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1259, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.6/http/client.py", line 976, in send
+    self.connect()
+  File "/usr/lib/python3.6/http/client.py", line 1417, in connect
+    super().connect()
+  File "/usr/lib/python3.6/http/client.py", line 948, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py", line 18, in <module>
+    WebCrawl_DatabazeKnih_vsechnyKnihy.FindBookUrls((Divcount*(x-1))+1,Divcount*x)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebCrawl_DatabazeKnih_vsechnyKnihy.py", line 51, in FindBookUrls
+    WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 81, in Webscrape_reviews
+    uClient = uReq(my_url)
+  File "/usr/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/usr/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.6/urllib/request.py", line 1368, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/usr/lib/python3.6/urllib/request.py", line 1327, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 110] Connection timed out>
+[10] 17:55:03 [FAILURE] knot01 Exited with error code 1
+Stderr: Traceback (most recent call last):
+  File "/usr/lib/python3.6/urllib/request.py", line 1325, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/usr/lib/python3.6/http/client.py", line 1264, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1310, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1259, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.6/http/client.py", line 976, in send
+    self.connect()
+  File "/usr/lib/python3.6/http/client.py", line 1417, in connect
+    super().connect()
+  File "/usr/lib/python3.6/http/client.py", line 948, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py", line 18, in <module>
+    WebCrawl_DatabazeKnih_vsechnyKnihy.FindBookUrls((Divcount*(x-1))+1,Divcount*x)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebCrawl_DatabazeKnih_vsechnyKnihy.py", line 51, in FindBookUrls
+    WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 81, in Webscrape_reviews
+    uClient = uReq(my_url)
+  File "/usr/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/usr/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.6/urllib/request.py", line 1368, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/usr/lib/python3.6/urllib/request.py", line 1327, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 110] Connection timed out>
+[11] 17:55:03 [FAILURE] knot12 Exited with error code 1
+Stderr: Traceback (most recent call last):
+  File "/usr/lib/python3.6/urllib/request.py", line 1325, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/usr/lib/python3.6/http/client.py", line 1264, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1310, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1259, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.6/http/client.py", line 976, in send
+    self.connect()
+  File "/usr/lib/python3.6/http/client.py", line 1417, in connect
+    super().connect()
+  File "/usr/lib/python3.6/http/client.py", line 948, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py", line 18, in <module>
+    WebCrawl_DatabazeKnih_vsechnyKnihy.FindBookUrls((Divcount*(x-1))+1,Divcount*x)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebCrawl_DatabazeKnih_vsechnyKnihy.py", line 51, in FindBookUrls
+    WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 81, in Webscrape_reviews
+    uClient = uReq(my_url)
+  File "/usr/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/usr/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.6/urllib/request.py", line 1368, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/usr/lib/python3.6/urllib/request.py", line 1327, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 110] Connection timed out>
+[12] 17:55:03 [FAILURE] knot16 Exited with error code 1
+Stderr: Traceback (most recent call last):
+  File "/usr/lib/python3.6/urllib/request.py", line 1325, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/usr/lib/python3.6/http/client.py", line 1264, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1310, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1259, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.6/http/client.py", line 976, in send
+    self.connect()
+  File "/usr/lib/python3.6/http/client.py", line 1417, in connect
+    super().connect()
+  File "/usr/lib/python3.6/http/client.py", line 948, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py", line 18, in <module>
+    WebCrawl_DatabazeKnih_vsechnyKnihy.FindBookUrls((Divcount*(x-1))+1,Divcount*x)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebCrawl_DatabazeKnih_vsechnyKnihy.py", line 51, in FindBookUrls
+    WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 81, in Webscrape_reviews
+    uClient = uReq(my_url)
+  File "/usr/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/usr/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.6/urllib/request.py", line 1368, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/usr/lib/python3.6/urllib/request.py", line 1327, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 110] Connection timed out>
+[13] 17:55:04 [FAILURE] knot03 Exited with error code 1
+Stderr: Traceback (most recent call last):
+  File "/usr/lib/python3.6/urllib/request.py", line 1325, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/usr/lib/python3.6/http/client.py", line 1264, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1310, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1259, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.6/http/client.py", line 976, in send
+    self.connect()
+  File "/usr/lib/python3.6/http/client.py", line 1417, in connect
+    super().connect()
+  File "/usr/lib/python3.6/http/client.py", line 948, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py", line 18, in <module>
+    WebCrawl_DatabazeKnih_vsechnyKnihy.FindBookUrls((Divcount*(x-1))+1,Divcount*x)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebCrawl_DatabazeKnih_vsechnyKnihy.py", line 51, in FindBookUrls
+    WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 81, in Webscrape_reviews
+    uClient = uReq(my_url)
+  File "/usr/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/usr/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.6/urllib/request.py", line 1368, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/usr/lib/python3.6/urllib/request.py", line 1327, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 110] Connection timed out>
+[14] 17:55:04 [FAILURE] knot06 Exited with error code 1
+Stderr: Traceback (most recent call last):
+  File "/usr/lib/python3.6/urllib/request.py", line 1325, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/usr/lib/python3.6/http/client.py", line 1264, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1310, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1259, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.6/http/client.py", line 976, in send
+    self.connect()
+  File "/usr/lib/python3.6/http/client.py", line 1417, in connect
+    super().connect()
+  File "/usr/lib/python3.6/http/client.py", line 948, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py", line 18, in <module>
+    WebCrawl_DatabazeKnih_vsechnyKnihy.FindBookUrls((Divcount*(x-1))+1,Divcount*x)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebCrawl_DatabazeKnih_vsechnyKnihy.py", line 51, in FindBookUrls
+    WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 81, in Webscrape_reviews
+    uClient = uReq(my_url)
+  File "/usr/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/usr/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.6/urllib/request.py", line 1368, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/usr/lib/python3.6/urllib/request.py", line 1327, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 110] Connection timed out>
+[15] 17:55:04 [FAILURE] knot08 Exited with error code 1
+Stderr: Traceback (most recent call last):
+  File "/usr/lib/python3.6/urllib/request.py", line 1325, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/usr/lib/python3.6/http/client.py", line 1264, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1310, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1259, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.6/http/client.py", line 976, in send
+    self.connect()
+  File "/usr/lib/python3.6/http/client.py", line 1417, in connect
+    super().connect()
+  File "/usr/lib/python3.6/http/client.py", line 948, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py", line 18, in <module>
+    WebCrawl_DatabazeKnih_vsechnyKnihy.FindBookUrls((Divcount*(x-1))+1,Divcount*x)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebCrawl_DatabazeKnih_vsechnyKnihy.py", line 51, in FindBookUrls
+    WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 81, in Webscrape_reviews
+    uClient = uReq(my_url)
+  File "/usr/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/usr/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.6/urllib/request.py", line 1368, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/usr/lib/python3.6/urllib/request.py", line 1327, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 110] Connection timed out>
+[16] 17:55:05 [FAILURE] knot09 Exited with error code 1
+Stderr: Traceback (most recent call last):
+  File "/usr/lib/python3.6/urllib/request.py", line 1325, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/usr/lib/python3.6/http/client.py", line 1264, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1310, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1259, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.6/http/client.py", line 976, in send
+    self.connect()
+  File "/usr/lib/python3.6/http/client.py", line 1417, in connect
+    super().connect()
+  File "/usr/lib/python3.6/http/client.py", line 948, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py", line 18, in <module>
+    WebCrawl_DatabazeKnih_vsechnyKnihy.FindBookUrls((Divcount*(x-1))+1,Divcount*x)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebCrawl_DatabazeKnih_vsechnyKnihy.py", line 51, in FindBookUrls
+    WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 81, in Webscrape_reviews
+    uClient = uReq(my_url)
+  File "/usr/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/usr/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.6/urllib/request.py", line 1368, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/usr/lib/python3.6/urllib/request.py", line 1327, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 110] Connection timed out>
+[17] 17:55:05 [FAILURE] knot21 Exited with error code 1
+Stderr: Traceback (most recent call last):
+  File "/usr/lib/python3.6/urllib/request.py", line 1325, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/usr/lib/python3.6/http/client.py", line 1264, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1310, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1259, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.6/http/client.py", line 976, in send
+    self.connect()
+  File "/usr/lib/python3.6/http/client.py", line 1417, in connect
+    super().connect()
+  File "/usr/lib/python3.6/http/client.py", line 948, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py", line 18, in <module>
+    WebCrawl_DatabazeKnih_vsechnyKnihy.FindBookUrls((Divcount*(x-1))+1,Divcount*x)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebCrawl_DatabazeKnih_vsechnyKnihy.py", line 51, in FindBookUrls
+    WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 81, in Webscrape_reviews
+    uClient = uReq(my_url)
+  File "/usr/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/usr/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.6/urllib/request.py", line 1368, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/usr/lib/python3.6/urllib/request.py", line 1327, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 110] Connection timed out>
+[18] 17:55:05 [FAILURE] knot13 Exited with error code 1
+Stderr: Traceback (most recent call last):
+  File "/usr/lib/python3.6/urllib/request.py", line 1325, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/usr/lib/python3.6/http/client.py", line 1264, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1310, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1259, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.6/http/client.py", line 976, in send
+    self.connect()
+  File "/usr/lib/python3.6/http/client.py", line 1417, in connect
+    super().connect()
+  File "/usr/lib/python3.6/http/client.py", line 948, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py", line 18, in <module>
+    WebCrawl_DatabazeKnih_vsechnyKnihy.FindBookUrls((Divcount*(x-1))+1,Divcount*x)
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebCrawl_DatabazeKnih_vsechnyKnihy.py", line 51, in FindBookUrls
+    WebScrape_DatabazeKnih.Webscrape_reviews("https://www.databazeknih.cz/"+kniha["href"])
+  File "/mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrape_DatabazeKnih.py", line 81, in Webscrape_reviews
+    uClient = uReq(my_url)
+  File "/usr/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/usr/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.6/urllib/request.py", line 1368, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/usr/lib/python3.6/urllib/request.py", line 1327, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 110] Connection timed out>
