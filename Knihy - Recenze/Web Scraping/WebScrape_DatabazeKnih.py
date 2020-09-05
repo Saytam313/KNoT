@@ -128,5 +128,6 @@ def Webscrape_reviews(my_url):
 
 			DatabazeKnihReviews.write("DatabazeKnih"+'\t'+Nazev+'\t'+username+'\t'+str(likes)+'\t'+str(date)+'\t'+str(rating)+'\t'+comment+'\n') 
 		time.sleep(2)#delay mezi pristupy aby nespadl server
+	time.sleep(2)
 
 	DatabazeKnihReviews.close()

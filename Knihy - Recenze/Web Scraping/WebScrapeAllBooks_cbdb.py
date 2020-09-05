@@ -2,9 +2,9 @@ import sys
 import WebCrawl_cbdb_vsechnyKnihy
 # parallel-ssh -i -t 0 -A -h Hosts python3 /mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_cbdb.py  \$HOSTNAME
 
-maxCount = 2228 #celkovy pocet stranek v databazi knih
+maxCount = 2231 #celkovy pocet stranek v databazi knih
 
-PCcount = 30 #pocet zarizeni na kterych skript pobezi
+PCcount = 38 #pocet zarizeni na kterych skript pobezi
 
 arg=sys.argv[1]
 

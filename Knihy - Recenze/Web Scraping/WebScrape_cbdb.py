@@ -85,6 +85,7 @@ def WebScrape_reviews(my_url):
 
 			cbdbReviews.write("cbdb"+'\t'+Nazev+'\t'+username+'\t'+userid+'\t'+date+'\t'+rating+'\t'+comment.replace('\n',' ').replace(chr(13),'').replace('  ','').strip()+'\n') 
 		
-		time.sleep(2)#delay mezi pristupy aby nespadl server
+		time.sleep(2)#delay mezi pristupy na stranky recenzí
+	time.sleep(2)#delay mezi pristupy na knihy
 
 	cbdbReviews.close()

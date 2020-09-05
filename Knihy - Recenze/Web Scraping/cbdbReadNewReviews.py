@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup as soup
 import os, sys
 import datetime
 import WebScrape_cbdb
+import time
 
 def get_date(Datestr):
 	return datetime.datetime.strptime(Datestr, '%d. %m. %Y, %H:%M')
@@ -16,8 +17,13 @@ NewReviewBooks.pop(0)#odstraneni data posledni aktualizace ze seznamu
 
 for line in NewReviewBooks:
 	
-	my_url='https://www.cbdb.cz/'+line+'?order_comments=time'
-	uClient = uReq(my_url)
+	my_url='https://www.cbdb.cz/'+line+'?order_comments=time'.encode('utf-8').decode('ascii', 'ignore')
+
+	try:
+		uClient = uReq(my_url)
+	except:
+		continue
+
 	page_html = uClient.read()
 	uClient.close()
 	page_soup = soup(page_html, "html.parser")
@@ -61,6 +67,8 @@ for line in NewReviewBooks:
 			comment=review.find("div",{"class":"comment_content"}).text
 
 			cbdbReviews.write("cbdb"+'\t'+Nazev+'\t'+username+'\t'+userid+'\t'+date+'\t'+rating+'\t'+comment.replace('\n',' ').replace(chr(13),'').replace('  ','').strip()+'\n') 
+		time.sleep(2)
+	time.sleep(2)
 
 
 
