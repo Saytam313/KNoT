@@ -1,27 +1,29 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup    
-import os, sys
+import os, sys, time
 import datetime
 import WebScrape_DatabazeKnih
 
-NewReviewsFile = open("/mnt/minerva1/nlp/projects/sentiment9/Results/DatabazeKnihNewReviews.txt", "r",encoding="utf-8")
+NewReviewsFile = open("../Results/DatabazeKnihNewReviews.txt", "r",encoding="utf-8")
 NewReviewBooks=NewReviewsFile.read().splitlines()
 
 LastUpdateDate = WebScrape_DatabazeKnih.get_date(NewReviewBooks[0])
 NewReviewBooks.pop(0)#odstraneni data posledni aktualizace ze seznamu
 
 for line in NewReviewBooks:
+	time.sleep(2)
 	my_url='https://www.databazeknih.cz/'+line
 	uClient = uReq(my_url)
 	page_html = uClient.read()
 	uClient.close()
 	page_soup = soup(page_html, "html.parser")
 	reviews = page_soup.findAll("div",{"class":"komentars_user komover"})
-	
-	Nazev = page_soup.find("h1",{"itemprop":"name"}).text
-
-
-	DatabazeKnihReviews = open("/mnt/minerva1/nlp/projects/sentiment9/Results/Reviews.tsv", "a",encoding="utf-8")
+	try:
+		Nazev = page_soup.find("h1",{"itemprop":"name"}).text
+	except AttributeError:
+		continue
+		
+	DatabazeKnihReviews = open("../Results/Reviews.tsv", "a",encoding="utf-8")
 
 
 	for review in reviews:
@@ -57,7 +59,7 @@ for line in NewReviewBooks:
 
 NewReviewsFile.close()
 
-NewReviewsFile = open("/mnt/minerva1/nlp/projects/sentiment9/Results/DatabazeKnihNewReviews.txt", "w",encoding="utf-8")
+NewReviewsFile = open("../Results/DatabazeKnihNewReviews.txt", "w",encoding="utf-8")
 NewReviewsFile.write(str(datetime.datetime.now().strftime("%d. %m. %Y, %H:%M"))+'\n')
 
 NewReviewsFile.close()
