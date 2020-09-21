@@ -30,13 +30,12 @@ for char in char_pages:
 
 		#vyhledani hledanych dat v html
 		page_soup = soup(page_html, "html.parser")
-		content = page_soup.find("div",{"id":"content"})  
+	
+	content = page_soup.find("div",{"id":"content"})  
+	books=content.table.findAll("a")    
 
-		books=content.table.findAll("a")    
-		x=0
-		for book in books:
-			if(book["href"][0]=='k'):
-				WebScrape_legie.WebScrape("https://www.legie.info/"+book["href"])
-				x+=1
-				if(x>5):
-					exit()
+	for book in books:
+		if(book["href"][0]=='k'):
+
+			WebScrape_legie.WebScrape("https://www.legie.info/"+book["href"])
+

@@ -31,26 +31,36 @@ def WebScrape(my_url):
 
 	nazev=page_soup.find("h2",{"id":"nazev_knihy"}).text
 
-	autor=page_soup.h3.a.text 
+	try:
+
+		autor=page_soup.h3.a.text 
+	except:
+		autor="???"
 
 	anotace=page_soup.find("div",{"id":"nic"})
 	if(anotace is None):
 	#	anotace=page_soup.find("div",{"id":"anotace"}).p.text
 		anotace=page_soup.find("div",{"id":"anotace"})
 		anotaceStr=""
-		for x in anotace:
-			strX=str(x)
-			if('<p>' in strX):
-				#print(x.text)
-				anotaceStr+=x.text
-			elif('<hr/>' in strX):
-				break
+		if(anotace is not None):
+			for x in anotace:
+				strX=str(x)
+				if('<p>' in strX):
+					#print(x.text)
+					anotaceStr+=x.text
+				elif('<hr/>' in strX):
+					break
 	else:
-		anotaceStr=anotace.p.text
+		try:
+			anotaceStr=anotace.p.text
+		except:
+			anotaceStr=""
 
+			
 	zalozky=page_soup.find("ul",{"id":"zalozky"})
 
 	print('legie.info'+'\t'+nazev+'\t'+autor+'\t'+anotaceStr.replace('\n',' ').replace(chr(13),'').replace('  ','').strip())
+	time.sleep(2)
 
 	for x in zalozky:
 		if("komentare" in str(x)):
@@ -58,7 +68,7 @@ def WebScrape(my_url):
 			komentareCnt=int(re.search('#(.*)\)',komentareStr).groups()[0])
 			if(komentareCnt>0):
 				my_url=my_url+'/komentare#zalozky'
-				#my_url='https://www.legie.info/kniha/220-harry-potter-a-kamen-mudrcu/komentare#zalozky'
+
 				uClient = uReq(my_url)
 				page_html = uClient.read()
 				uClient.close()
@@ -81,7 +91,7 @@ def WebScrape(my_url):
 
 					datum=koment.span.text
 					text=koment.p.text
-					print(autor+'\t'+str(hodnoceni)+'\t'+get_date(datum)+'\t'+text.replace('\n',' ').replace(chr(13),'').replace('  ','').strip())
-
+					print('legie.info'+'\t'+nazev+'\t'+autor+'\t'+str(hodnoceni)+'\t'+get_date(datum)+'\t'+text.replace('\n',' ').replace(chr(13),'').replace('  ','').strip())
+					time.sleep(2)
 
 
