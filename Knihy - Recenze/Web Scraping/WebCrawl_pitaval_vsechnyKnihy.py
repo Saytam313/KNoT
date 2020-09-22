@@ -1,10 +1,10 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
-import WebScrape_legie
+import WebScrape_pitaval
 
 def FindBookUrls(CrawlPart):
 
-	my_url='https://www.legie.info/kniha/zacina/num'
+	my_url='https://www.pitaval.cz/kniha/zacina/num'
 
 	uClient = uReq(my_url)
 	page_html = uClient.read()
@@ -23,7 +23,7 @@ def FindBookUrls(CrawlPart):
 
 	char=char_pages[CrawlPart-1]
 	if(char != "kniha/zacina/num"):
-		my_url="https://www.legie.info/"+char
+		my_url="https://www.pitaval.cz/"+char
 
 
 		uClient = uReq(my_url)
@@ -39,5 +39,5 @@ def FindBookUrls(CrawlPart):
 	for book in books:
 		if(book["href"][0]=='k'):
 
-			WebScrape_legie.WebScrape("https://www.legie.info/"+book["href"])
+			WebScrape_pitaval.WebScrape("https://www.pitaval.cz/"+book["href"])
 

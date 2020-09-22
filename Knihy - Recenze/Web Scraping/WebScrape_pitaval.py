@@ -55,7 +55,7 @@ def WebScrape(my_url):
 			
 	zalozky=page_soup.find("ul",{"id":"zalozky"})
 
-	print('legie.info'+'\t'+nazev+'\t'+autor+'\t'+anotaceStr.replace('\n',' ').replace(chr(13),'').replace('  ','').strip())
+	print('pitaval'+'\t'+nazev+'\t'+autor+'\t'+anotaceStr.replace('\n',' ').replace(chr(13),'').replace('  ','').strip())
 	time.sleep(2)
 
 	for x in zalozky:
@@ -87,7 +87,7 @@ def WebScrape(my_url):
 
 					datum=koment.span.text
 					text=koment.p.text
-					print('legie.info'+'\t'+nazev+'\t'+autor+'\t'+str(hodnoceni)+'\t'+get_date(datum)+'\t'+text.replace('\n',' ').replace(chr(13),'').replace('  ','').strip())
+					print('pitaval'+'\t'+nazev+'\t'+autor+'\t'+str(hodnoceni)+'\t'+get_date(datum)+'\t'+text.replace('\n',' ').replace(chr(13),'').replace('  ','').strip())
 					time.sleep(2)
 
 
