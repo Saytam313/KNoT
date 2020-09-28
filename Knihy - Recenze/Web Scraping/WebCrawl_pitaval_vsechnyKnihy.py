@@ -1,7 +1,8 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 import WebScrape_pitaval
-
+#CrawlPart = ID pismena ve kterém se mají hledat URL
+#BookPart = id knihy konkrétního písmena od které se mají hledat url
 def FindBookUrls(CrawlPart):
 
 	my_url='https://www.pitaval.cz/kniha/zacina/num'

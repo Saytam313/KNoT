@@ -54,8 +54,11 @@ def WebScrape(my_url):
 
 			
 	zalozky=page_soup.find("ul",{"id":"zalozky"})
+	BookInfoFile=open("/mnt/minerva1/nlp/projects/sentiment9/Results/BookInfo.tsv", "a",encoding="utf-8")
 
-	print('pitaval'+'\t'+nazev+'\t'+autor+'\t'+anotaceStr.replace('\n',' ').replace(chr(13),'').replace('  ','').strip())
+	BookInfoFile.write('pitaval'+'\t'+nazev+'\t'+autor+'\t'+anotaceStr.replace('\n',' ').replace(chr(13),'').replace('  ','').strip()+'\n')
+	BookInfoFile.close()
+
 	time.sleep(2)
 
 	for x in zalozky:
@@ -71,6 +74,9 @@ def WebScrape(my_url):
 				page_soup = soup(page_html, "html.parser")
 
 				Komentare = page_soup.findAll("div",{"class":"komentar okraj"})
+				
+				ReviewFile = open("/mnt/minerva1/nlp/projects/sentiment9/Results/Reviews.tsv", "a",encoding="utf-8")
+
 				for koment in Komentare:
 					autor=koment.a.text
 					hodnoceniStr=koment.find("div",{"class":"nick_a_hodnoceni"}).a.next_sibling.replace('|','').strip()
@@ -86,8 +92,12 @@ def WebScrape(my_url):
 						hodnoceni+=len(hodnoceniStr)*20
 
 					datum=koment.span.text
-					text=koment.p.text
-					print('pitaval'+'\t'+nazev+'\t'+autor+'\t'+str(hodnoceni)+'\t'+get_date(datum)+'\t'+text.replace('\n',' ').replace(chr(13),'').replace('  ','').strip())
-					time.sleep(2)
+					try:
+						text=koment.p.text
+					except:
+						text=""
+					ReviewFile.write('pitaval'+'\t'+nazev+'\t'+autor+'\t'+str(hodnoceni)+'\t'+get_date(datum)+'\t'+text.replace('\n',' ').replace(chr(13),'').replace('  ','').strip()+'\n')
+				ReviewFile.close()
+				time.sleep(2)
 
 

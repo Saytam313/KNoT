@@ -3,7 +3,7 @@ import WebCrawl_DatabazeKnih_vsechnyKnihy
 
 # parallel-ssh -i -t 0 -A -h Hosts2 python3 /mnt/minerva1/nlp/projects/sentiment9/Scripts/WebScrapeAllBooks_DatabazeKnih.py  \$HOSTNAME
 
-#celkovy pocet stranek v databazi knih
+#celkovy pocet stranek v databazi knih, lze zjistit pomoci skriptu CountAllPages.py
 maxCount = 4592
 
 

@@ -4,7 +4,7 @@ import os, sys, time
 import datetime
 import WebScrape_DatabazeKnih
 
-NewReviewsFile = open("../Results/DatabazeKnihNewReviews.txt", "r",encoding="utf-8")
+NewReviewsFile = open("/mnt/minerva1/nlp/projects/sentiment9/Results/DatabazeKnihNewReviews.txt", "r",encoding="utf-8")
 NewReviewBooks=NewReviewsFile.read().splitlines()
 
 LastUpdateDate = WebScrape_DatabazeKnih.get_date(NewReviewBooks[0])
@@ -18,12 +18,14 @@ for line in NewReviewBooks:
 	uClient.close()
 	page_soup = soup(page_html, "html.parser")
 	reviews = page_soup.findAll("div",{"class":"komentars_user komover"})
+	
 	try:
 		Nazev = page_soup.find("h1",{"itemprop":"name"}).text
 	except AttributeError:
 		continue
 		
-	DatabazeKnihReviews = open("../Results/Reviews.tsv", "a",encoding="utf-8")
+
+	DatabazeKnihReviews = open("/mnt/minerva1/nlp/projects/sentiment9/Results/Reviews.tsv", "a",encoding="utf-8")
 
 
 	for review in reviews:
@@ -59,7 +61,7 @@ for line in NewReviewBooks:
 
 NewReviewsFile.close()
 
-NewReviewsFile = open("../Results/DatabazeKnihNewReviews.txt", "w",encoding="utf-8")
+NewReviewsFile = open("/mnt/minerva1/nlp/projects/sentiment9/Results/DatabazeKnihNewReviews.txt", "w",encoding="utf-8")
 NewReviewsFile.write(str(datetime.datetime.now().strftime("%d. %m. %Y, %H:%M"))+'\n')
 
 NewReviewsFile.close()
