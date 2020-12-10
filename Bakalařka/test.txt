@@ -1,0 +1,399 @@
+TODO
+#vyhledani kterej text je relevantni at to tam nebere nejaky vedlejsi odkazy na novinky
+
+skipnout radek po linku
+vzít si celej odstavec mezi <p> tagama a checknout jestli je tam link tag, kdyz j tak celej odstave skipnu
+
+
+['./src/html_to_vert.py', '-o', '../workplace/3-vert/cs_media/2020-10-01_0045.vert.processing', '-l', '-f', '-m', '12', '-t', './src/../library/morphodita/precompiled_bin/run_tokenizer', '-i', './src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.processing']
+
+
+pudb3 /mnt/data-2/feeds_crawling/big_brother/src/html_to_vert.py -o /mnt/data-2/feeds_crawling/big_brother/src/../workplace/3-vert/cs_media/2020-10-01_0045.vert.processing -l -f -m 12 -t /mnt/data-2/feeds_crawling/big_brother/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.processing
+
+
+time python3 /mnt/data-2/feeds_crawling/big_brother/src/html_to_vert.py -o ./src/../workplace/3-vert/cs_media/2020-10-01_0045.vert.processing -l -f -m 12 -t /mnt/data-2/feeds_crawling/big_brother/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.failed
+
+
+SPOUŠTÍM TO PŘES TOTO:
+
+time python3 ./src/html_to_vert.py -o test.txt -l -f -m 12 -t ./src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.failed
+
+
+time python3 ./cs_media/src/html_to_vert.py -o test.txt -l -f -m 12 -t ./cs_media/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.failed
+
+
+time python3 ./feeds_crawler/src/html_to_vert.py -o test.txt -l -f -m 12 -t ./feeds_crawler/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.failed
+
+time python3 /mnt/minerva1/nlp/repositories/feeds_crawler/src/html_to_vert.py -o test.txt -l -f -m 12 -t /mnt/minerva1/nlp/repositories/feeds_crawler/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.failed
+
+time python3 ./feeds_crawler/src/html_to_vert.py -o test.txt -l -f -m 12 -t ./feeds_crawler/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.failed
+
+time python3 ./feeds_crawler/src/html_to_vert.py -o test.txt -l -f -m 12 -t ./feeds_crawler/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/newsbrief_eu/2020-10-20_0125.warc.failed
+
+
+
+
+ENV:
+source /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/venv/bin/activate
+
+
+
+Data:
+/mnt/data-2/feeds_crawling/big_brother/workplace/2-downloaded/cs_media
+
+
+
+
+
+Recenze 2020-09-10 :
+https://channelworld.cz/produktove-novinky/evolveo-uvadi-tlacitkove-vecko-s-dvema-displeji-easyphone-fg-25167?utm_source=rss&utm_medium=web&utm_campaign=rss 																			(telefon)
+http://pctuning.tyden.cz/hardware/skrine-zdroje-chladice/60355-cooler-master-mastercase-h500-argb-nejnizsi-haf 																															(hw)
+https://notebook.cz/clanky/recenze-notebook/2020/11-generace-intel-core-acer-swift-5-sf514-55t 																																			(notebook)
+http://www.hrej.cz/pr-clanek/asus-gaming-vg249q-6599/ 																																													(notebook)
+https://www.systemonline.cz/zpravy/wd-predstavuje-prvni-externi-disk-zabezpeceny-technologii-armorlock-z.htm 																															(hw)
+http://www.autoazena.sk/news/land-rover-defender-predstavuje-plug-in-hybrid-novy-sestvalcovy-diesel-a-vybavu-x-dynamic/ 																												(auto)
+https://www.topspeed.sk/novinky/vw-golf-variant-2021-oficialne-prekvapil-dlhsim-razvorom-aj-verziou-alltrack/18277 																														(auto)
+https://www.autojournal.cz/test-hyundai-i30n-project-c/ 																																												(auto)
+https://digiarena.zive.cz/jakumei-optics-jde-na-trh-s-objektivem-dulens-apo-85-mm-f2 																																					(fotak)
+https://www.svetandroida.cz/poco-m2-oficialne/ 																																															(telefon)
+https://musicserver.cz/clanek/64151/honor-choice-earbuds-lepsi-bezdratova-sluchatka-za-899-kc-nesezenete/ 																																(sluchatka)
+https://www.mobilmania.cz/clanky/na-terminalu-uz-zaplatite-i-s-telefonem-za-tri-tisice-je-tu-levne-redmi-9c-nfc/sc-3-a-1349281/default.aspx 																							(telefon)
+https://androidportal.zoznam.sk/2020/08/recenzia-samsung-galaxy-note20/																																					(telefon)
+https://smartmania.cz/recenze-microsoft-surface-book-3-vykonny-notebook-a-graficky-tablet-v-jednom/#comment-360421 																														(notebook)
+https://www.fullmoonzine.cz/novinky/honor-choice-earbuds-lepsi-bezdratova-sluchatka-za-899-kc-nesezenete 																																(sluchatka)
+https://tech.sme.sk/c/22484803/test-galaxy-watch3-vyskusali-sme-fitness-hodinky-od-samsungu.html 																																		(hodinky)
+https://www.autokaleidoskop.cz/Testy/Kia-Xceed-1-6-CRDi-MHEV-iMT-s-novou-prevodovkou-vice-kilometru/ 																																	(auto)
+https://www.autojournal.cz/test-ojetiny-land-rover-discovery-4-schopny-stroj-s-posramocenou-povesti/ 																																	(auto)
+https://mobilizujeme.cz/clanky/cat-s62-pro-recenze#comment-98939 																																										(telefon)
+https://www.svetandroida.cz/realme-buds-air-neo-recenze/comment-page-1/#comment-1021344 																																				(sluchatka)
+https://www.mojandroid.sk/samsung-galaxy-note-20-recenzia/#comment-259838 																																								(telefon)
+https://www.mojandroid.sk/samsung-galaxy-note-20-ultra-ako-foti/ 																																										(telefon)
+https://smartmania.cz/redmi-note-8t-recenze/#comment-360411 																																											(telefon)
+https://mobilizujeme.cz/clanky/poco-x3-nfc-skvela-volba-za-rozumny-peniz#comment-98926 																																					(telefon)
+							
+https://mobilizujeme.cz/clanky/poco-m2-prevleceny-redmi-ale-na-jine-vlne 																																								(telefon)
+https://www.svetandroida.cz/testujeme-samsung-galaxy-tab-s7/comment-page-1/#comment-1021364 																																			(telefon)
+https://www.mojandroid.sk/poco-x3-nfc-predstavenie/ 																																													(telefon)
+							
+							
+Recenze 2020-09-11:							
+https://samsungmania.mobilmania.cz/clanky/recenze-samsung-galaxy-z-fold2--vitana-evoluce-a-skvela-hracka-pro-narocne/sc-309-a-1349249/default.aspx 																						(telefon)
+https://magazin.aktualne.cz/kultura/literatura/debut-ceske-spisovatelky-klara-vlasakova-praskliny-recenze/r~e3b6562af35a11eab1110cc47ab5f122/?utm_source=mediafed&utm_medium=rss&utm_campaign=mediafed 									(kniha)
+https://techbox.dennikn.sk/hp-zbook-fury-15-a-17-ponuknu-desktopovy-vykon-v-telach-beznych-notebookov/ 																																	(notebook)
+http://motodenik.cz/clanek/2401-aprilia-dorsoduro-900-zabavny.html 																																										(motorka)
+https://androidportal.zoznam.sk/2020/04/elektricky-bicykel-fiido-m1-100-kilometrov/#comment-403483 																																		(motorka)
+https://autoroad.cz/testy-aut/99728-test-peugeot-208-1-5-bluehdi-100-gt-line-zaslouzene-autem-roku-2020 																																(auto)
+https://prazsky-zpravodaj.cz/technika/vrcholem-nabidky-opelu-je-grandland-xplug-in-hybrid4-221kw-300hp/ 																																(auto)
+https://diit.cz/clanek/recenze-asus-rog-strix-b550-f-gaming-wifi-ryzen-5-3600-pretaktovani	 																																			(notebook)
+https://auto-mania.cz/test-mercedes-amg-a-45-s-4matic-2020/ 																																											(auto)
+https://smartmania.cz/test-skoda-octavia-2020-bude-to-opet-prodejni-bestseller/#comment-360528 																																			(auto)
+https://www.idnes.cz/kultura/literatura/recenze-milan-kundera-slavnost-bezvyznamnosti.A200910_570074_literatura_spm#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 													(kniha)
+https://www.idnes.cz/kultura/literatura/recenze-soukupova-urban-epstein.A200909_094924_literatura_kiz#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 																(kniha)
+https://www.idnes.cz/hry/recenze/recenze-the-last-campfire.A200908_230057_bw-pc-recenze_oma#utm_source=rss&utm_medium=feed&utm_campaign=bonusweb&utm_content=main 																		(hra)
+https://www.idnes.cz/kultura/film-televize/recenze-krajina-ve-stinu-bohdan-slama-spalkova-polakova.A200909_569879_filmvideo_spm#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 										(film)
+							
+							
+Recenze 2020-09-12:							
+https://auto-mania.cz/test-plug-in-hybridu-ford-kuga-phev-2020/ 																																										(auto)
+https://vybermiauto.cz/recenze/test-fiat-tipo-hatchback 																																												(auto)
+https://www.autojournal.cz/test-peugeot-208-gt-line-na-pomezi-premiove-tridy/ 																																							(auto)
+https://www.autanet.cz/autonews-test-peugeot-208-1-2-puretech-130-gt-line-ciperny-a-pohlednejsi-konkurent-fabie-4164 																													(auto)
+https://www.autojournal.cz/test-skoda-octavia-2-0-tdi-evo-pokrok-nezastavis/ 																																							(auto)
+https://smartmania.cz/samsung-galaxy-z-fold-2-recenze-otevrene-okno-do-budoucnosti/?utm_source=rss&utm_medium=rss&utm_campaign=samsung-galaxy-z-fold-2-recenze-otevrene-okno-do-budoucnosti 											(telefon)
+https://www.svetandroida.cz/nejlepsi-chytre-hodinky-s-wear-os-2020/comment-page-1/#comment-1021490 																																		(hodinky)
+https://www.e15.cz/magazin/kultura/recenze-pc-hry-crusader-kings-3-aneb-jak-se-bavit-stredovekem-1373121 																																(hry)
+https://www.idnes.cz/kultura/film-televize/recenze-zenska-pomsta-rapos-vejmelkova.A200911_570293_filmvideo_spm#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 														(film)
+https://www.svetandroida.cz/motorola-razr-5g-oficialne/ 																																												(telefon)
+https://www.svetandroida.cz/shelly-duo-recenze-chytra-zarovka/comment-page-1/#comment-1021493 																																			(telefon)
+https://www.idnes.cz/kultura/film-televize/recenze-mlsne-medvedi-pribehy.A200910_570075_filmvideo_spm#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 																(film)
+https://www.idnes.cz/hry/recenze/wrc-9-recenze-bonusweb.A200910_134028_bw-pc-recenze_oz#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 																				(hry)
+https://www.idnes.cz/kultura/film-televize/recenze-zenska-pomsta-rapos-vejmelkova.A200911_570293_filmvideo_spm#utm_source=rss&utm_medium=feed&utm_campaign=zpravodaj&utm_content=main 													(kniha)
+							
+							
+Recenze 2020-09-13:							
+https://www.topspeed.sk/testy-aut/suzuki-jimny-4x4-test/18285 																																											(auto)
+https://touchit.sk/samung-galaxy-z-fold2-prve-dojmy/308542 																																												(telefon)
+https://touchit.sk/recenzia-hp-elitebook-x360-1040-g6-jasny-biznis-notebook/307959 																																						(notebook)
+https://touchit.sk/recenzia-sony-mdr-rf895rk/307895 																																													(sluchatka)
+https://www.lidovky.cz/kultura/recenze-nebat-se-emoci-ani-patosu-vojna-a-mir-je-jedna-z-nejlepsich-docekalovych-inscenaci.A200910_103756_ln_kultura_jto#utm_source=rss&utm_medium=feed&utm_campaign=ln_lidovky&utm_content=main 		(divadlo)
+https://touchit.sk/recenzie-aoc-q27t1-stylovy-monitor-ktory-sa-odlisuje/308078 																																							(monitor)
+							
+Recenze 2020-09-14:							
+https://mobilenet.cz/clanky/recenze-motorola-moto-g-5g-plus-stredni-trida-se-vsim-vsudy-41676 																																			(telefon)
+https://www.topspeed.sk/testy-aut/test-audi-q7-60-tfsi-e-porucime-vetru-dazdu/18288 																																					(auto)
+https://automagazin.sk/2020/09/13/test-mercedes-amg-cla-45-s-4matic-poriadna-davka-adrenalinu/ 																																			(auto)
+https://www.gamepark.cz/recenze/tony-hawks-pro-skater-12/ 																																												(hry)
+https://www.svetandroida.cz/samsung-galaxy-buds-live-recenze/comment-page-1/#comment-1021628 																																			(sluchatka)
+https://www.idnes.cz/mobil/telefony/sony-xperia-1-ii-recenze-test-smartphone-android.A200902_225905_telefony_vok#utm_source=rss&utm_medium=feed&utm_campaign=mobil&utm_content=main 													(telefon)
+							
+Recenze 2020-09-15:							
+https://www.mobilmania.cz/clanky/recenze-sony-xperia-1-ii--bez-kompromisu-tak-to-maji-fanousci-radi/sc-3-a-1349305/default.aspx#part=1 																									(telefon)
+https://www.autojournal.cz/test-bmw-118d/ 																																																(auto)
+https://automagazin.sk/2020/09/13/test-mercedes-amg-cla-45-s-4matic-poriadna-davka-adrenalinu/ 																																			(auto)
+https://mobilizujeme.cz/clanky/redmi-note-9-pro-recenze#comment-99061 																																									(telefon)
+https://www.autojournal.cz/test-yamaha-tracer-700/ 																																														(auto)
+https://smartmania.cz/microsoft-surface-duo-v-prvnich-recenzich-zatim-neni-duvod-k-oslavam/#comment-360739 																																(telefon)
+https://www.mojandroid.sk/recenzia-motorola-edge/ 																																														(telefon)
+https://www.novinky.cz/kultura/filmy-serialy/clanek/recenze-film-zenska-pomsta-je-predevsim-pomstou-na-divacich-40336244 																												(film)
+							
+Recenze 2020-09-16:							
+							
+
+http://www.motoforum.cz/supersporty/aprilia-tuono-v4-x-221-koni-na-166-kilogramu/ 																																						(auto)
+https://androidportal.zoznam.sk/2018/01/samsung-galaxy-a8-2018-recenzia-test/#comment-403492 																																			(telefon)
+https://auto-mania.cz/test-mild-hybridu-ford-focus-kombi-10-ecoboost-hybrid-2020/ 																																						(auto)
+https://touchit.sk/motorola-moto-g9-plus-telefon-s-5000-mah-bateriou-a-30-w-nabijanim/308695 																																			(telefon)
+https://touchit.sk/recenzia-asus-tuf-gaming-a15-laka-pomerom-cena-vykon-a-odolnym-sasi/307972 																																			(notebook)
+		
+
+Tema:
+
+	Smartphony
+
+		CZ:
+			https://channelworld.cz/produktove-novinky/evolveo-uvadi-tlacitkove-vecko-s-dvema-displeji-easyphone-fg-25167?utm_source=rss&utm_medium=web&utm_campaign=rss (info o telefonu)
+
+			https://www.svetandroida.cz/poco-m2-oficialne/ (asi ne recenze, jen info o telefonu)
+			https://www.svetandroida.cz/testujeme-samsung-galaxy-tab-s7/(tablet ne smartphone)
+			https://www.svetandroida.cz/motorola-razr-5g-oficialne/(info o telefonu)
+
+			https://www.mobilmania.cz/clanky/na-terminalu-uz-zaplatite-i-s-telefonem-za-tri-tisice-je-tu-levne-redmi-9c-nfc/sc-3-a-1349281/default.aspx (ma hodnoceni, ale nějak tu nevidim text)
+			https://samsungmania.mobilmania.cz/clanky/recenze-samsung-galaxy-z-fold2--vitana-evoluce-a-skvela-hracka-pro-narocne/sc-309-a-1349249/default.aspx (hodnoceni 2x, plusy minusi i text)
+			https://www.mobilmania.cz/clanky/recenze-sony-xperia-1-ii--bez-kompromisu-tak-to-maji-fanousci-radi/sc-3-a-1349305/default.aspx#part=1(hodnoceni 2x, pulsy minusy i pěknej text)
+
+			https://smartmania.cz/redmi-note-8t-recenze/#comment-360411(hodnoceni, + -, hodně informací)
+			https://smartmania.cz/samsung-galaxy-z-fold-2-recenze-otevrene-okno-do-budoucnosti/?utm_source=rss&utm_medium=rss&utm_campaign=samsung-galaxy-z-fold-2-recenze-otevrene-okno-do-budoucnosti(hodnoceni, + -, hodně textu)
+			https://smartmania.cz/microsoft-surface-duo-v-prvnich-recenzich-zatim-neni-duvod-k-oslavam/#comment-360739(hodnocení z ruzných webů)
+
+			https://mobilizujeme.cz/clanky/poco-x3-nfc-skvela-volba-za-rozumny-peniz#comment-98926(specifikace)
+			https://mobilizujeme.cz/clanky/poco-m2-prevleceny-redmi-ale-na-jine-vlne#comment-98954(specifikace)
+				https://mobilizujeme.cz/clanky/poco-m2-prevleceny-redmi-ale-na-jine-vlne
+			https://mobilizujeme.cz/clanky/redmi-note-9-pro-recenze#comment-99061(specifikace)
+
+			https://mobilenet.cz/clanky/recenze-motorola-moto-g-5g-plus-stredni-trida-se-vsim-vsudy-41676(specifikace, plusy minusy)
+
+			https://www.idnes.cz/mobil/telefony/sony-xperia-1-ii-recenze-test-smartphone-android.A200902_225905_telefony_vok#utm_source=rss&utm_medium=feed&utm_campaign=mobil&utm_content=main(hodně textu, + -)
+
+		SK:
+			https://androidportal.zoznam.sk/2018/01/samsung-galaxy-a8-2018-recenzia-test/#comment-403492
+
+			https://www.mojandroid.sk/samsung-galaxy-note-20-ultra-ako-foti/#comment-259830
+			https://www.mojandroid.sk/samsung-galaxy-note-20-recenzia/#comment-259838
+				https://www.mojandroid.sk/samsung-galaxy-note-20-ultra-ako-foti/
+			https://www.mojandroid.sk/poco-x3-nfc-predstavenie/
+				https://www.mojandroid.sk/samsung-galaxy-note-20-recenzia/#comment-259845
+				https://www.mojandroid.sk/samsung-galaxy-note-20-recenzia/#comment-259856
+			https://www.mojandroid.sk/recenzia-motorola-edge/
+
+			https://touchit.sk/samung-galaxy-z-fold2-prve-dojmy/308542
+			https://touchit.sk/motorola-moto-g9-plus-telefon-s-5000-mah-bateriou-a-30-w-nabijanim/308695#comment-19674
+				https://touchit.sk/motorola-moto-g9-plus-telefon-s-5000-mah-bateriou-a-30-w-nabijanim/308695
+
+			https://androidportal.zoznam.sk/2020/08/recenzia-samsung-galaxy-note20/#comment-403481
+
+
+	Filmy:
+
+		CZ:	
+			https://www.idnes.cz/kultura/film-televize/recenze-krajina-ve-stinu-bohdan-slama-spalkova-polakova.A200909_569879_filmvideo_spm#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 										(film)
+			https://www.idnes.cz/kultura/film-televize/recenze-zenska-pomsta-rapos-vejmelkova.A200911_570293_filmvideo_spm#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 														(film)
+			https://www.idnes.cz/kultura/film-televize/recenze-mlsne-medvedi-pribehy.A200910_570075_filmvideo_spm#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 																(film)
+
+			https://www.novinky.cz/kultura/filmy-serialy/clanek/recenze-film-zenska-pomsta-je-predevsim-pomstou-na-divacich-40336244 																												(film)
+
+
+
+	Auta:
+		CZ:
+			
+			https://www.autojournal.cz/test-hyundai-i30n-project-c/(hodnoceni,text)																																										(auto)
+			https://www.autojournal.cz/test-ojetiny-land-rover-discovery-4-schopny-stroj-s-posramocenou-povesti/ 																																	(auto)
+			
+			https://www.autanet.cz/autonews-test-peugeot-208-1-2-puretech-130-gt-line-ciperny-a-pohlednejsi-konkurent-fabie-4164(+ -) 																													(auto)
+			
+			https://www.autokaleidoskop.cz/Testy/Kia-Xceed-1-6-CRDi-MHEV-iMT-s-novou-prevodovkou-vice-kilometru/ (specifikace)																																	(auto)
+			
+			https://autoroad.cz/testy-aut/99728-test-peugeot-208-1-5-bluehdi-100-gt-line-zaslouzene-autem-roku-2020 (recenze text)																																(auto)
+			
+			https://prazsky-zpravodaj.cz/technika/vrcholem-nabidky-opelu-je-grandland-xplug-in-hybrid4-221kw-300hp/ (specifikace)																													(auto)
+			
+			https://smartmania.cz/test-skoda-octavia-2020-bude-to-opet-prodejni-bestseller/#comment-360539 	(hodnoceni, hodně textu)																																		(auto)
+			
+			https://auto-mania.cz/test-mercedes-amg-a-45-s-4matic-2020/ (recenze text)																																											(auto)
+			https://auto-mania.cz/test-plug-in-hybridu-ford-kuga-phev-2020/ (recenze text)																																								(auto)
+			https://auto-mania.cz/test-mild-hybridu-ford-focus-kombi-10-ecoboost-hybrid-2020/(recenze text) 																																						(auto)
+					
+			https://vybermiauto.cz/recenze/test-fiat-tipo-hatchback (hodnoceni, recenze text)																																											(auto)
+			
+			https://www.autojournal.cz/test-peugeot-208-gt-line-na-pomezi-premiove-tridy/ (hodnoceni, recenze text)																																							(auto)
+			https://www.autojournal.cz/test-skoda-octavia-2-0-tdi-evo-pokrok-nezastavis/  (hodnoceni, recenze text)																																							(auto)
+			https://www.autojournal.cz/test-bmw-118d/ (hodnoceni, recenze text)																																																(auto)
+			https://www.autojournal.cz/test-yamaha-tracer-700/ (text)																																													(motorka)
+			
+			http://www.motoforum.cz/supersporty/aprilia-tuono-v4-x-221-koni-na-166-kilogramu/ (text)																																					(auto)
+			
+			http://motodenik.cz/clanek/2401-aprilia-dorsoduro-900-zabavny.html (text) 																																										(motorka)
+
+		SK:
+			https://androidportal.zoznam.sk/2020/04/elektricky-bicykel-fiido-m1-100-kilometrov/#comment-403483 																																		(motorka)
+
+
+
+
+		SK:
+			http://www.autoazena.sk/news/land-rover-defender-predstavuje-plug-in-hybrid-novy-sestvalcovy-diesel-a-vybavu-x-dynamic/ 																												(auto)
+			
+			https://www.topspeed.sk/novinky/vw-golf-variant-2021-oficialne-prekvapil-dlhsim-razvorom-aj-verziou-alltrack/18277 																														(auto)
+			https://www.topspeed.sk/testy-aut/suzuki-jimny-4x4-test/18285 																																											(auto)
+			https://www.topspeed.sk/testy-aut/test-audi-q7-60-tfsi-e-porucime-vetru-dazdu/18288 																																					(auto)
+			
+			https://automagazin.sk/2020/09/13/test-mercedes-amg-cla-45-s-4matic-poriadna-davka-adrenalinu/ 																																			(auto)
+			https://automagazin.sk/2020/09/13/test-mercedes-amg-cla-45-s-4matic-poriadna-davka-adrenalinu/ 																																			(auto)
+
+	hw:
+		CZ:
+			http://pctuning.tyden.cz/hardware/skrine-zdroje-chladice/60355-cooler-master-mastercase-h500-argb-nejnizsi-haf 																															(hw)
+			https://www.systemonline.cz/zpravy/wd-predstavuje-prvni-externi-disk-zabezpeceny-technologii-armorlock-z.htm 																															(hw)
+			https://www.svetandroida.cz/shelly-duo-recenze-chytra-zarovka/comment-page-1/#comment-1021454 																																			(hw)
+
+
+	notebook:
+		CZ:
+			https://notebook.cz/clanky/recenze-notebook/2020/11-generace-intel-core-acer-swift-5-sf514-55t 																																			(notebook)
+			http://www.hrej.cz/pr-clanek/asus-gaming-vg249q-6599/ 																																													(notebook)
+			https://smartmania.cz/recenze-microsoft-surface-book-3-vykonny-notebook-a-graficky-tablet-v-jednom/#comment-360421 																														(notebook)
+			https://diit.cz/clanek/recenze-asus-rog-strix-b550-f-gaming-wifi-ryzen-5-3600-pretaktovani	 																																			(notebook)
+		SK:
+			https://touchit.sk/recenzia-hp-elitebook-x360-1040-g6-jasny-biznis-notebook/307959 																																						(notebook)
+			https://touchit.sk/recenzia-asus-tuf-gaming-a15-laka-pomerom-cena-vykon-a-odolnym-sasi/307972 																																			(notebook)
+			https://techbox.dennikn.sk/hp-zbook-fury-15-a-17-ponuknu-desktopovy-vykon-v-telach-beznych-notebookov/ 																																	(notebook)
+
+	sluchatka:
+		CZ:
+			https://musicserver.cz/clanek/64151/honor-choice-earbuds-lepsi-bezdratova-sluchatka-za-899-kc-nesezenete/ 																																(sluchatka)
+			https://www.fullmoonzine.cz/novinky/honor-choice-earbuds-lepsi-bezdratova-sluchatka-za-899-kc-nesezenete 																																(sluchatka)
+			https://www.svetandroida.cz/realme-buds-air-neo-recenze/comment-page-1/#comment-1021344 																																				(sluchatka)
+			https://www.svetandroida.cz/samsung-galaxy-buds-live-recenze/comment-page-1/#comment-1021628 																																			(sluchatka)
+
+		SK:
+			https://touchit.sk/recenzia-sony-mdr-rf895rk/307895 																																													(sluchatka)
+
+
+
+
+
+
+https://www.autojournal.cz/test (hodnoceni, text)
+https://autoroad.cz/testy-aut/ (text (závěr))
+https://smartmania.cz/test (hodnoceni, text, + -)
+https://auto-mania.cz/test (text)
+https://vybermiauto.cz/recenze/ (hodnoceni po prokliku, text)
+
+
+
+
+https://www.autojournal.cz/test-hyundai-i30n-project-c/ G
+https://www.autojournal.cz/test-ojetiny-land-rover-discovery-4-schopny-stroj-s-posramocenou-povesti/ B    asdasd
+https://autoroad.cz/testy-aut/99728-test-peugeot-208-1-5-bluehdi-100-gt-line-zaslouzene-autem-roku-2020 G
+https://autoroad.cz/testy-aut/99727-kdyz-ma-elektromobil-jeden-kvalt-couva-stejne-rychle-jako-jede-dopredu B asdasd
+https://auto-mania.cz/test-mercedes-amg-a-45-s-4matic-2020/ G 
+https://smartmania.cz/test-skoda-octavia-2020-bude-to-opet-prodejni-bestseller/?utm_source=rss&utm_medium=rss&utm_campaign=test-skoda-octavia-2020-bude-to-opet-prodejni-bestseller G
+https://auto-mania.cz/test-plug-in-hybridu-ford-kuga-phev-2020/ G
+https://vybermiauto.cz/recenze/test-fiat-tipo-hatchback G
+https://www.autojournal.cz/test-peugeot-208-gt-line-na-pomezi-premiove-tridy/ G
+https://www.autojournal.cz/test-skoda-octavia-2-0-tdi-evo-pokrok-nezastavis/ G
+https://auto-mania.cz/test-plug-in-hybridu-peugeot-3008-gt-hybrid4-2020/ G
+https://www.autojournal.cz/test-bmw-118d/ G 
+https://www.autojournal.cz/test-yamaha-tracer-700/ B asdasd
+https://auto-mania.cz/test-mild-hybridu-ford-focus-kombi-10-ecoboost-hybrid-2020/ G
+https://www.autojournal.cz/test-peugeot-2008-1-5-bluehdi/ G
+https://auto-mania.cz/test-volkswagen-t-roc-cabriolet-1-5-tsi-110-kw-dsg-r-line-2020/ G
+
+
+
+
+
+pudb3 /mnt/data-2/feeds_crawling/big_brother/src/html_to_vert.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/workplace/3-vert/cs-media/2020-10-01_0045.vert.processing' -l -f -m 12 -t /mnt/data-2/feeds_crawling/big_brother/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/workplace/2-downloaded/cs-media/2020-10-01_0045.warc.processing
+
+pudb3 /mnt/data-2/feeds_crawling/big_brother/src/html_to_vert.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/workplace/3-vert/cs-media/2020-10-01_0045.vert.processing -l -f -m 12 -t /mnt/data-2/feeds_crawling/big_brother/src/../library/morphodita/precompiled_bin/run_tokenizer /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.processing
+
+python3 ./src/html_to_vert.py -o ./workplace/3-vert/cs_media/2020-10-01_0045.vert.processing -l -f -m 12 -t ./src/../library/morphodita/precompiled_bin/run_tokenizer -i ./workplace/2-downloaded/cs_media/2020-10-01_0045.warc.processing
+
+
+python3 ./src/html_to_vert.py -o ./workplace/3-vert/cs_media/2020-10-01_0045.vert.processing -t ./library/morphodita/precompiled_bin/run_tokenizer -i ./workplace/2-downloaded/cs_media/2020-10-01_0045.warc.processing
+
+
+domov můj:
+/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media
+
+
+
+
+
+
+
+
+
+https://vybermiauto.cz/recenze/test-volkswagen-tiguan-allspace G
+https://auto-mania.cz/test-skoda-superb-scout-2-0-tsi-200-kw-dsg-4x4-2019/ G
+https://autoroad.cz/testy-aut/98200-test-peugeot-508-gt-line-jde-k-sobe-zakladni-benzin-a-grand-tourismo G
+https://vybermiauto.cz/recenze/test-bmw-x5 	G
+https://www.autojournal.cz/test-toyota-yaris-gr-sport-1-5/	G
+https://vybermiauto.cz/recenze/test-dacia-logan-mcv-stepway G
+https://www.autojournal.cz/test-mercedes-benz-v250-d-4matic-marco-polo/ G
+https://autoroad.cz/testy-aut/98214-test-hyundai-i30-kombi-1-4-t-gdi-opravdu-nejlepsi-ceske-kombi G
+https://vybermiauto.cz/recenze/test-toyota-corolla-touring-sports G
+https://auto-mania.cz/test-audi-tt-rs-coupe-2-5-tfsi-quattro-2019/ G
+https://autoroad.cz/testy-aut/98292-test-mitsubishi-eclipse-cross-1-5-turbo-cvt-4wd-crossover-nejen-do-mesta G
+https://vybermiauto.cz/recenze/test-mitsubishi-eclipse-cross G
+https://www.autojournal.cz/test-renault-clio-tce-100-demonstrator-pokroku/ G
+https://www.autojournal.cz/test-ojetiny-audi-a6-3-0-bi-tdi-avant/ 																	B ojetina
+https://vybermiauto.cz/recenze/test-honda-civic-type-r G
+https://vybermiauto.cz/recenze/test-kia-optima-sw G
+https://www.autojournal.cz/test-mini-john-cooper-works/ G
+https://vybermiauto.cz/recenze/test-audi-a6-avant G
+https://auto-mania.cz/test-bmw-m2-competition-2019/ G
+https://www.autojournal.cz/test-ojetiny-opel-astra-h-levna-ale-prehlizena-volba-2/ 													B ojetina
+https://vybermiauto.cz/recenze/test-skoda-scala G
+https://vybermiauto.cz/recenze/test-bmw-3-sedan G
+https://www.autojournal.cz/test-ojetiny-seat-leon-fr-3d/ 																			B ojetina
+https://vybermiauto.cz/recenze/test-honda-hr-v G
+https://vybermiauto.cz/recenze/test-volkswagen-t-cross G
+https://vybermiauto.cz/recenze/test-audi-e-tron G
+https://vybermiauto.cz/recenze/test-kia-ceed G
+https://auto-mania.cz/test-dacia-logan-mcv-blue-dci-70-kw-techroad-2019/ G
+https://vybermiauto.cz/recenze/test-hyundai-i30-fastback G
+https://vybermiauto.cz/recenze/test-kia-stonic G
+https://vybermiauto.cz/recenze/test-ford-edge G
+https://vybermiauto.cz/recenze/test-bmw-z4 G
+https://vybermiauto.cz/recenze/test-toyota-camry  G
+https://vybermiauto.cz/recenze/test-opel-insignia-liftback G
+https://vybermiauto.cz/recenze/test-skoda-kamiq G
+https://vybermiauto.cz/recenze/test-volkswagen-tiguan G
+https://vybermiauto.cz/recenze/test-seat-alhambra G
+https://vybermiauto.cz/recenze/test-mazda-cx-5 G
+https://auto-mania.cz/test-audi-a4-allroad-40-tdi-quattro-2019/ G
+https://auto-mania.cz/test-bmw-330d-xdrive-touring-2020/ G
+https://www.autojournal.cz/test-peugeot-508-sw-gt-bluehdi-180-neobycejne-kombi/ G
+https://auto-mania.cz/test-skoda-kamiq-1-0-tsi-70-kw-2019/ G
+https://auto-mania.cz/test-mitsubishi-l200-24-did-4x4-5at-rock-proof-2019/ G
+https://vybermiauto.cz/recenze/test-peugeot-508-sw G
+https://auto-mania.cz/test-mitsubishi-l200-2019/ G
+https://autoroad.cz/testy-aut/98594-test-honda-cr-v-2-0-hybrid-i-mmd-e-cvt-lifestyle-terapie-tichem G
+https://auto-mania.cz/test-ds-3-crossback-1-2-puretech-155-eat8-2019/ G
+https://www.autojournal.cz/test-mercedes-benz-a-160/ G
+https://auto-mania.cz/test-audi-q7-50-tdi-quattro-2019/ G
+https://www.autojournal.cz/test-toyota-corolla-sedan-1-8-hybrid-abstinent/ G
+https://www.autojournal.cz/test-audi-sq8-naskok-diky-technice/ G
+https://auto-mania.cz/test-kia-xceed-1-6-t-gdi-204-k-7dct-2019/ G
+https://www.autojournal.cz/test-jaguar-i-pace-s-ev400-elektricky-kral/ G
+https://vybermiauto.cz/recenze/test-skoda-superb-combi G
+https://www.autojournal.cz/test-audi-s6-avant-nafta-neni-mrtva/ G
+https://autoroad.cz/testy-aut/98518-test-mitsubishi-l200-double-cab-oldschoolovy-partak-s-diamanty-ve-znaku G
+https://www.autojournal.cz/test-ojetiny-peugeot-208/ 																			B ojetina
+https://auto-mania.cz/test-mazda3-hatchback-skyactiv-x-180-awd-2020/
+https://vybermiauto.cz/recenze/test-seat-leon-st
+https://auto-mania.cz/test-mitsubishi-eclipse-cross-1-5-turbo-mivec-cvt-s-awc-2019/
+https://auto-mania.cz/test-peugeot-508-sw-gt-puretech-225-2019/
+https://smartmania.cz/test-lexus-rx-wellness-na-kolech/
+https://autoroad.cz/testy-aut/98613-test-mercedes-benz-x350d-premiovy-pick-up-se-skvelym-motorem

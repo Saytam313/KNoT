@@ -1,0 +1,58 @@
+__NOTITLE____NOTOC__
+
+== Převod dat hodnocení knih do jednotné podoby (sentiment9) ==
+<!-- Začátek automaticky generované sekce --><!-- ID: 1080 -->
+
+'''Řešitel''': Šimon Matyáš
+
+'''Vedoucí''':  doc. RNDr., Ph.D. Pavel Smrž
+
+'''Zahájení projektu''': 13.07.2020
+
+
+
+----
+<!-- Konec automaticky generované sekce -->== Zadaní projektu == 
+
+Podívat se na existující práce o stahování dat k filmům, (kromě bakalářek a diplomek také adresáře v /mnt/minerva1/nlp-3/, např. imdb, csfd, fdb). Zpracovat data recenzí knih, např. z cbdb.cz (viz třeba https://www.cbdb.cz/kniha-10-harry-potter-a-fenixuv-rad-harry-potter-and-the-order-of-the-phoenix), připravit skripty pro pravidelnou aktualizaci.
+
+== Adresář projektu ==
+
+/mnt/minerva1/nlp/projects/sentiment9
+
+== Obsah Adresáře projektu ==
+ Adresář '''Results'''
+   '''BookInfo.tsv''' - informace o knihách
+   '''cbdbNewReviews.txt''' - obsahuje čas poslední aktualizace a knihy u kterých byly přidány recenze od poslední aktualizace pro web cbdb.cz
+   '''DatabazeKnihNewReviews.txt''' - obsahuje čas poslední aktualizace a knihy u kterých byly přidány recenze od poslední aktualizace pro web databazeknih.cz
+   '''Reviews.tsv''' - recenze knih
+ Adresář '''Scripts'''
+   '''cbdbAktualizace.py''' - přečte url 5ti knih s nejnovějšími komentáři z webu cbdb.cz a přidá je do souboru '''cbdbNewReviews.txt''' pokud v souboru ještě nejsou
+   '''cbdbReadNewReviews.py''' - projde všechny knihy uvedené v souboru '''cbdbNewReviews.txt''' a stáhne recenze přidané po posledním datu aktualizace, po přečtení všech knih změní datum poslední aktualizace
+   '''CountAllPages.py''' - vrací počet stránek v databázi knih na webech cbdb.cz a DatabazeKnih.cz na webu cbdb je na jedné stránce uvedeno 100 knih a na databazeKnih.cz je to 40
+   '''cronscript.txt''' - obsahuje script cron pro pravidelné spouštění
+   '''DatabazeKnihAktualizace.py''' - přečte url 25ti knih s nejnovějšími komentáři z webu cbdb.cz a přidá je do souboru '''DatabazeKnihNewReviews.txt''' pokud v souboru ještě nejsou
+   '''DatabazeKnihReadNewReviews.py''' - projde všechny knihy uvedené v souboru '''DatabazeKnihNewReviews.txt''' a stáhne recenze přidané po posledním datu aktualizace, po přečtení všech knih změní datum poslední aktualizace
+   '''WebCrawl_cbdb_vsechnyKnihy.py''' - projde a očísluje všechny stránky v databázi knih na webu cbdb.cz a vrátí url všech knih na stránkách určeného intervalu
+   '''WebCrawl_DatabazeKnih_vsechnyKnihy.py''' - projde a očísluje všechny stránky v databázi knih na webu cbdb.cz a vrátí url všech knih na stránkách určeného intervalu
+   '''WebScrape_cbdb.py''' - prohledá určitou knihu na webu cbdb.cz a stáhne informace o knize a její recenze do souborů '''BookInfo.tsv''' a '''Reviews.tsv'''
+   '''WebScrape_DatabazeKnih.py''' - prohledá určitou knihu na webu cbdb.cz a stáhne její recenze do souboru '''Reviews.tsv'''
+   '''WebScrapeAllBooks_cbdb.py''' - skript určen pro paralelní stažení webu cbdb.cz na zařízeních knot01 - knot38, před spuštěním je třeba upravit proměnné PCcount a maxCount
+   '''WebScrapeAllBooks_DatabazeKnih.py''' - skript určen pro paralelní stažení webu databazeknih.cz na zařízeních pcknot - pcknot5, před spuštěním je třeba upravit proměnné PCcount a maxCount
+
+== Formát souborů tsv ===
+
+'''BookInfo.tsv'''
+
+Nazev   Autor   žánry   Anotace
+
+''' Reviews.tsv'''
+
+DatabazeKnih   NázevKnihy   JménoUživatele   PočetLiků   DatumRecenze   Hodnocení   Komentář
+
+cbdb NázevKnihy   JménoUživatele   IDUživatele   DatumRecenze   Hodnoceni   Komentář
+
+== Aktualizační skripty ===
+
+Aktualizační skript pro web cbdb.
+
