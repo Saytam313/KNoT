@@ -1,4 +1,5 @@
 from SPARQLWrapper import SPARQLWrapper, JSON
+from unidecode import unidecode
 import pandas as pd
 import requests
 
@@ -18,8 +19,8 @@ def findBrands(product):
     r = requests.get(API_ENDPOINT, params = params)
 
     WikidataID=r.json()['search'][0]['id']
-
-    sparql = SPARQLWrapper("https://query.wikidata.org/sparql")
+    #print(WikidataID)
+    sparql = SPARQLWrapper("https://query.wikidata.org/sparql",agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11")
     #vyhledani kde je produkt zminen v sekci 'Products and Materials' na wikidatech
     sparql.setQuery("""
     SELECT ?item ?itemLabel (GROUP_CONCAT(DISTINCT(?altLabel); separator = ", ") AS ?altLabel_list)
@@ -59,7 +60,8 @@ def findBrands(product):
             brandList.append(x["itemLabel"]["value"])
 
     #brandList=filterBrands(brandList)
-    #print(brandList)
+    
+    
     return brandList
 
 #overi ktere ze zadaneho seznamu slov jsou nazvy firem 
@@ -77,7 +79,7 @@ def filterBrands(brandList):
             'search': query
         }
 
-        r = requests.get(API_ENDPOINT, params = params)
+        r = requests.get(API_ENDPOINT, params = params, headers={'User-Agent': 'Mozilla/5.0'})
         SearchResultCounter=1
         GoodResult=False
         for SearchResult in r.json()['search']: #kontrola prvních 2 vysledku hledani podle nazvu jestli se nejedna o firmu
@@ -130,5 +132,68 @@ def filterBrands(brandList):
     return(CorrectBrands)
         #WikidataID=r.json()['search'][0]['id']
 
+def findProductNames(product):
+    '''
+    API_ENDPOINT = "https://www.wikidata.org/w/api.php"
+
+    #vyhledani id zadaneho produktu
+    params = {
+        'action': 'wbsearchentities',
+        'format': 'json',
+        'language': 'cs',
+        'search': product
+    }
+
+    r = requests.get(API_ENDPOINT, params = params)
+    for x in r.json()['search']:
+        print(x)
+        print('\n\n')
+    '''
+
+
+    API_ENDPOINT = "https://www.wikidata.org/w/api.php"
+
+    query = product
+    #vyhledani id zadaneho produktu
+    params = {
+        'action': 'wbsearchentities',
+        'format': 'json',
+        'language': 'cs',
+        'search': query
+    }
+
+    r = requests.get(API_ENDPOINT, params = params, headers={'User-Agent': 'Mozilla/5.0'})
+    
+    WikidataID=r.json()['search'][0]['id']
+    params = {
+        'action': 'wbgetentities',
+        'format': 'json',
+        'ids': WikidataID
+    }
+    r = requests.get(API_ENDPOINT, params = params)
+
+    result=list()
+    result.append(r.json()['entities'][WikidataID]['labels']['cs']['value'])
+    try:
+        for x in r.json()['entities'][WikidataID]['aliases']['cs']:
+            result.append(x['value'])
+    except:
+        False
+    
+    for x in result:
+        NewProduct=unidecode(u'{0}'.format(x))
+
+        if(NewProduct != x):
+            result.append(NewProduct)
+
+
+
+
+    return result
+    #print(r.json()['entities'][WikidataID]['aliases']['cs'][0]['value'])
 #print(findBrands('auto'))
+#print(findProductNames('auto'))
 #filterBrands(['Samsung'])
+
+
+

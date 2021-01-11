@@ -1,6 +1,27 @@
 from bs4 import BeautifulSoup as soup 
+from difflib import SequenceMatcher
 import os
 import brandFinder
+
+reviewProduct='auto'
+brands=brandFinder.findBrands(reviewProduct)
+product=brandFinder.findProductNames(reviewProduct)
+
+def SubstrInList(word,list):
+	if(len(word)>1):
+		if(word[0].islower() and len(word)<4):#specialni priklad po porovnavani znacek, nektery znacky jsou kratky treba BMW
+			return False
+	else:
+		return False
+	#s = SequenceMatcher(None,"notebook","laptop")
+
+	for x in list:
+		
+		if(word in x):
+			return True
+		elif(x in word):
+			return True
+	return False
 
 def FindReviews(link):
 
@@ -20,7 +41,7 @@ def FindReviews(link):
 		exit()
 		for line in x.splitlines():
 			if("WARC-Target-URI:" in line):
-
+				
 				url=line.replace("\n","").split('WARC-Target-URI: ')[1]
 				
 				if(url.startswith('https://www.autojournal.cz/test')):
@@ -41,10 +62,12 @@ def FindReviews(link):
 
 
 def readReviews(link):
-	reviewWordsList=["recenze"]
-	reviewWordsList = reviewWordsList+brands
+	reviewWordsListPart = ['recenze','test']
+	#reviewWordsListPart.append(reviewProduct)
+	#reviewWordsListFull = reviewWordsListPart+brands
+
 	
-	reviewWordsList=[x.lower() for x in reviewWordsList]
+	#reviewWordsListFull=[x.lower() for x in reviewWordsListFull]
 	datafile=open(link,"r",encoding="utf8")
 	ReviewUrlsFile=open('..\Data\\ReviewUrls.txt',"r",encoding="utf8")
 	ReviewUrlsText=ReviewUrlsFile.read()
@@ -54,12 +77,18 @@ def readReviews(link):
 	dataContentList=dataContent.split('<doc')
 	#AllWordCounter=dict()
 
-	goodWords=list()
 
 	for x in dataContentList:
 		firstLine=True
 		WordResult=0
 		UrlResult=0
+		
+		IsReview=0
+		IsProduct=0
+		IsBrand=0
+
+
+
 		url=''
 		LinkInPar=False
 		ParagraphLines=list()
@@ -67,11 +96,17 @@ def readReviews(link):
 
 
 			if(firstLine==True):
+				#print('\n\n\n\n\n\n\n')
 				firstLine=False
 				url=line.split('url="')[-1].split('"')[0]
 				if('comment' in url.split('#')[-1]):
 					break
 				UrlResult=readURL(url)
+
+
+				IsReview=0
+				IsProduct=0
+				IsBrand=0
 			#if(line.startswith('<p')):
 
 			ParagraphLines.append(line)
@@ -79,20 +114,56 @@ def readReviews(link):
 				LinkInPar=True
 			if(line.startswith('</p')):
 				if(not LinkInPar):
+					paragraph=list()
 					for ParagraphLine in ParagraphLines:
-						print(ParagraphLine)
-						if(ParagraphLine in reviewWordsList):
-							WordResult+=1
-							goodWords.append(line)
+						if(not ParagraphLine.startswith('<')):
+							paragraph.append(ParagraphLine)
+							if(SubstrInList(ParagraphLine,reviewWordsListPart)):
+								WordResult+=100
+								IsReview+=1
+								#print('\t\t\t\t\t\t',ParagraphLine)
+							
+							
+							if(SubstrInList(ParagraphLine,brands)):
+							#if(ParagraphLine in reviewWordsList):
+								#print('WOR: ',ParagraphLine)
+								WordResult+=1
+								IsBrand+=1
+								#print(ParagraphLine)
+							
+
+
+							if(SubstrInList(ParagraphLine,product)):
+							#if(ParagraphLine in reviewWordsList):
+								#print('WOR: ',ParagraphLine)
+								WordResult+=20
+								IsProduct+=1
+								#print(ParagraphLine)
+					#print(' '.join(paragraph),'.')
 				LinkInPar=False
 				ParagraphLines=list()
-		Result=UrlResult*5+WordResult
-		if(Result>=6):
+		Result=UrlResult*1+WordResult
+
+		if(IsReview>0):
+			if(IsProduct>5):
+				if(IsBrand+IsProduct*2>49):
+
+					print('\n\t\t\t',url,': ',end='')
+				else:
+					print('\n',url,': ',end='')
+				print('Review: ',IsReview,end=' ')
+				print('Product: ',IsProduct,end=' ')
+				print('Brand: ',IsBrand,end=' ')
+				print('P+B: ',IsBrand+IsProduct*2,end=' ')
+			
+			#if(IsBrand>0):
+				#print('Brand: ',IsBrand,end=' ')
+		'''
+		if(Result>100):
 			print(url,': ',Result)
 			print('Word: ',WordResult,'|Url: ', UrlResult)
-			print(goodWords)
-			goodWords=list()
-
+			#break
+		'''
 
 	'''Vyhledavani slov ktery se vyskytuji ve clancich bez recenzi
 		if(url not in ReviewUrlsList):
@@ -106,8 +177,15 @@ def readReviews(link):
 	#print(sorted(AllWordCounter.items(), key=lambda j: j[1]))
 def readURL(url):
 
-	goodWords=['test','recenze']
-	goodWords.append(brands)
+
+	reviewWordsListPart = ['test','recenze']
+	reviewWordsListPart.append(reviewProduct)
+	#reviewWordsListFull = reviewWordsListPart+brands
+
+	
+	#reviewWordsListFull=[x.lower() for x in reviewWordsListFull]
+
+
 	UrlPartList=url.split('/')[3:]#odstraneni protokolu a webu z url
 	
 	UrlPartList.reverse()
@@ -115,7 +193,7 @@ def readURL(url):
 	
 	#print(UrlPartList)
 	#UrlLongestPart=sorted(UrlPartList,key=len)[-1]
-	WordWeight=0
+	WordWeight=1
 	Result=0
 	for part in UrlPartList:
 		UrlPartWords=part.split('-')
@@ -123,17 +201,134 @@ def readURL(url):
 		if(WordWeight<3):
 			WordWeight+=1
 		for word in UrlPartWords:
-			if(word in goodWords):
-				Result+=WordWeight
+			if(SubstrInList(word,reviewWordsListPart)):
+				Result+=100
+			'''	
+			if(SubstrInList(word,brands)):
+				Result+=1
+			'''
+			if(SubstrInList(word,product)):
+				Result+=1
+			#if(word in reviewWordsListFull):
+				#print('URL: ',word)
+				#Result+=WordWeight
 	return Result
+def readSpecificURL(link,SpecURL):
+	reviewWordsListPart = ['recenze','test']
+	#reviewWordsListPart.append(reviewProduct)
+	#reviewWordsListFull = reviewWordsListPart+brands
+
+	
+	#reviewWordsListFull=[x.lower() for x in reviewWordsListFull]
+	datafile=open(link,"r",encoding="utf8")
+	#ReviewUrlsFile=open('..\Data\\ReviewUrls.txt',"r",encoding="utf8")
+	#ReviewUrlsText=ReviewUrlsFile.read()
+	#ReviewUrlsList=ReviewUrlsText.splitlines()
+
+	dataContent=datafile.read()
+	dataContentList=dataContent.split('<doc')
+	#AllWordCounter=dict()
+
+
+	for x in dataContentList:
+		firstLine=True
+		WordResult=0
+		UrlResult=0
+		
+		IsReview=0
+		IsProduct=0
+		IsBrand=0
+
+
+
+		url=''
+		LinkInPar=False
+		ParagraphLines=list()
+		for line in x.splitlines():
+
+
+			if(firstLine==True):
+				#print('\n\n\n\n\n\n\n')
+				firstLine=False
+				url=line.split('url="')[-1].split('"')[0]
+				if('comment' in url.split('#')[-1]):
+					break
+				if(url!=SpecURL):
+					break
+				UrlResult=readURL(url)
+
+
+				IsReview=0
+				IsProduct=0
+				IsBrand=0
+			#if(line.startswith('<p')):
+
+			ParagraphLines.append(line)
+			if(line.startswith('<link')):
+				LinkInPar=True
+			if(line.startswith('</p')):
+				if(not LinkInPar):
+					paragraph=list()
+					for ParagraphLine in ParagraphLines:
+						if(not ParagraphLine.startswith('<')):
+							paragraph.append(ParagraphLine)
+							if(SubstrInList(ParagraphLine,reviewWordsListPart)):
+								WordResult+=100
+								IsReview+=1
+								#print('\t\t\t\t\t\t',ParagraphLine)
+							
+							
+							if(SubstrInList(ParagraphLine,brands)):
+							#if(ParagraphLine in reviewWordsList):
+								#print('WOR: ',ParagraphLine)
+								WordResult+=1
+								IsBrand+=1
+								#print(ParagraphLine)
+							
+
+
+							if(SubstrInList(ParagraphLine,product)):
+							#if(ParagraphLine in reviewWordsList):
+								#print('WOR: ',ParagraphLine)
+								WordResult+=20
+								IsProduct+=1
+								#print(ParagraphLine)
+					print(' '.join(paragraph),'.')
+				LinkInPar=False
+				ParagraphLines=list()
+		Result=UrlResult*1+WordResult
+
+		if(IsReview>0):
+			'''
+			if(IsProduct>5):
+				if(IsBrand+IsProduct*2>49):
+
+					print('\n\t\t\t',url,': ',end='')
+				else:
+					print('\n',url,': ',end='')
+				print('Review: ',IsReview,end=' ')
+				print('Product: ',IsProduct,end=' ')
+				print('Brand: ',IsBrand,end=' ')
+				print('P+B: ',IsBrand+IsProduct*2,end=' ')
+			
+			'''
+			print('\n',url,end='')	
+
+
 #f = open('asd.txt','w')
-reviewProduct='auto'
+
 AllWordCounter=dict()
-brands=brandFinder.findBrands(reviewProduct)
-#for x in os.listdir('..\Data\\vert\\'):
+#print(product)
+#print(brands)
+for x in os.listdir('..\Data\\vert\\'):
 	#FindReviews('..\Data\\'+x)
-#	readReviews('..\Data\\vert\\'+x)
-readReviews('..\Data\\vert\\2020-09-10_0035.vert.processing')
+	readReviews('..\Data\\vert\\'+x)
+
+#readReviews('..\\testClanek.txt')
+
+#readReviews('..\Data\\vert\\2020-09-10_0035.vert.processing')
+#readSpecificURL('..\Data\\vert\\2020-09-10_0035.vert.processing','https://www.topspeed.sk/novinky/vw-golf-variant-2021-oficialne-prekvapil-dlhsim-razvorom-aj-verziou-alltrack/18277')
+
 #print(sorted(AllWordCounter.items(), key=lambda j: j[1]))
 
 #FindReviews('..\Data\\2020-10-20_0224.warc.failed')

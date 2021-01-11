@@ -4,6 +4,17 @@ TODO
 skipnout radek po linku
 vzít si celej odstavec mezi <p> tagama a checknout jestli je tam link tag, kdyz j tak celej odstave skipnu
 
+to vyhledavani na wikidatech je trochu scuffed, nenajde některy značky a chtělo by to trocho pošefovat skore u ohodnoceni članku
+
+najit alt nazvy produktu a najit jen clanky ktery obsahuji recenze slova, a pak delat skore podle brandu a nazvu produktu ( u nazvu produktu najít podle nazvu ID a podle ID si dat do seznamu alt nazvy a label)
+
+odstranit specialni znaky a vymenit je za normalni, treba 'sluchátka' na 'sluchatka'
+
+vylepseni presnosti klasifikatoru
+
+
+
+zeptat se jestli budou tokeny z novych souboru a jestli budou mit urceny slovni druhy
 
 ['./src/html_to_vert.py', '-o', '../workplace/3-vert/cs_media/2020-10-01_0045.vert.processing', '-l', '-f', '-m', '12', '-t', './src/../library/morphodita/precompiled_bin/run_tokenizer', '-i', './src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.processing']
 
