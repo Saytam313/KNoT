@@ -1,4 +1,19 @@
+
+
+
+
+vypada to že dobrej  text je složenej z několika odstavců ohraničených <s> tagama, takže zkusim brát jen text kterej je v takovým odstavci a uvidim jak bude vypadat výsledek
+
+vyhledani relevantniho textu v recenzi, ne nejakej bullshit okolo
+
+
+najit ktery slova obsahuji recenze, moc to nehleda recenze
+
+
+
 TODO
+pridani anglickych nazvu do nazvu produktu, aby to hledalo treba smartphony
+
 #vyhledani kterej text je relevantni at to tam nebere nejaky vedlejsi odkazy na novinky
 
 skipnout radek po linku
@@ -40,6 +55,11 @@ time python3 /mnt/minerva1/nlp/repositories/feeds_crawler/src/html_to_vert.py -o
 time python3 ./feeds_crawler/src/html_to_vert.py -o test.txt -l -f -m 12 -t ./feeds_crawler/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.failed
 
 time python3 ./feeds_crawler/src/html_to_vert.py -o test.txt -l -f -m 12 -t ./feeds_crawler/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/newsbrief_eu/2020-10-20_0125.warc.failed
+
+python3 ./src/html_to_vert.py -o test.txt -l -f -m 12 -t ./cs_media/library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/workplace/2-downloaded/cs_media/2020-09-10_0035.warc.processing_tokenize
+
+/mnt/data-2/feeds_crawling/big_brother/workplace/2-downloaded/cs_media/2020-09-10_0035.warc.processing_tokenize
+
 
 
 

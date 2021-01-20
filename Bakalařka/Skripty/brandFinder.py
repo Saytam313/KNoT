@@ -17,7 +17,6 @@ def findBrands(product):
     }
 
     r = requests.get(API_ENDPOINT, params = params)
-
     WikidataID=r.json()['search'][0]['id']
     #print(WikidataID)
     sparql = SPARQLWrapper("https://query.wikidata.org/sparql",agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11")
@@ -35,7 +34,6 @@ def findBrands(product):
     results = sparql.query().convert()
 
     brandList=list() 
-
     #print(results["results"]["bindings"][0]["altLabel_list"]["value"].split(','))
 
     '''
@@ -174,15 +172,24 @@ def findProductNames(product):
 
     result=list()
     result.append(r.json()['entities'][WikidataID]['labels']['cs']['value'])
+
     try:
         for x in r.json()['entities'][WikidataID]['aliases']['cs']:
             result.append(x['value'])
     except:
         False
-    
+
+    result.append(r.json()['entities'][WikidataID]['labels']['en']['value'])
+    try:
+        for x in r.json()['entities'][WikidataID]['aliases']['en']:
+            result.append(x['value'])
+    except:
+        False
+
     for x in result:
         NewProduct=unidecode(u'{0}'.format(x))
-
+        if(len(x)<4):
+            result.remove(x)
         if(NewProduct != x):
             result.append(NewProduct)
 
