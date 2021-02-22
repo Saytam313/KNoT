@@ -1,5 +1,86 @@
+prezentace:
+
+1. Zadani bakalarky
+			- Dobrý den, ja jsem šimon matyáš a mám bakalářskou práci na téma Metavyhledávání recenzí na českém webu
+2. Cíl práce
+			- Práce umožní vyhledat v pravidelně stahovaných článcích recenze zabývající se zadaným produktem a vyhodnotit jak recenze produkt hodnotí.
+
+3. schéma systému
+			- ve schématu systému můžeme vidět aktuální postup práce, momentálně pracuji na vyhledání textu recenze v článku a s tím je spojeno i vyhodnocení jestli se jedná o článek obsahující recenzi produktu.
+
+4. wikidata vyhledani slov
+			- když uživatel zadá například mobilní telefon tak systém potřebuje najít slova podle kterých detekovat články zabývající se tímto produktem.
+			
+			- k vyhledání alternativních názvů a výrobců produktu který uživatel zadá jsem použil wikidata, po zadání produktu je produkt vyhledán na wikidatech ze kterých si systém do seznamu uloží alternativní názvy produktu v českém a anglickém jazyce, pokud některý z názvů obsahuje diakritiku tak je název do seznamu přidán ještě jednou bez diakritiky kvůli hledání v url.
+
+			- výrobci zadaného produktu jsou vyhledáni pomocí dotazovacího jazyku sparkl (SPARQL) který pomocí tohoto kódu najde ve wikidatech články které mají v kategorii 'product or material produced' právě ID hledaného produktu, u výrobců kontroluji alternativní názvy a snažím se vybrat co nejkratší název firmy, pokud možno jednoslovný, protože v článcích často nebývá uveden celý oficiální název výrobce. Například u telefonů je v článcích uváděn 'Samsung' ale oficiální název výrobce je Samsung Electronics.
+5. vyhledani relevantniho textu v clanku
+			- Problém s detekováním jestli se jedná o recenzi je vyhledání relevantního textu článku, snažím se tedy z článku oddělit menu a odkazy na souvisejicí články. Každý portál má jiné rozložení HTML nemohl jsem obsah článku detekovat jednoduše pomocí tagů HTML, využití těchto tagů se mi osvědčilo pouze u názvu článku který bývá většinou napsán v hlavičce HTML, pro obsah článku se snažím detekovat text pomocí délky odstavců což obvykle funguje docela dobře, ale v případě kdy se pod článek dají přidávat komentáře a někdo se moc rozepíše tak to detekuje i komentář jako součást článku.
+
+6. časový plán
+			- do půlky února bych chtěl dokončit vyhledávání článků obsahující recenze a vyhledání názvu produktu kterým se článek zabývá a poté se zaměřit na ohodnocení jak recenze produkt hodnotí.
+
+PREZENTACE FAKULTY a podekovani je v sablone
 
 
+https://www.lidovky.cz/kultura/recenze-mezi-nami-sousedy-krajina-ve-stinu-ceka-v-kinech-na-ty-prave-divaky.A200909_214328_ln_kultura_jto#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=ln_lidovky&amp;utm_content=main ['Krajina ve stínu'] h3
+
+https://www.idnes.cz/kultura/film-televize/recenze-binoche-kdo-si-myslis-ze-jsem.A200914_570768_filmvideo_spm#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=idnes&amp;utm_content=main [Kdo si myslíš, že jsem] stejný jako idnes knihy
+https://www.idnes.cz/kultura/film-televize/narusitel-recenze.A190124_093906_filmvideo_ts#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main
+
+https://www.novinky.cz/kultura/clanek/recenze-dvorske-intriky-zbavene-romantiky-40268895 [Favoritka] pujde to z html
+https://www.novinky.cz/kultura/filmy-serialy/clanek/recenze-film-zenska-pomsta-je-predevsim-pomstou-na-divacich-40336244 pujde z html
+https://www.novinky.cz/kultura/clanek/recenze-psi-domov-deti-dojme-i-potesi-spoustou-zvirat-40268926 pujde z html
+
+TODO
+//
+zkusit jusText
+sehnat další soubory se slovnima druhama
+
+hodnoceni recenze asi zkusim udělat ze zavěru recenze, to je odstavec po poslednim nadpisu
+
+jusText trva dlouho na urcovani jestli se jedna o recenzi nebo ne, ale asi to půjde pouzit pro vysekavani zaveru recenze, nadpisu, na to je to nice
+
+zpracovani nefunguje, myslim že tam neni jeden mezi krok mezi vert a těma podstatnyma jmenama
+
+zbozi.cz webscrape nefunguje, mozna bych zkusil predurcit web jen pro nekolik typů produktů, a pak hledat jestli v celym nadpisu clanku neni nazev
+
+Hardware
+	- Heureka, zbozi
+
+Knihy
+	- 
+
+
+
+//
+
+
+
+Počet manuálně prohledaných článků
+09-10-2020 – 09-16-2020 : 18516
+
+Celkem jsem našel 80 článků obsahující recenzi
+nejčastější produkty recenzí byly telefony a auta
+
+
+Využité metody, tam napsat o těch wikidatech, třeba že slovo "test" nejsou uplně vždycky recenze a jaký špatný články to teď hledá.
+ 
+
+09-10 : 3748
+09-11 : 3857
+09-12 : 3399
+09-13 : 1106
+09-14 : 2438
+09-15 : 3617
+09-16 : 3411
+
+
+brát text jen ze závěru, z toho se asi bude dělat dobře ta recenze
+
+rozhodnout jestli zapnout / vypnout detekovani clanků bez recenze slove
+
+Upravit to vyhledavani aby to tam davalo html Head a pak hledalo v nadpisech v clanku, maybe zvednout prioritu v nadpisech v clanku, a pak velkej weight na brand v url
 
 
 vypada to že dobrej  text je složenej z několika odstavců ohraničených <s> tagama, takže zkusim brát jen text kterej je v takovým odstavci a uvidim jak bude vypadat výsledek
@@ -8,6 +89,10 @@ vyhledani relevantniho textu v recenzi, ne nejakej bullshit okolo
 
 
 najit ktery slova obsahuji recenze, moc to nehleda recenze
+
+https://www.idnes.cz/kultura/literatura/recenze-milan-kundera-slavnost-bezvyznamnosti.A200910_570074_literatura_spm#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=idnes&amp;utm_content=main  [Slavnost Bezvýznamnosti] h3 nadpis, url
+https://www.idnes.cz/kultura/literatura/recenze-soukupova-urban-epstein.A200909_094924_literatura_kiz#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=idnes&amp;utm_content=main [Zamilované povídky] h3 nadpis
+https://www.lidovky.cz/kultura/recenze-mezi-nami-sousedy-krajina-ve-stinu-ceka-v-kinech-na-ty-prave-divaky.A200909_214328_ln_kultura_jto#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=ln_lidovky&amp;utm_content=main [Krajina ve stínu] h3 nadpis, film
 
 
 
@@ -26,7 +111,6 @@ najit alt nazvy produktu a najit jen clanky ktery obsahuji recenze slova, a pak 
 odstranit specialni znaky a vymenit je za normalni, treba 'sluchátka' na 'sluchatka'
 
 vylepseni presnosti klasifikatoru
-
 
 
 zeptat se jestli budou tokeny z novych souboru a jestli budou mit urceny slovni druhy
@@ -72,8 +156,56 @@ source /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/venv/bin/activate
 Data:
 /mnt/data-2/feeds_crawling/big_brother/workplace/2-downloaded/cs_media
 
+       python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/test.txt' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-10_0035.vert'  
+
+       python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/test.txt' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-10_0035.vert'
+
+       python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/test.txt' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-10_0035.vert'
+
+       python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-10-5.txt' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-10-4.txt'
 
 
+       command   = BE_NICE + [ self._path + '/tagger.py', '-o', output_file, '-l' ] + models + [ '-m', '2', '-t', tagger, '-p', '50', '-i', in_file ]
+
+       python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/tagger.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/test.txt' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/models/cs.tagger' -m 2 -t '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/precompiled_bin/run_tagger' -p 50 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-10_0035.vert'
+      
+
+Skripty na spuštění:
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/tagger.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-10.tagged' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/models/cs.tagger' -m 2 -t '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/precompiled_bin/run_tagger' -p 50 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-10_0035.vert'
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-10.parsed' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-10.tagged'
+
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/tagger.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-11.tagged' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/models/cs.tagger' -m 2 -t '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/precompiled_bin/run_tagger' -p 50 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-11_0046.vert'
+
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-11.parsed' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-11.tagged'
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/tagger.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-12.tagged' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/models/cs.tagger' -m 2 -t '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/precompiled_bin/run_tagger' -p 50 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-12_0047.vert'
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-12.parsed' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-12.tagged'
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/tagger.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-13.tagged' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/models/cs.tagger' -m 2 -t '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/precompiled_bin/run_tagger' -p 50 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-13_1555.vert'
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-13.parsed' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-13.tagged'
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/tagger.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-14.tagged' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/models/cs.tagger' -m 2 -t '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/precompiled_bin/run_tagger' -p 50 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-14_0046.vert'
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-14.parsed' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-14.tagged'
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/tagger.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-15.tagged' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/models/cs.tagger' -m 2 -t '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/precompiled_bin/run_tagger' -p 50 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-15_0035.vert'
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-15.parsed' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-15.tagged'
+
+---
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/tagger.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-16.tagged' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/models/cs.tagger' -m 2 -t '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/precompiled_bin/run_tagger' -p 50 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-16_0035.vert'
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-16.parsed' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-16.tagged'
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/tagger.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-17.tagged' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/models/cs.tagger' -m 2 -t '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/precompiled_bin/run_tagger' -p 50 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-17_0035.vert'
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-17.parsed' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-17.tagged'
 
 
 Recenze 2020-09-10 :
