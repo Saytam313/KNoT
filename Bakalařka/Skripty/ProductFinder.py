@@ -16,7 +16,8 @@ def WebScrape_product(product):
 	except:
 		return
 
-
+	time.sleep(2)
+	#print('https://www.heureka.cz/?h%5Bfraze%5D='+search_word)
 	page_html = uClient.read()
 	#print(page_html)
 	uClient.close()
@@ -28,13 +29,26 @@ def WebScrape_product(product):
 	#product_list=page_soup.findAll("div",{"class":"product"})
 	#print(page_soup.findAll("div",{"class":"product"})[0].h2.text)
 	count=0
-	for x in page_soup.findAll("div",{"class":"product"}):
+	#print(len(page_soup.findAll("div",{"class":"product"})))
+	#print(page_soup)
+	'''
+	product_list=page_soup.findAll("div",{"class":"product"})
+	if(len(product_list)==0):
+		product_list=page_soup.findAll('a',{"class":"c-product__link"})
+	'''
+	product_list=page_soup.findAll('a',{"class":"c-product__link"})
+	for x in product_list:
+	#for x in page_soup.findAll("div",{"class":"product"}):
+		#time.sleep(1)
+		
 		#print(x.h2.text)
 		count+=1
 		#print(product)
 		#print(x.h2.text.lower())
-		#print(similar(product,x.h2.text.lower()))
-		if(similar(product,x.h2.text.lower())>=0.3):
+		#print(similar(product.lower(),x.h2.text.lower()))
+		#print(similar(product.lower(),x.text.lower()))
+		#if(similar(product.lower(),x.h2.text.lower())>=0.3):
+		if(similar(product.lower(),x.text.lower())>=0.3):
 			return True
 		if(count>2):
 			break
@@ -43,17 +57,18 @@ def WebScrape_product(product):
 
 def WebScrape_productAuto(product):
 
-	search_word=product
+	search_word=product.strip()
 	search_word=search_word.replace(' ','+')
 	try:
-		uClient = uReq('https://auto-mania.cz/?s='+search_word)
+		uClient = uReq('https://auto-mania.cz/?s='+search_word,timeout=10)
 	except:
-		return
-
-	page_html = uClient.read()
+		return False
+	try:
+		page_html = uClient.read()
+	except:
+		return False
 	#print(page_html)
 	uClient.close()
-
 	#vyhledani hledanych dat v html
 	page_soup = soup(page_html, "html.parser")
 
@@ -63,6 +78,7 @@ def WebScrape_productAuto(product):
 	#print(page_soup.findAll("div",{"class":"product"})[0].h2.text)
 	count=0
 	#print(page_soup.findAll("div",{"ud":"td-outer-wrap"}))
+	
 	for x in page_soup.findAll("h3",{"class":"entry-title td-module-title"}):
 
 		#print(x.h2.text)
@@ -114,3 +130,5 @@ def WebScrape_productAuto(product):
 #WebScrape_reviews('https://www.zbozi.cz/hledani/?q='+search_word)
 #WebScrape_reviews('https://www.heureka.cz/?h%5Bfraze%5D='+search_word)
 #WebScrape_reviews('https://www.databazeknih.cz/knihy/sikmy-kostel-428618')
+#WebScrape_productAuto('Renault Clio 30 Vznikl')
+#print(WebScrape_product('Sony Xperia 1 II Tak '))

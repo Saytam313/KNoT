@@ -62,7 +62,7 @@ def WebScrape_productAuto(product):
 	search_word=search_word.replace(' ','+')
 	try:
 		uClient = uReq('https://auto-mania.cz/?s='+search_word)
-		print('https://auto-mania.cz/?s='+search_word)
+		#print('https://auto-mania.cz/?s='+search_word)
 	except:
 		return
 
