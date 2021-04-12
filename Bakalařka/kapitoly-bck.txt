@@ -1,0 +1,136 @@
+\chapter{Úvod}
+
+Je mnoho novinkových webů a blogů zabývajících se recenzováním různých produktů, tyto recenze se ovšem často k uživateli vůbec nedostanou pokud nehledá právě recenze konkrétního produktu. Často uživatelé k ohodnocení produktu využívají krátké neprofesionální recenze od ostatních uživatelů kteří si daný produkt zakoupili před krátkou dobou a portál přes který si produkt zakoupili je požádal o hodnocení.
+
+Navíc pokud uživatel hledá recenze k nějakému produktu musí proklikat několik různých webů aby si zjistil podrobné informace ke konkrétnímu produktu, pokud si například uživatel chce zakoupit nový notebook musí si nejprve najít konkrétní notebook který ho zajímá a poté si vyhledat články ke konkrétnímu notebooku.
+
+Českých portálů píšících rozsáhlejší recenze je mnoho ovšem většinou jsou zaměřeny pouze na jeden produkt typ produktu(svetandroida.cz, auto-mania.cz). Práce se tedy hlavně zaměřuje na vyhledávání článků obsahující rozsáhlejší recenze, ne na krátké uživatelské recenze jako je tomu třeba na webech heureka.cz a zbozi.cz, tyto servery mají u některých produktů dostupné i rozsáhlé recenze které ovšem musí k produktu doplnit zaměstnanci ručně, práci mohou využít tedy i pracovníci těchto portálů k vyhledání recenzí. Pro americká média existuje portál metacritic.com který shromažďuje recenze o filmech, knihách, muzice a počítačových hrách, pro češtinu nástroje pro vytvoření takového systému dosud nebyly dostupné. 
+
+Systém tedy umožňuje vyhledání článků obsahujících recenze na zadanou skupinu produktů jako jsou například "telefon","monitor","auto" a je schopen vyhledat i věci jako jsou třeba "film","kniha" a "počítačová hra". Dále vyhledané recenze ohodnotí jestli článek hodnotí produkt pozitivně či negativně.
+
+Při zadání produktu jsou pomocí wikidat vyhledány alternativní názvy produktu a firmy které daný produkt vyrábí. Podle výrobců, alternativních názvů a slov často se vyskytujících v recenzích je u článkům přiřazena hodnota určující pravděpodobnost že se jedná o článek obsahující hodnotící hledaný produkt. Po ohodnocení všech článků jsou poté seřazeny podle přiřazené hodnoty a je u nich ohodnocen sentiment a vypsány na stdout.
+
+Práce využívá projekt FeedsCrawler který pravidelně každý den stahuje články z českých novinkových webů a blogů.
+
+Kapitola 2 obsahuje teorii témat využitých v práci jako jsou způsoby jakými jsou stahovány články z portálů, jakým způsobem jsou zpracovány, je zde také něco o tom co jsou to wikidata, rozpoznávání typu článku a názvu produktu kterým se článek zabývá a jakým způsobem probíhá analýza sentimentu. V kapitole 3 jsou popsány data použité k vyhledání recenzí, tvorby datasetu pro testování práce, postupy použité pro vyhledávání recenzí, relevantního textu v recenzích a produktu kterým se recenze zabývá, využití wikidat, upravené podmínky vyhledávání pro speciální produkty, konfigurační soubor a trénování modelu pro určování sentimentu.Kapitola 4 se zabývá rozborem skriptů, problémy kterými jsem se při tvorbě zabýval, jak jsem práci testoval a jak vypadají výsledky práce. V Kapitole 5 je pak zhodnocení výsledků celé práce.
+
+\chapter{Teorie}
+\label{teorie}
+
+\section{Stahování dat}
+Zdrojová data poskytuje projekt FeedsCrawler který pomocí technologií RSS a ATOM vyhledává a následně stahuje obsahy článků z českých webů. Články jsou staženy v jazyce HTML a pro další práci je potřeba je dále zpracovat aby bylo možné vyhledání relevantního textu a určeni slovních druhů u jednotlivých slov.
+
+\subsection*{RSS} \textit{Rich Site Summary} text ve formátu XML který obsahuje data o článku, umožňuje uživatelům odebírat nové články z několika webů najednou bez toho aby uživatel musel každý z portálů navštívit a podívat se jestli není dostupný nějaký nový článek. Vývoj technologie RSS skončil v roce 2003.
+
+\subsection*{ATOM}  \textit{Atom Syndication Format} nástupce formátu RSS, doplňuje jeho nedostatky a hlavně je standardem IETF , ale jeho podstata je stejná taky, ukládá metadata o článcích ve formátu XML.
+
+%https://www.fit.vut.cz/study/thesis-file/20846/20846.pdf
+
+%RSS - https://www.root.cz/clanky/vse-podstatne-o-rss/
+%ATOM - https://www.root.cz/clanky/atom-1-0-format/
+\section{Zpracovani HTML}
+%Po stažení článků je potřeba stažená data zpracovat. Při zpracování jsou odstraněny reklamy, text je převeden do vertikální podoby 
+
+%https://www.fit.vut.cz/study/thesis-file/20846/20846.pdf
+
+\section{Určování slovních druhů}
+( jak funguje morphodita)
+
+%https://www.fit.vut.cz/study/thesis-file/20846/20846.pdf
+
+%https://ufal.mff.cuni.cz/morphodita
+
+\section{Wikidata}
+
+Volně dostupná, kolaborativní, vícejazyčná znalostní báze. Wikidata používá nespočet projektů, Wikipedia je například používá pro úpravu článku ve všech jazycích najednou,
+
+\subsection*{Položky}
+Všechny položky ve Wikidatech mají štítky, krátký popisek, alternativní názvy a jsou označeny unikátním identifikátorem začínajícím písmenem Q a číslem.
+
+
+\subsection*{Výroky}
+
+Výroky popisují dané položky skládá se vlastnosti a hodnoty. Vlastnosti mají identifikátor začínající písmenem P a číslem.
+
+Například položka \textit{Vincent van Gogh}(Q5582) má ve svých vlastnostech \textit{occupation}(P106) uvedenou hodnotu \textit{painter}(Q1028181). Jako další vlastnosti jsou u této konkretní položky uvedeny i věci jako \textit{work location}(P937) nebo třeba \textit{writing language}(P6886) vyhledané hodnoty mají taky svoje vlastnosti.
+
+Na základě těchto vlastností je možné si dohledat různé informace jako například kteří malíři píšící francouzským jazykem pracovali někdy během svého života ve městě s nižší populací než je 1 000 000 obyvatel.
+
+
+%https://cs.wikipedia.org/wiki/Wikidata
+
+%https://www.wikidata.org/wiki/Wikidata:Introduction
+
+\section{Rozpoznávaní recenze}
+(jak se rozpozná recenze od nerecenze)
+
+Určení jestli se jedná o článek obsahující recenzi může být v některých případech těžké i pro člověka.
+
+Článek který má v hlavičce článku uvedeno například "RECENZE: Samsung Galaxy S20" lze považovat za recenzi i bez čtení zbytku článku, ovšem článek který má v názvu "Nový iPhone 12" může obsahovat pouze informace o tom že společnost Apple představila nový telefon který bude k získání až za několik měsíců a o recenzi se tudíž nejedná.
+Na první pohled se tedy často dá rozlišit které články by recenzi obsahovat mohli a které ne už z hlavičky článku.
+%https://academia.stackexchange.com/questions/40497/is-there-a-way-to-find-review-articles-by-the-keyword
+
+
+\section{Rozpoznání názvu produktu}
+(zpusoby rozpoznani nazvu produktu z clanku)
+
+%https://www.itspy.cz/wp-content/uploads/2019/10/17_prace.pdf
+
+
+\section{Určení sentimentu}
+(analyza sentimentu)
+
+%https://en.wikipedia.org/wiki/Sentiment_analysis
+
+\chapter{Návrh řešení}
+\label{navrh_reseni}
+
+\section{Dostupná data}
+(jak vypadaji pouzivany data)
+
+\section{Rozpoznání recenze}
+(něco jako jak jsem rozdeloval odstavce a hledal slova podle podstatnych jmen)
+
+\section{Vyhledání relevantního textu}
+(jakym zpusobem jsem oddeloval odkazy na ostatni clanky a reklamy)
+
+\section{Tvorba datasetu pro testování}
+(manualni prochazeni clanku a vyhledavani co je recenze a co ne)
+
+\section{Použití wikidat}
+(jakej jazyk jsem pouzil pro vyhledavani ve wikidatech, jakym zpusobem jsem zjistoval vyrobce a alternativni nazvy)
+
+\section{Rozpoznání názvu produktu}
+(rozpoznavani podle velkych malých pismen v hlavičce dokumentu)
+
+\section{Speciální případy}
+(Jaký jsem vybral specialni případy a proč, jak tam co funguje jinak)
+
+\section{Konfigurační soubor}
+(Jak funguje konfigurační soubor)
+
+\section{Určení sentimentu}
+(jakej model jsem použil pro určování snetimentu)
+
+\chapter{Realizace a vyhodnocení}
+\label{realizace_a_vyhodnoceni}
+
+\section{Určování slovních druhů}
+( trvá to dlouho)
+
+\section{Určovani recenzí}
+(špatny/dobrý slova)
+
+\section{Použití wikidat}
+(někdy to nenajde všechny firmy)
+
+\section{Vyhledání relevantního textu}
+( někdy to tam vezme věci jako jméno autora a datum což moc neovlivňuje výsledek, někdy to ale špatně označí recenzi)
+
+\section{Určování názvu produktu}
+(Někdy je tam slovo který tam nepatří, někdy to veme slovo jako třeba Vodafone)
+
+\section{Určování sentimentu}
+(Je těžký určit jestli je recenze pos/neg někdy to nejde uplně poznat)
+
+%===============================================================================
