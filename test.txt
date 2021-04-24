@@ -1,0 +1,1127 @@
+Skript rozdělí titulek článku na slova podle bílých znaků a vyhledá slova začínající velkým písmenem a číslovky, tyto slova a číslovky poté vloží do proměnné ArticleProduct reprezentující název produktu.
+
+Po vyhledání názvu skript \verb|productFinder| provede ověření jestli se jedná o platný název produktu. Ověření probíhá ve funkci \verb|WebScrape_product(product)|. Vstupní parametr 'product' který obsahuje řetězec s vyhledaným názvem produktu je převeden do formátu vhodného pro vyhledávání převedením mezer na znak '+' poté proběhne hledání na webu heureka.cz. Toto hledání je provedeno pomocí webscrapingu url adresy vytvořené spojením 'https://www.heureka.cz/?h%5Bfraze%5D='a vyhledávaného řetězce. Poté co je stažen HTML kód z portálu heureka.cz jsou prohledány titulky položek. Většinou pokud je zadán neplatný produkt tak vyhledávání nenajde žádnou položku na základě zadaného řetězce a produkt je tudíž označen za neplatný. V případě že hledání vrátí několik položek jsou porovnány titulky prvních dvou položek s vyhledávaným řetězcem a na základě podobnosti je produkt vyhodnocen jako platný či neplatný. Porovnání rětězců probíhá pomocí třídy SquenceMatcher z Pythonovského modulu difflib. Tato třída porovnává řetězce poddle nejdelší souvislé shodné posloupnosti a poté pomocí metody ratio() vrací hodnotu v intervalu 1.0-0.0 kde vyšší číslo reprezentuje vyšší podobnost. 
+
+Sentiment podnadpisy ostatnich
+
+
+telefon 12-16 jeden soubor
+
+seriový zpracování: 727.5
+ 1 proc = 759.9s
+ 2 proc = 523s
+ 3 proc = 539.6
+ 4 513
+
+Upravil jsem toto
+if((ParagraphTagsS>2 or ArticleHeadFlag or ParHeading)):
+zvedl spodni limit aby to nebralo clanky co maji skore 10
+
+
+
+
+https://www.fit.vut.cz/study/thesis-file/20846/20846.pdf
+https://www.fit.vut.cz/study/thesis-file/22451/22451.pdf
+https://www.fit.vut.cz/study/thesis-file/22452/22452.pdf
+
+ Je možné nalézt mnoho komerčních analyzátorů, které nabízí své služby (Gavagai1 , Natural language API od firmy Google2 nebo Brand24 3 . Využívaným typem dat pro analýzu sentimentu se staly recenze a to především filmů a seriálů. Důvodem je jejich dostupnost (existují webové stránky specificky vytvořené pro recenze), množství (především filmových recenzí je nespočet) a fakt, že recenze jsou již ohodnoceny autorem (nemusí být manuálně anotovány). Právě z těchto důvodů se v práci snažím prozkoumat využitelnost klasifikátorů natrénovaných na těchto datech v jiných doménách. 
+ 
+Podivat se na příběhy ostatní bakalařek
+
+... příběh - motivace by měl být napsán v Úvodu - nejde tedy o změnu struktury, ale hned na začátku jasné vymezení, 
+- z čeho se vychází, 
+- co nejde/není vyřešeno při ppoužití současných řešení,
+- a jaké jsou tedu cíle (ne body zadání, ale obecné přínosy),
+- proč se v teorii / ve všech dalších kapitolách objevuje to, co tam je (jak to přesně souvisí).
+
+-napsat že jsem si to vybral kvuli spolupraci se skupinou KNOT
+-napsat že cíl je teda vytvořit systém schopný vyhledat recene
+
+
+Dostupná data
+(jak vypadají používané data)
+- ukazat format vysledku - (říct co je na každým řádku, který části jsou důležitý pro mě),
+/mnt/data-2/feeds_crawling/big_brother/workplace/5-parsed/cs_media
+ napsat kde na minervě jsou data, ktery části mě nejvic zajimaj a jak jsem je rozděloval
+
+Tvorba datasetu pro testováni
+- který dny jsem ručně prošel, kolik jsem našel článků a z jakých kategorií.
+- taky jsem při vyhledávání článků všímal jaký slova články obsahují a podle čeho jsem při ručním vyhledávání identifikoval recenzi
+
+Rozpoznání recenze
+	(něco jako jak jsem rozděloval odstavce a hledal slova podle podstatných jmen)
+- SubstrInList funkce
+- napsat o weightech a při jakých podmínkách se mění
+- že jsem při ručním procházení našel hlavně články který 
+
+Vyhledání relevantního textu
+
+- oddělování prvního řádku a jaký informace z něj získám
+- rozdělování podle odstavců
+
+
+Paralelní zpracování
+- je to náročný na ramku při zpracování více dnů najednou
+
+Použití wikidat
+ - vyhledavani produktu, ukazky kodu
+ - vyhledavani brandu
+ - převedení do malych pismen
+
+Rozpoznání názvu produktu
+
+ - velky malý písmena (nevim moc o čem tu mluvit asi to bude kratka kapitola)
+ 
+Speciální případy
+ - proč jsou specialni připady jinak, jak jsem hledal weby pro konkretni priklady
+ - stahovani html znovu protože soubory který obsahují stažený html jsou v jinym pořadí a bylo by potřeba je tedy pro každý článek prohledávat a to by trvalo dlouho
+ - beautiful soup
+ 
+Konfigurační soubor
+- formát, jaky obsahuje informace, navod jak přidat nový specialni případ
+
+Určení sentimentu
+- trenování
+- z čeho jsem vybíral texty na trenovani
+
+
+
+141.3 sec 1proc
+108.1 sec 2proc
+
+Až budou dostupný parsovaný data tak otestovat předělání skriptu na paralel, lokalni skript-kopie už je předělanej takže si checknout rozdíly a nahrat je na minervu, hlavně pak do readme dopsat že to žere hafo paměti na vice procesech
+a upravoval jsem SentimentAnalyzer, snižil tam hranici mezi neg a pos sentimentem a u nadpisů zvedl weight
+
+- předělání textu na overleaf
+- Doplnění úvodu
+- rozepsání teorie, říct že jsem tam napsal základní věci a podle rozsahu ostatních části případně teorii rozšířím
+- použitá literatura je zatím v komentářích v textu a správně ji vložím až budu dělat citace
+- propojení s projektem FeedsCrawler zmíním v poslední části.
+
+- říct že by měly být k dispozici texty s určenými slovnímy druhy, takže zpracování jednoho dne by mělo trvat asi 30 sec místo 8mi minut
+- při určování sentimentu stačí dát podnadpisům větší váhu
+- přidat paralelní zpracování
+
+Paralelní zpracování, větší váha nadpisů, oddělat morphoditu
+
+Aspektová orientace: ohodnocení nadpisů má větší hodnotu při určování sentimentu stránky
+
+předělat txt na Overleaf D
+
+Měl byste zmínit, že některé prodejní servery uvádějí na stránce produktů odkazy na externí recenze, ale to většinou dělají jejich pracovníci ručně.
+Výstupy systému tak mohou sloužit i pro tento účel. D
+
+Dále by bylo dobré říct, že k problému přistupujete obecně, že můžete kromě individuálních výrobků hledat recenze na celé skupiny a také třeba zpracovávat recenze knih, počítačových her, alb a filmů, že pro americká média existuje třeba metacritic, ale pro češtinu nástroje pro vytvoření takového systému dosud nebyly dostupné.(lepší přiklad bude asi amazon než metacritic, zeptat se na to v mailu) D
+
+A aby se zdůvodnila diskuse o klasifikaci (polarity) postojů, měl byste říct, že systémy by mohly využívat předběžného roztřídění podle pozitivity/negativity (ke konkrétním aspektům?). D
+
+Přidejte odstavec, jaké jsou tedy cíle a "součásti" toho, čím se v práci budete zabývat - chytrá? klasifikace, že se v článku skutečně jedná o daný výrobek, službu, entitu, případně skupinu (třeba programy pro editaci videa v mobilu), na základě jakých dat se dělá expanze prvotních klíčových slov, jestli se snažíte zapojit nějaké metody pro rychlý výběr článků, které ukazují, že některá slova jsou příliš víceznačná a jiná by naopak mělo cenu ještě doplnit, jak se poznává, že se jedná opravdu o recenzi, zda systém má alespoň nějaký náznak automatické extrakce aspektů (třeba podnadpisy?), aby se naplnilo zadání "aspektově-orientovanou analýzu postojů z textu" atd. D
+
+popsat i některé pokročilejší metody klasifikace (relevance) textu (např. založené na modelu typu BERT) a také o způsobech vyhodnocování, případně porovnání s jinými pracemi pro češtinu. Teorie
+
+
+byste měl také minimálně říci o indexování dat, např. pomocí Elastic (případně systémů typu MG4J, který máme popsán na stránce Corpproc/SEC), nebo aspoň o představě začlenění systému do FeedsCrawling Teorie
+/\
+||
+Zatím jste se tím bohužel vůbec nezabýval, ale při velmi dlouhém čekání na výsledky z jednoho dne mne napadlo, že byste měl také minimálně říci o indexování dat, např. pomocí Elastic (případně systémů typu MG4J, který máme popsán na stránce Corpproc/SEC), nebo aspoň o představě začlenění systému do FeedsCrawling - že by se základní extrakce udělala rovnou v době stahování (pro předem známé výrobky/oblasti), jinak by systém trávil při rozbalování a postupném procházení hodiny.
+
+
+
+na wiki napsat jaky moduly jsou potřeba, někam dopsat že se vše musí spustit ze serveru minerva3, jak dlouho trvá zpracovat jeden den, co ukazuje hlášení pruběhu, 
+aar2slob==1.0
+altair==4.1.0
+apt-xapian-index==0.47
+argon2-cffi==20.1.0
+asn1crypto==0.24.0
+astor==0.8.1
+async-generator==1.10
+attrs==17.4.0
+Automat==0.6.0
+backcall==0.2.0
+base58==2.0.1
+beautifulsoup4==4.6.0
+bleach==3.2.1
+blinker==1.4
+boto3==1.16.9
+botocore==1.19.9
+bottle==0.12.13
+Brotli==1.0.9
+cachetools==4.1.1
+certifi==2020.12.5
+cffi==1.14.3
+chardet==4.0.0
+click==7.1.2
+colorama==0.3.7
+command-not-found==0.3
+configobj==5.0.6
+constantly==15.1.0
+cryptography==2.1.4
+cssselect==1.1.0
+cycler==0.10.0
+cymem==1.31.2
+cytoolz==0.9.0.1
+dataclasses==0.8
+decorator==4.1.2
+defusedxml==0.6.0
+devscripts===2.17.12ubuntu1.1
+dill==0.2.9
+distro-info===0.18ubuntu0.18.04.1
+docker==2.5.1
+docker-pycreds==0.2.1
+entrypoints==0.3
+enum-compat==0.0.3
+filelock==3.0.12
+gbp==0.9.8
+gitdb==4.0.5
+GitPython==3.1.11
+Glances==2.11.1
+gpg==1.10.0
+html5lib==0.999999999
+httplib2==0.9.2
+hyperlink==17.3.1
+idna==2.10
+ijson==2.3
+importlib-metadata==3.10.0
+incremental==16.10.1
+influxdb==4.1.1
+iotop==0.6
+ipykernel==5.3.4
+ipython==7.16.1
+ipython-genutils==0.2.0
+ipywidgets==7.5.1
+isodate==0.6.0
+jedi==0.17.2
+Jinja2==2.11.2
+jmespath==0.10.0
+joblib==1.0.1
+jsonpickle==0.9.5
+jsonschema==2.6.0
+jupyter-client==6.1.7
+jupyter-core==4.6.3
+jupyterlab-pygments==0.1.2
+jusText==2.2.0
+keyring==10.6.0
+keyrings.alt==3.0
+langdetect==1.0.8
+language-selector==0.1
+launchpadlib==1.10.6
+lazr.restfulclient==0.13.5
+lazr.uri==1.0.3
+lxml==4.6.3
+Mako==1.0.7
+MarkupSafe==1.0
+matplotlib==2.1.1
+meld==3.18.0
+mistune==0.8.4
+msgpack==0.6.2
+msgpack-numpy==0.4.4.3
+murmurhash==0.28.0
+nbclient==0.5.1
+nbconvert==6.0.7
+nbformat==5.0.8
+nest-asyncio==1.4.2
+netifaces==0.10.4
+nltk==3.2.5
+notebook==6.1.4
+numexpr==2.6.4
+numpy==1.19.5
+oauth==1.0.1
+olefile==0.45.1
+packaging==20.9
+PAM==0.4.2
+pandas==0.22.0
+pandocfilters==1.4.3
+parso==0.7.1
+pathlib==1.0.1
+pathtools==0.1.2
+pdfminer==20191125
+pexpect==4.8.0
+pickleshare==0.7.5
+Pillow==8.0.1
+plac==0.9.6
+ply==3.11
+preshed==1.0.1
+prometheus-client==0.8.0
+prompt-toolkit==3.0.8
+protobuf==3.13.0
+psutil==5.4.2
+ptyprocess==0.6.0
+pudb==2017.1.4
+py3dns==3.1.1
+pyarrow==2.0.0
+pyasn1==0.4.2
+pyasn1-modules==0.2.1
+pycairo==1.16.2
+pycparser==2.20
+pycrypto==2.6.1
+pycryptodome==3.9.9
+pycryptodomex==3.4.7
+pycurl==7.43.0.1
+pydeck==0.5.0
+Pygments==2.2.0
+pygobject==3.26.1
+PyICU==1.9.8
+pyOpenSSL==17.5.0
+pyparsing==2.4.7
+pyserial==3.4
+pysmi==0.2.2
+pysnmp==4.4.3
+pystache==0.5.4
+python-apt==1.6.5+ubuntu0.5
+python-dateutil==2.6.1
+python-debian==0.1.32
+python-debianbts==2.7.2
+python-magic==0.4.16
+pytz==2018.3
+pyxdg==0.25
+PyYAML==3.12
+pyzmq==19.0.2
+QtPy==1.3.1
+rdflib==4.2.1
+regex==2021.3.17
+reportbug===7.1.8ubuntu1
+requests==2.25.1
+requests-file==1.4.3
+requests-unixsocket==0.1.5
+s3cmd==2.0.1
+s3concurrent==0.3.0
+s3transfer==0.3.3
+sacremoses==0.0.43
+scipy==0.19.1
+scour==0.36
+SecretStorage==2.3.1
+selenium==3.8.0
+Send2Trash==1.5.0
+service-identity==16.0.0
+simplejson==3.13.2
+six==1.15.0
+Slob==1.0.2
+smmap==3.0.4
+spacy==2.0.11
+SPARQLWrapper==1.7.6
+ssh-import-id==5.7
+systemd-python==234
+tables==3.4.2
+terminado==0.9.1
+testpath==0.4.4
+thinc==6.10.3
+tldextract==2.2.0
+tokenizers==0.10.1
+toml==0.10.2
+toolz==0.10.0
+torch==1.8.1
+tornado==6.1
+tqdm==4.59.0
+traitlets==4.3.3
+transformers==4.4.2
+Twisted==17.9.0
+typing-extensions==3.7.4.3
+tzlocal==2.1
+ubuntu-dev-tools===0.175-18.04.1
+ubuntu-drivers-common==0.0.0
+ufal.morphodita==1.10.1.1
+ufal.udpipe==1.2.0.3
+ufw==0.36
+ujson==1.35
+unattended-upgrades==0.1
+unicode==2.8
+Unidecode==1.2.0
+unidiff==0.5.4
+urllib3==1.26.4
+urwid==2.0.1
+usb-creator==0.3.3
+validators==0.18.1
+virtualenv==15.1.0
+wadllib==1.3.2
+warc==0.2.1
+warc3-wet==0.2.3
+watchdog==0.10.3
+wcwidth==0.2.5
+webencodings==0.5
+websocket-client==0.44.0
+widgetsnbextension==3.5.1
+wrapt==1.10.11
+xdxf2slob==1.0
+xkit==0.0.0
+zipp==3.4.1
+zope.interface==4.3.2
+
+
+stahování dat, tvorba datasetu( manualni vyhledavani článků), vyhledávání alternativních názvů produktu, vyhledání výrobců produktu, tvorba klasifikatoru pro vyhledání článků, specialni případy produktů, určování slovních druhů, ohodnocení článků jestli se jedná o recenzi, vyhledávání relevantního textu v článcích, vyhledání názvu produktu v článku, ohodnocování recenze (vyhodnocení sentimentu)
+
+obecně psát o:
+	
+	Stahování dat
+
+	určování slovních druhů v textu
+
+	Vyhledávání článků
+
+	Vyhledání ve wikidatech
+
+	Rozpoznání že se jedná o recenzi
+
+	Vyhledání relevantního textu
+
+	Rozpoznání názvu produktu
+
+	Sentiment
+
+	Implementace práce
+
+Doplnit epizody, podivat se na wiki
+
+
+
+přejmenuju libtorch_cuda.so na cuda-bck a uvidim jestli to pojede
+
+TODO 5.4.21
+začit s dokumentací rozvrhnout si nadpisy na stranky, nahrát skript a dataset použitý pro trening,
+
+inspirovat se ostatnima, podivat se jaky maji nadpisy a tak
+
+1. stahnout si ostatni BP
+
+TODO 3.4.21
+zkusit pořešit ten download při prvnim spuštění asi? test pls
+knihy a další typy přidat do konfigurace pro možnost rozšiřování, možna i stahovani z html done
+upravit hlašku že to nedopočita ten posledni článek a upravit ho aby to jasně psalo že je to postup práce done i guess 
+přidat datovou sadu ať ukažu čim jsem to trenoval 
+
+todo dneska, nahrat config upgrade na minervu, nahrat model na minervu, dopsat do readme jak tam pridavat dalsi specialni pripady
+
+
+
+v configu bude:
+Zdroj souborů
+weby pro specialni pripady
+html pro specialni pripady
+{
+	"dataSource":"D:\\Users\\Šimon\\Desktop\\Github\\KNoT\\Bakalařka\\Data\\vert",
+
+	"specialProduct":[
+		"kniha":{
+			"portal":"chleba"
+			"html":"rohlik"
+		}
+	]
+}
+		"film":
+	]
+	Kniha
+		portaly
+			html pro portal
+	Film
+		portaly
+			html pro portal
+
+před upravou to vraci: 09-11 09-11 film
+Lanugo - neg - https://www.idnes.cz/kultura/hudba/launugo-koncert-recenze-marketa-foukalova.A200910_081738_hudba_jgo#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main
+Slavnost bezvýznamnosti - neg - https://www.idnes.cz/kultura/literatura/recenze-milan-kundera.A200910_570074_literatura_spm#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main
+Krajina ve stínu - neg - https://www.idnes.cz/kultura/film-televize/recenze-krajina-ve-stinu-bohdan-slama-spalkova-polakova.A200909_569879_filmvideo_spm#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main
+Krajina ve stínu - neg - https://www.idnes.cz/kultura/film-televize/recenze-krajina-ve-stinu-bohdan-slama-spalkova-polakova.A200909_569879_filmvideo_spm#utm_source=rss&utm_medium=feed&utm_campaign=zpravodaj&utm_content=main
+Krajina ve stínu - neg - https://www.lidovky.cz/kultura/recenze-mezi-nami-sousedy-krajina-ve-stinu-ceka-v-kinech-na-ty-prave-divaky.A200909_214328_ln_kultura_jto#utm_source=rss&utm_medium=feed&utm_campaign=ln_lidovky&utm_content=main
+
+
+Udělat virualni prostředí D
+Zjistit který skripty potřebuju D
+Přidat spuštění konkrétních skriptů mezi dvěma daty D
+Morphodita i guess D
+Vytrénovat znovu model na serveru D
+
+MOžná ještě udělat spuštění na více procesech
+
+checknout jak vypada format v fRA.py D
+zkusit jestli to dobře parsuje D
+
+udělat readme a dokumentaci
+napsat mail jestli budou parsovany soubory z cs_media
+napsat mail že jsem tam nahral práci a že to ma checknout, ale zatim jsem tam dal vlastni parsovani tak to dlouho trvá
+
+
+Dobrý den,
+
+do adresáře /mnt/minerva1/nlp/projects/sentiment10 jsem nahrál skripty mé bakalářské práce, můžete se prosím podívat jestli jsou výsledky dostatečné a mohu tak začít pracovat na textové části práce.
+
+V adresáři /mnt/data-2/feeds_crawling/big_brother/workplace/ zatím nejsou k dispozici texty s doplněnými slovními druhy tak prozatím zpracovávám text nástrojem morphoDita který výrazně prodlouží délku vyhledávání v textech, zpracování článků jednoho dne trvá asi 8min tak jsem výsledek ukázky spuštění z readme.txt vložil do adresáře /sentiment10/result/example.txt, spojím se s Janem Doležalem a zjistím kdy budou texty se slovními druhy k dispozici, jestli nebudou k dispozici vůbec tak přidám spouštění na více procesech.
+
+S pozdravem,
+Šimon Matyáš
+
+Dobrý den,
+
+Chtěl bych se zeptat jestli v adresáři /mnt/data-2/feeds_crawling/big_brother/workplace/ budou k dispozici data s určenými slovními druhy.
+
+S pozdravem,
+Šimon Matyáš
+
+[Finished in 4004.6s]
+
+
+Produkt+WordResult
+  -  https://www.e15.cz/domaci/prestante-se-strasit-koronavirem-vyzval-obcany-babis-stezoval-si-na-kritiku-1373267
+Viliama Bucherta  -  https://www.e15.cz/nazory/komentar-viliama-bucherta-nakazene-volby-1373128
+V  -  https://www.e15.cz/koronahelpdesk-e15/v-cesku-opet-pribylo-pres-tisic-lidi-s-covidem-je-to-druhy-nejvyssi-denni-narust-1373127
+V  -  https://www.e15.cz/nazory/v-cesku-opet-pribylo-pres-tisic-lidi-s-covidem-je-to-druhy-nejvyssi-denni-narust-1373127
+V  -  https://www.e15.cz/domaci/v-cesku-za-sobotu-padl-vikendovy-rekord-v-poctu-novych-onemocneni-covid-19-1373209
+V Prymula  -  https://www.e15.cz/domaci/v-cr-je-druha-vlna-epidemie-hospitalizovanych-pribude-uvedl-vladni-zmocnenec-prymula-1373218
+  -  https://www.e15.cz/koronahelpdesk-e15/vojtech-chce-od-patku-regulovat-pocet-navstevniku-v-klubech-1373316
+10  -  https://www.e15.cz/koronahelpdesk-e15/nova-opatreni-od-patku-jsou-zakazany-vnitrni-akce-na-stani-nad-10-lidi-1373316
+COVID  -  https://www.e15.cz/domaci/cesko-ma-dalsi-covidovy-rekord-novych-pripadu-je-skoro-jako-v-osmkrat-lidnatejsim-nemecku-1373205
+V  -  https://www.e15.cz/koronahelpdesk-e15/v-sobotu-pribyl-rekordni-pocet-nakazenych-koronavirem-cesko-je-treti-nejzasazenejsi-zemi-eu-1373210
+INFOGRAFIKA  -  https://www.e15.cz/koronahelpdesk-e15/infografika-nizozemsko-omezuje-cestovani-pro-prazany-kypr-se-zavira-vsem-cechum-1369084
+INFOGRAFIKA  -  https://www.e15.cz/koronahelpdesk-e15/infografika-prazanum-vstup-omezen-jako-rizikove-vnimaji-cestujici-z-metropole-i-v-nizozemsku-1369084
+INFOGRAFIKA  -  https://www.e15.cz/koronahelpdesk-e15/infografika-dansko-odmita-poustet-do-zeme-ceske-turisty-pravidla-zprisnili-i-svycari-1369084
+INFOGRAFIKA  -  https://www.e15.cz/koronahelpdesk-e15/infografika-dansko-odmita-poustet-do-zeme-ceske-turisty-1369084
+INFOGRAFIKA  -  https://www.e15.cz/koronahelpdesk-e15/infografika-evropa-postupne-zavira-cechum-hranice-na-rizikovy-seznam-je-pridalo-i-slovensko-1369084
+INFOGRAFIKA  -  https://www.e15.cz/koronahelpdesk-e15/infografika-evropa-postupne-zavira-cechum-hranice-na-rizikovy-seznam-je-zrejme-prida-i-slovensko-1369084
+INFOGRAFIKA  -  https://www.e15.cz/koronahelpdesk-e15/infografika-nizozemsko-omezuje-cestovani-pro-prazany-nemci-nove-povazuji-za-rizikovou-oblast-stredocesky-kraj-1369084
+Super Mario 3D All-Stars  -  https://www.idnes.cz/hry/recenze/super-mario-3d-all-stars-recenze.A200914_160111_bw-switch-recenze_oz#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=bonusweb&amp;utm_content=main
+WRC 9  -  https://www.idnes.cz/hry/recenze/wrc-9-recenze-bonusweb.A200910_134028_bw-pc-recenze_oz#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=idnes&amp;utm_content=main
+WRC 9  -  https://www.idnes.cz/hry/recenze/wrc-9-recenze-bonusweb.A200910_134028_bw-pc-recenze_oz#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=bonusweb&amp;utm_content=main
+WRC 9  -  http://www.hrej.cz/recenze/wrc-9-6607/
+Iron Harvest  -  http://www.hrej.cz/recenze/iron-harvest-6601/
+NBA 2K21  -  http://www.hrej.cz/recenze/nba-2k21-6610/
+The Last Campfire  -  https://www.idnes.cz/hry/recenze/recenze-the-last-campfire.A200908_230057_bw-pc-recenze_oma#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=bonusweb&amp;utm_content=main
+The Last Campfire  -  https://www.idnes.cz/hry/recenze/recenze-the-last-campfire.A200908_230057_bw-pc-recenze_oma#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=idnes&amp;utm_content=main
+
+Review
+Nvidia ARM Holdings  -  https://www.e15.cz/byznys/technologie-a-media/americky-vyrobce-cipu-nvidia-koupi-za-temer-bilion-korun-britsky-arm-holdings-1373254
+Nvidia Arm 40  -  https://www.e15.cz/byznys/technologie-a-media/nvidia-ma-na-dosah-prevzeti-spolecnosti-arm-za-vice-nez-40-miliard-dolaru-1373214
+Víkend namodro #4  -  http://www.hrej.cz/komentare/vikend-namodro-4-6602/
+WRC 9  -  http://www.hrej.cz/recenze/wrc-9-6607/
+Iron Harvest  -  http://www.hrej.cz/recenze/iron-harvest-6601/
+NBA 2K21  -  http://www.hrej.cz/recenze/nba-2k21-6610/
+The Last Campfire  -  https://www.idnes.cz/hry/recenze/recenze-the-last-campfire.A200908_230057_bw-pc-recenze_oma#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=bonusweb&amp;utm_content=main
+The Last Campfire  -  https://www.idnes.cz/hry/recenze/recenze-the-last-campfire.A200908_230057_bw-pc-recenze_oma#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=idnes&amp;utm_content=main
+
+Produkt
+Super Mario 3D All-Stars  -  https://www.idnes.cz/hry/recenze/super-mario-3d-all-stars-recenze.A200914_160111_bw-switch-recenze_oz#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=bonusweb&amp;utm_content=main
+WRC 9  -  https://www.idnes.cz/hry/recenze/wrc-9-recenze-bonusweb.A200910_134028_bw-pc-recenze_oz#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=idnes&amp;utm_content=main
+WRC 9  -  https://www.idnes.cz/hry/recenze/wrc-9-recenze-bonusweb.A200910_134028_bw-pc-recenze_oz#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=bonusweb&amp;utm_content=main
+WRC 9  -  http://www.hrej.cz/recenze/wrc-9-6607/
+Iron Harvest  -  http://www.hrej.cz/recenze/iron-harvest-6601/
+NBA 2K21  -  http://www.hrej.cz/recenze/nba-2k21-6610/
+The Last Campfire  -  https://www.idnes.cz/hry/recenze/recenze-the-last-campfire.A200908_230057_bw-pc-recenze_oma#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=bonusweb&amp;utm_content=main
+The Last Campfire  -  https://www.idnes.cz/hry/recenze/recenze-the-last-campfire.A200908_230057_bw-pc-recenze_oma#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=idnes&amp;utm_content=main
+
+
+
+Nic
+WRC 9  -  http://www.hrej.cz/recenze/wrc-9-6607/
+Iron Harvest  -  http://www.hrej.cz/recenze/iron-harvest-6601/
+NBA 2K21  -  http://www.hrej.cz/recenze/nba-2k21-6610/
+The Last Campfire  -  https://www.idnes.cz/hry/recenze/recenze-the-last-campfire.A200908_230057_bw-pc-recenze_oma#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=bonusweb&amp;utm_content=main
+The Last Campfire  -  https://www.idnes.cz/hry/recenze/recenze-the-last-campfire.A200908_230057_bw-pc-recenze_oma#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=idnes&amp;utm_content=main
+
+
+
+
+https://discuss.pytorch.org/t/dataloader-iterator-is-not-working-for-custom-dataset/89099
+https://discuss.pytorch.org/t/next-iter-dataloader-throws-an-error/89139
+
+
+/mnt/minerva1/nlp/projects/sentiment8 https://www.fit.vut.cz/study/thesis/22452
+/mnt/minerva1/nlp/projects/review_analysis https://www.fit.vut.cz/study/thesis/22451
+/mnt/minerva1/nlp/projects/annot_game10
+
+https://www.fit.vut.cz/study/thesis/22452
+https://www.fit.vut.cz/study/thesis/22451
+https://www.fit.vut.cz/study/thesis/22792
+
+uprava D:\Python37\lib\site-packages\torch\nn\modules\rnn.py 646
+
+
+['Já', 'chci', 'na', 'chleba', 'řízek']
+[37906, 19549, 2032, 71618, 100]
+
+['Já', 'chci', 'na', 'chleba', 'sýr']
+[37906, 19549, 2032, 71618, 100]
+
+['Já', 'chci', 'na', 'rohlík', 'kus', 'chleba']
+[37906, 19549, 2032, 100, 13655, 71618]
+
+Epoch 1/10
+----------
+Train loss 0.7043395549058914 accuracy 0.5157232704402516
+Val   loss 0.5100892186164856 accuracy 0.6666666666666666
+
+Epoch 2/10
+----------
+Train loss 0.6079303801059723 accuracy 0.6918238993710691
+Val   loss 0.512931801378727 accuracy 0.5555555555555556
+
+Epoch 3/10
+----------
+Train loss 0.319361424818635 accuracy 0.8805031446540881
+Val   loss 0.5395278688520193 accuracy 0.7777777777777778
+
+Epoch 4/10
+----------
+Train loss 0.019556495861615987 accuracy 0.9937106918238994
+Val   loss 1.009273670031689 accuracy 0.6666666666666666
+
+Epoch 5/10
+----------
+Train loss 0.05909384643455269 accuracy 0.9874213836477987
+Val   loss 0.9915460521151545 accuracy 0.7777777777777778
+
+Epoch 6/10
+----------
+Train loss 0.02871557305479655 accuracy 0.9937106918238994
+Val   loss 0.9792980933125364 accuracy 0.7777777777777778
+
+Epoch 7/10
+----------
+Train loss 0.01420119504473405 accuracy 0.9937106918238994
+Val   loss 1.1581428517602035 accuracy 0.6666666666666666
+
+Epoch 8/10
+----------
+Train loss 0.0002702406229218468 accuracy 1.0
+Val   loss 0.9793652196676703 accuracy 0.7777777777777778
+
+Epoch 9/10
+----------
+Train loss 0.0038737262111681048 accuracy 1.0
+Val   loss 0.666145791503368 accuracy 0.6666666666666666
+
+Epoch 10/10
+----------
+Train loss 0.0002718232331972104 accuracy 1.0
+Val   loss 0.6824156543370918 accuracy 0.7777777777777778
+
+[Finished in 9699.1s]
+
+review_analyze 183-229
+
+
+https://www.lidovky.cz/kultura/recenze-mezi-nami-sousedy-krajina-ve-stinu-ceka-v-kinech-na-ty-prave-divaky.A200909_214328_ln_kultura_jto#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=ln_lidovky&amp;utm_content=main ['Krajina ve stínu'] h3
+
+https://www.idnes.cz/kultura/film-televize/recenze-binoche-kdo-si-myslis-ze-jsem.A200914_570768_filmvideo_spm#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=idnes&amp;utm_content=main [Kdo si myslíš, že jsem] stejný jako idnes knihy
+https://www.idnes.cz/kultura/film-televize/narusitel-recenze.A190124_093906_filmvideo_ts#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main
+
+https://www.novinky.cz/kultura/clanek/recenze-dvorske-intriky-zbavene-romantiky-40268895 [Favoritka] pujde to z html
+https://www.novinky.cz/kultura/filmy-serialy/clanek/recenze-film-zenska-pomsta-je-predevsim-pomstou-na-divacich-40336244 pujde z html
+https://www.novinky.cz/kultura/clanek/recenze-psi-domov-deti-dojme-i-potesi-spoustou-zvirat-40268926 pujde z html
+
+
+videohry
+https://www.idnes.cz/hry <h2 itemprop="name">WRC 9</h2>,
+gamepark.cz <h1 class="entry-title" itemprop="name headline">Tony Hawk’s Pro Skater 1+2</h1>
+e15.cz velky malý pismena
+
+
+Portaly ktery maji hodnoceni:
+
+www.mobilmania.cz
+https://samsungmania.mobilmania.cz
+smartmania.cz
+
+https://www.idnes.cz/kultura/film-televize/
+https://www.novinky.cz/kultura/filmy-serialy
+
+www.autojournal.cz
+vybermiauto.cz
+autojournal.cz
+
+
+
+
+TODO
+//
+zkusit jusText
+sehnat další soubory se slovnima druhama
+
+hodnoceni recenze asi zkusim udělat ze zavěru recenze, to je odstavec po poslednim nadpisu
+
+jusText trva dlouho na urcovani jestli se jedna o recenzi nebo ne, ale asi to půjde pouzit pro vysekavani zaveru recenze, nadpisu, na to je to nice
+
+zpracovani nefunguje, myslim že tam neni jeden mezi krok mezi vert a těma podstatnyma jmenama
+
+zbozi.cz webscrape nefunguje, mozna bych zkusil predurcit web jen pro nekolik typů produktů, a pak hledat jestli v celym nadpisu clanku neni nazev
+
+Hardware
+	- Heureka, zbozi
+
+Knihy
+	- 
+
+
+
+//
+
+
+
+Počet manuálně prohledaných článků
+09-10-2020 – 09-16-2020 : 18516
+
+Celkem jsem našel 80 článků obsahující recenzi
+nejčastější produkty recenzí byly telefony a auta
+
+
+Využité metody, tam napsat o těch wikidatech, třeba že slovo "test" nejsou uplně vždycky recenze a jaký špatný články to teď hledá.
+ 
+
+09-10 : 3748
+09-11 : 3857
+09-12 : 3399
+09-13 : 1106
+09-14 : 2438
+09-15 : 3617
+09-16 : 3411
+
+
+brát text jen ze závěru, z toho se asi bude dělat dobře ta recenze
+
+rozhodnout jestli zapnout / vypnout detekovani clanků bez recenze slove
+
+Upravit to vyhledavani aby to tam davalo html Head a pak hledalo v nadpisech v clanku, maybe zvednout prioritu v nadpisech v clanku, a pak velkej weight na brand v url
+
+
+vypada to že dobrej  text je složenej z několika odstavců ohraničených <s> tagama, takže zkusim brát jen text kterej je v takovým odstavci a uvidim jak bude vypadat výsledek
+
+vyhledani relevantniho textu v recenzi, ne nejakej bullshit okolo
+
+
+najit ktery slova obsahuji recenze, moc to nehleda recenze
+
+https://www.idnes.cz/kultura/literatura/recenze-milan-kundera-slavnost-bezvyznamnosti.A200910_570074_literatura_spm#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=idnes&amp;utm_content=main  [Slavnost Bezvýznamnosti] h3 nadpis, url
+https://www.idnes.cz/kultura/literatura/recenze-soukupova-urban-epstein.A200909_094924_literatura_kiz#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=idnes&amp;utm_content=main [Zamilované povídky] h3 nadpis
+https://www.lidovky.cz/kultura/recenze-mezi-nami-sousedy-krajina-ve-stinu-ceka-v-kinech-na-ty-prave-divaky.A200909_214328_ln_kultura_jto#utm_source=rss&amp;utm_medium=feed&amp;utm_campaign=ln_lidovky&amp;utm_content=main [Krajina ve stínu] h3 nadpis, film
+
+
+
+TODO
+pridani anglickych nazvu do nazvu produktu, aby to hledalo treba smartphony
+
+#vyhledani kterej text je relevantni at to tam nebere nejaky vedlejsi odkazy na novinky
+
+skipnout radek po linku
+vzít si celej odstavec mezi <p> tagama a checknout jestli je tam link tag, kdyz j tak celej odstave skipnu
+
+to vyhledavani na wikidatech je trochu scuffed, nenajde některy značky a chtělo by to trocho pošefovat skore u ohodnoceni članku
+
+najit alt nazvy produktu a najit jen clanky ktery obsahuji recenze slova, a pak delat skore podle brandu a nazvu produktu ( u nazvu produktu najít podle nazvu ID a podle ID si dat do seznamu alt nazvy a label)
+
+odstranit specialni znaky a vymenit je za normalni, treba 'sluchátka' na 'sluchatka'
+
+vylepseni presnosti klasifikatoru
+
+
+zeptat se jestli budou tokeny z novych souboru a jestli budou mit urceny slovni druhy
+
+['./src/html_to_vert.py', '-o', '../workplace/3-vert/cs_media/2020-10-01_0045.vert.processing', '-l', '-f', '-m', '12', '-t', './src/../library/morphodita/precompiled_bin/run_tokenizer', '-i', './src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.processing']
+
+
+pudb3 /mnt/data-2/feeds_crawling/big_brother/src/html_to_vert.py -o /mnt/data-2/feeds_crawling/big_brother/src/../workplace/3-vert/cs_media/2020-10-01_0045.vert.processing -l -f -m 12 -t /mnt/data-2/feeds_crawling/big_brother/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.processing
+
+
+time python3 /mnt/data-2/feeds_crawling/big_brother/src/html_to_vert.py -o ./src/../workplace/3-vert/cs_media/2020-10-01_0045.vert.processing -l -f -m 12 -t /mnt/data-2/feeds_crawling/big_brother/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.failed
+
+
+SPOUŠTÍM TO PŘES TOTO:
+
+time python3 ./src/html_to_vert.py -o test.txt -l -f -m 12 -t ./src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.failed
+
+
+time python3 ./cs_media/src/html_to_vert.py -o test.txt -l -f -m 12 -t ./cs_media/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.failed
+
+
+time python3 ./feeds_crawler/src/html_to_vert.py -o test.txt -l -f -m 12 -t ./feeds_crawler/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.failed
+
+time python3 /mnt/minerva1/nlp/repositories/feeds_crawler/src/html_to_vert.py -o test.txt -l -f -m 12 -t /mnt/minerva1/nlp/repositories/feeds_crawler/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.failed
+
+time python3 ./feeds_crawler/src/html_to_vert.py -o test.txt -l -f -m 12 -t ./feeds_crawler/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.failed
+
+time python3 ./feeds_crawler/src/html_to_vert.py -o test.txt -l -f -m 12 -t ./feeds_crawler/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/newsbrief_eu/2020-10-20_0125.warc.failed
+
+python3 ./src/html_to_vert.py -o test.txt -l -f -m 12 -t ./cs_media/library/morphodita/precompiled_bin/run_tokenizer -i /mnt/data-2/feeds_crawling/big_brother/workplace/2-downloaded/cs_media/2020-09-10_0035.warc.processing_tokenize
+
+/mnt/data-2/feeds_crawling/big_brother/workplace/2-downloaded/cs_media/2020-09-10_0035.warc.processing_tokenize
+
+
+
+
+
+ENV:
+source /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/venv/bin/activate
+
+
+
+Data:
+/mnt/data-2/feeds_crawling/big_brother/workplace/2-downloaded/cs_media
+
+       python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/test.txt' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-10_0035.vert'  
+
+       python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/test.txt' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-10_0035.vert'
+
+       python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/test.txt' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-10_0035.vert'
+
+       python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-10-5.txt' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-10-4.txt'
+
+
+       command   = BE_NICE + [ self._path + '/tagger.py', '-o', output_file, '-l' ] + models + [ '-m', '2', '-t', tagger, '-p', '50', '-i', in_file ]
+
+       python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/tagger.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/test.txt' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/models/cs.tagger' -m 2 -t '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/precompiled_bin/run_tagger' -p 50 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-10_0035.vert'
+      
+
+Skripty na spuštění:
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/tagger.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-10.tagged' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/models/cs.tagger' -m 2 -t '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/morphodita/precompiled_bin/run_tagger' -p 50 -i '/mnt/data-2/feeds_crawling/big_brother/workplace/3-vert/cs_media/2020-09-10_0035.vert'
+
+python3 /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media2/src/parser.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-10.parsed' -l 'cs=/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/models/cs.udpipe' -P '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/library/udpipe/bin/udpipe' -p 50 -m 2 -i '/mnt/minerva1/nlp/homes/xmatya11/BP/parse/2020-09-10.tagged'
+
+
+Recenze 2020-09-10 :
+https://channelworld.cz/produktove-novinky/evolveo-uvadi-tlacitkove-vecko-s-dvema-displeji-easyphone-fg-25167?utm_source=rss&utm_medium=web&utm_campaign=rss 																			(telefon)
+http://pctuning.tyden.cz/hardware/skrine-zdroje-chladice/60355-cooler-master-mastercase-h500-argb-nejnizsi-haf 																															(hw)
+https://notebook.cz/clanky/recenze-notebook/2020/11-generace-intel-core-acer-swift-5-sf514-55t 																																			(notebook)
+http://www.hrej.cz/pr-clanek/asus-gaming-vg249q-6599/ 																																													(notebook)
+https://www.systemonline.cz/zpravy/wd-predstavuje-prvni-externi-disk-zabezpeceny-technologii-armorlock-z.htm 																															(hw)
+http://www.autoazena.sk/news/land-rover-defender-predstavuje-plug-in-hybrid-novy-sestvalcovy-diesel-a-vybavu-x-dynamic/ 																												(auto)
+https://www.topspeed.sk/novinky/vw-golf-variant-2021-oficialne-prekvapil-dlhsim-razvorom-aj-verziou-alltrack/18277 																														(auto)
+https://www.autojournal.cz/test-hyundai-i30n-project-c/ 																																												(auto)
+https://digiarena.zive.cz/jakumei-optics-jde-na-trh-s-objektivem-dulens-apo-85-mm-f2 																																					(fotak)
+https://www.svetandroida.cz/poco-m2-oficialne/ 																																															(telefon)
+https://musicserver.cz/clanek/64151/honor-choice-earbuds-lepsi-bezdratova-sluchatka-za-899-kc-nesezenete/ 																																(sluchatka)
+https://www.mobilmania.cz/clanky/na-terminalu-uz-zaplatite-i-s-telefonem-za-tri-tisice-je-tu-levne-redmi-9c-nfc/sc-3-a-1349281/default.aspx 																							(telefon)
+https://androidportal.zoznam.sk/2020/08/recenzia-samsung-galaxy-note20/																																									(telefon)
+https://smartmania.cz/recenze-microsoft-surface-book-3-vykonny-notebook-a-graficky-tablet-v-jednom/#comment-360421 																														(notebook)
+https://www.fullmoonzine.cz/novinky/honor-choice-earbuds-lepsi-bezdratova-sluchatka-za-899-kc-nesezenete 																																(sluchatka)
+https://tech.sme.sk/c/22484803/test-galaxy-watch3-vyskusali-sme-fitness-hodinky-od-samsungu.html 																																		(hodinky)
+https://www.autokaleidoskop.cz/Testy/Kia-Xceed-1-6-CRDi-MHEV-iMT-s-novou-prevodovkou-vice-kilometru/ 																																	(auto)
+https://www.autojournal.cz/test-ojetiny-land-rover-discovery-4-schopny-stroj-s-posramocenou-povesti/ 																																	(auto)
+https://mobilizujeme.cz/clanky/cat-s62-pro-recenze#comment-98939 																																										(telefon)
+https://www.svetandroida.cz/realme-buds-air-neo-recenze/comment-page-1/#comment-1021344 																																				(sluchatka)
+https://www.mojandroid.sk/samsung-galaxy-note-20-recenzia/#comment-259838 																																								(telefon)
+https://www.mojandroid.sk/samsung-galaxy-note-20-ultra-ako-foti/ 																																										(telefon)
+https://smartmania.cz/redmi-note-8t-recenze/#comment-360411 																																											(telefon)
+https://mobilizujeme.cz/clanky/poco-x3-nfc-skvela-volba-za-rozumny-peniz#comment-98926 																																					(telefon)
+							
+https://mobilizujeme.cz/clanky/poco-m2-prevleceny-redmi-ale-na-jine-vlne 																																								(telefon)
+https://www.svetandroida.cz/testujeme-samsung-galaxy-tab-s7/comment-page-1/#comment-1021364 																																			(telefon)
+https://www.mojandroid.sk/poco-x3-nfc-predstavenie/ 																																													(telefon)
+							
+							
+Recenze 2020-09-11:							
+https://samsungmania.mobilmania.cz/clanky/recenze-samsung-galaxy-z-fold2--vitana-evoluce-a-skvela-hracka-pro-narocne/sc-309-a-1349249/default.aspx 																						(telefon)
+https://magazin.aktualne.cz/kultura/literatura/debut-ceske-spisovatelky-klara-vlasakova-praskliny-recenze/r~e3b6562af35a11eab1110cc47ab5f122/?utm_source=mediafed&utm_medium=rss&utm_campaign=mediafed 									(kniha)
+https://techbox.dennikn.sk/hp-zbook-fury-15-a-17-ponuknu-desktopovy-vykon-v-telach-beznych-notebookov/ 																																	(notebook)
+http://motodenik.cz/clanek/2401-aprilia-dorsoduro-900-zabavny.html 																																										(motorka)
+https://androidportal.zoznam.sk/2020/04/elektricky-bicykel-fiido-m1-100-kilometrov/#comment-403483 																																		(motorka)
+https://autoroad.cz/testy-aut/99728-test-peugeot-208-1-5-bluehdi-100-gt-line-zaslouzene-autem-roku-2020 																																(auto)
+https://prazsky-zpravodaj.cz/technika/vrcholem-nabidky-opelu-je-grandland-xplug-in-hybrid4-221kw-300hp/ 																																(auto)
+https://diit.cz/clanek/recenze-asus-rog-strix-b550-f-gaming-wifi-ryzen-5-3600-pretaktovani	 																																			(notebook)
+https://auto-mania.cz/test-mercedes-amg-a-45-s-4matic-2020/ 																																											(auto)
+https://smartmania.cz/test-skoda-octavia-2020-bude-to-opet-prodejni-bestseller/#comment-360528 																																			(auto)
+https://www.idnes.cz/kultura/literatura/recenze-milan-kundera-slavnost-bezvyznamnosti.A200910_570074_literatura_spm#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 													(kniha)
+https://www.idnes.cz/kultura/literatura/recenze-soukupova-urban-epstein.A200909_094924_literatura_kiz#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 																(kniha)
+https://www.idnes.cz/hry/recenze/recenze-the-last-campfire.A200908_230057_bw-pc-recenze_oma#utm_source=rss&utm_medium=feed&utm_campaign=bonusweb&utm_content=main 																		(hra)
+https://www.idnes.cz/kultura/film-televize/recenze-krajina-ve-stinu-bohdan-slama-spalkova-polakova.A200909_569879_filmvideo_spm#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 										(film)
+							
+							
+Recenze 2020-09-12:							
+https://auto-mania.cz/test-plug-in-hybridu-ford-kuga-phev-2020/ 																																										(auto)
+https://vybermiauto.cz/recenze/test-fiat-tipo-hatchback 																																												(auto)
+https://www.autojournal.cz/test-peugeot-208-gt-line-na-pomezi-premiove-tridy/ 																																							(auto)
+https://www.autanet.cz/autonews-test-peugeot-208-1-2-puretech-130-gt-line-ciperny-a-pohlednejsi-konkurent-fabie-4164 																													(auto)
+https://www.autojournal.cz/test-skoda-octavia-2-0-tdi-evo-pokrok-nezastavis/ 																																							(auto)
+https://smartmania.cz/samsung-galaxy-z-fold-2-recenze-otevrene-okno-do-budoucnosti/?utm_source=rss&utm_medium=rss&utm_campaign=samsung-galaxy-z-fold-2-recenze-otevrene-okno-do-budoucnosti 											(telefon)
+https://www.svetandroida.cz/nejlepsi-chytre-hodinky-s-wear-os-2020/comment-page-1/#comment-1021490 																																		(hodinky)
+https://www.e15.cz/magazin/kultura/recenze-pc-hry-crusader-kings-3-aneb-jak-se-bavit-stredovekem-1373121 																																(hry)
+https://www.idnes.cz/kultura/film-televize/recenze-zenska-pomsta-rapos-vejmelkova.A200911_570293_filmvideo_spm#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 														(film)
+https://www.svetandroida.cz/motorola-razr-5g-oficialne/ 																																												(telefon)
+https://www.svetandroida.cz/shelly-duo-recenze-chytra-zarovka/comment-page-1/#comment-1021493 																																			(telefon)
+https://www.idnes.cz/kultura/film-televize/recenze-mlsne-medvedi-pribehy.A200910_570075_filmvideo_spm#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 																(film)
+https://www.idnes.cz/hry/recenze/wrc-9-recenze-bonusweb.A200910_134028_bw-pc-recenze_oz#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 																				(hry)
+https://www.idnes.cz/kultura/film-televize/recenze-zenska-pomsta-rapos-vejmelkova.A200911_570293_filmvideo_spm#utm_source=rss&utm_medium=feed&utm_campaign=zpravodaj&utm_content=main 													(kniha)
+							
+							
+Recenze 2020-09-13:							
+https://www.topspeed.sk/testy-aut/suzuki-jimny-4x4-test/18285 																																											(auto)
+https://touchit.sk/samung-galaxy-z-fold2-prve-dojmy/308542 																																												(telefon)
+https://touchit.sk/recenzia-hp-elitebook-x360-1040-g6-jasny-biznis-notebook/307959 																																						(notebook)
+https://touchit.sk/recenzia-sony-mdr-rf895rk/307895 																																													(sluchatka)
+https://www.lidovky.cz/kultura/recenze-nebat-se-emoci-ani-patosu-vojna-a-mir-je-jedna-z-nejlepsich-docekalovych-inscenaci.A200910_103756_ln_kultura_jto#utm_source=rss&utm_medium=feed&utm_campaign=ln_lidovky&utm_content=main 		(divadlo)
+https://touchit.sk/recenzie-aoc-q27t1-stylovy-monitor-ktory-sa-odlisuje/308078 																																							(monitor)
+							
+Recenze 2020-09-14:							
+https://mobilenet.cz/clanky/recenze-motorola-moto-g-5g-plus-stredni-trida-se-vsim-vsudy-41676 																																			(telefon)
+https://www.topspeed.sk/testy-aut/test-audi-q7-60-tfsi-e-porucime-vetru-dazdu/18288 																																					(auto)
+https://automagazin.sk/2020/09/13/test-mercedes-amg-cla-45-s-4matic-poriadna-davka-adrenalinu/ 																																			(auto)
+https://www.gamepark.cz/recenze/tony-hawks-pro-skater-12/ 																																												(hry)
+https://www.svetandroida.cz/samsung-galaxy-buds-live-recenze/comment-page-1/#comment-1021628 																																			(sluchatka)
+https://www.idnes.cz/mobil/telefony/sony-xperia-1-ii-recenze-test-smartphone-android.A200902_225905_telefony_vok#utm_source=rss&utm_medium=feed&utm_campaign=mobil&utm_content=main 													(telefon)
+							
+Recenze 2020-09-15:							
+https://www.mobilmania.cz/clanky/recenze-sony-xperia-1-ii--bez-kompromisu-tak-to-maji-fanousci-radi/sc-3-a-1349305/default.aspx#part=1 																									(telefon)
+https://mobilizujeme.cz/clanky/redmi-note-9-pro-recenze#comment-99061 																																									(telefon)
+https://smartmania.cz/microsoft-surface-duo-v-prvnich-recenzich-zatim-neni-duvod-k-oslavam/#comment-360739 																																(telefon)
+https://www.mojandroid.sk/recenzia-motorola-edge/ 																																														(telefon)
+https://www.autojournal.cz/test-bmw-118d/ 																																																(auto)
+https://automagazin.sk/2020/09/13/test-mercedes-amg-cla-45-s-4matic-poriadna-davka-adrenalinu/ 																																			(auto)
+https://www.autojournal.cz/test-yamaha-tracer-700/ 																																														(auto)
+https://www.novinky.cz/kultura/filmy-serialy/clanek/recenze-film-zenska-pomsta-je-predevsim-pomstou-na-divacich-40336244 																												(film)
+							
+Recenze 2020-09-16:							
+							
+
+http://www.motoforum.cz/supersporty/aprilia-tuono-v4-x-221-koni-na-166-kilogramu/ 																																						(auto)
+https://androidportal.zoznam.sk/2018/01/samsung-galaxy-a8-2018-recenzia-test/#comment-403492 																																			(telefon)
+https://auto-mania.cz/test-mild-hybridu-ford-focus-kombi-10-ecoboost-hybrid-2020/ 																																						(auto)
+https://touchit.sk/motorola-moto-g9-plus-telefon-s-5000-mah-bateriou-a-30-w-nabijanim/308695 																																			(telefon)
+https://touchit.sk/recenzia-asus-tuf-gaming-a15-laka-pomerom-cena-vykon-a-odolnym-sasi/307972 																																			(notebook)
+		
+
+Tema:
+
+	Smartphony
+
+		CZ:
+			https://channelworld.cz/produktove-novinky/evolveo-uvadi-tlacitkove-vecko-s-dvema-displeji-easyphone-fg-25167?utm_source=rss&utm_medium=web&utm_campaign=rss (info o telefonu) neni
+
+			https://www.svetandroida.cz/poco-m2-oficialne/ (asi ne recenze, jen info o telefonu) neni
+			https://www.svetandroida.cz/testujeme-samsung-galaxy-tab-s7/(tablet ne smartphone) je [Testujeme Samsung Galaxy Tab 7]
+			https://www.svetandroida.cz/motorola-razr-5g-oficialne/(info o telefonu) neni
+
+			https://www.mobilmania.cz/clanky/na-terminalu-uz-zaplatite-i-s-telefonem-za-tri-tisice-je-tu-levne-redmi-9c-nfc/sc-3-a-1349281/default.aspx (ma hodnoceni, ale nějak tu nevidim text) [Na Je Redmi 9 C NFC ]
+			https://samsungmania.mobilmania.cz/clanky/recenze-samsung-galaxy-z-fold2--vitana-evoluce-a-skvela-hracka-pro-narocne/sc-309-a-1349249/default.aspx (hodnoceni 2x, plusy minusi i text) [Galaxy Z Fold 2]
+			https://www.mobilmania.cz/clanky/recenze-sony-xperia-1-ii--bez-kompromisu-tak-to-maji-fanousci-radi/sc-3-a-1349305/default.aspx#part=1 (hodnoceni 2x, pulsy minusy i pěknej text) [Sony Xperia 1 II Tak]
+
+			https://smartmania.cz/redmi-note-8t-recenze/#comment-360411(hodnoceni, + -, hodně informací) neni
+			https://smartmania.cz/samsung-galaxy-z-fold-2-recenze-otevrene-okno-do-budoucnosti/?utm_source=rss&utm_medium=rss&utm_campaign=samsung-galaxy-z-fold-2-recenze-otevrene-okno-do-budoucnosti(hodnoceni, + -, hodně textu) [Samsung Galaxy Z Fold 2]
+			https://smartmania.cz/microsoft-surface-duo-v-prvnich-recenzich-zatim-neni-duvod-k-oslavam/#comment-360739(hodnocení z ruzných webů) [Microsoft Surface Duo ]
+
+			https://mobilizujeme.cz/clanky/poco-x3-nfc-skvela-volba-za-rozumny-peniz#comment-98926(specifikace)
+			https://mobilizujeme.cz/clanky/poco-m2-prevleceny-redmi-ale-na-jine-vlne#comment-98954(specifikace)
+				https://mobilizujeme.cz/clanky/poco-m2-prevleceny-redmi-ale-na-jine-vlne
+			https://mobilizujeme.cz/clanky/redmi-note-9-pro-recenze#comment-99061(specifikace)
+
+			https://mobilenet.cz/clanky/recenze-motorola-moto-g-5g-plus-stredni-trida-se-vsim-vsudy-41676(specifikace, plusy minusy) [Motorola Moto G 5 G Plus]
+
+			https://www.idnes.cz/mobil/telefony/sony-xperia-1-ii-recenze-test-smartphone-android.A200902_225905_telefony_vok#utm_source=rss&utm_medium=feed&utm_campaign=mobil&utm_content=main(hodně textu, + -) [Sony Xperia 1 II]
+
+		SK:
+			https://androidportal.zoznam.sk/2018/01/samsung-galaxy-a8-2018-recenzia-test/#comment-403492
+
+			https://www.mojandroid.sk/samsung-galaxy-note-20-ultra-ako-foti/#comment-259830
+			https://www.mojandroid.sk/samsung-galaxy-note-20-recenzia/#comment-259838
+				https://www.mojandroid.sk/samsung-galaxy-note-20-ultra-ako-foti/
+			https://www.mojandroid.sk/poco-x3-nfc-predstavenie/
+				https://www.mojandroid.sk/samsung-galaxy-note-20-recenzia/#comment-259845
+				https://www.mojandroid.sk/samsung-galaxy-note-20-recenzia/#comment-259856
+			https://www.mojandroid.sk/recenzia-motorola-edge/
+
+			https://touchit.sk/samung-galaxy-z-fold2-prve-dojmy/308542
+			https://touchit.sk/motorola-moto-g9-plus-telefon-s-5000-mah-bateriou-a-30-w-nabijanim/308695#comment-19674
+				https://touchit.sk/motorola-moto-g9-plus-telefon-s-5000-mah-bateriou-a-30-w-nabijanim/308695
+
+			https://androidportal.zoznam.sk/2020/08/recenzia-samsung-galaxy-note20/#comment-403481
+
+
+	Filmy:
+
+		CZ:	
+			https://www.idnes.cz/kultura/film-televize/recenze-krajina-ve-stinu-bohdan-slama-spalkova-polakova.A200909_569879_filmvideo_spm#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 										(film)
+			https://www.idnes.cz/kultura/film-televize/recenze-zenska-pomsta-rapos-vejmelkova.A200911_570293_filmvideo_spm#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 														(film)
+			https://www.idnes.cz/kultura/film-televize/recenze-mlsne-medvedi-pribehy.A200910_570075_filmvideo_spm#utm_source=rss&utm_medium=feed&utm_campaign=idnes&utm_content=main 																(film)
+
+			https://www.novinky.cz/kultura/filmy-serialy/clanek/recenze-film-zenska-pomsta-je-predevsim-pomstou-na-divacich-40336244 																												(film)
+
+
+
+	Auta:
+		CZ:
+			
+			https://www.autojournal.cz/test-hyundai-i30n-project-c/(hodnoceni,text)																																										(auto)
+			https://www.autojournal.cz/test-ojetiny-land-rover-discovery-4-schopny-stroj-s-posramocenou-povesti/ 																																	(auto)
+			
+			https://www.autanet.cz/autonews-test-peugeot-208-1-2-puretech-130-gt-line-ciperny-a-pohlednejsi-konkurent-fabie-4164(+ -) 																													(auto)
+			
+			https://www.autokaleidoskop.cz/Testy/Kia-Xceed-1-6-CRDi-MHEV-iMT-s-novou-prevodovkou-vice-kilometru/ (specifikace)																																	(auto)
+			
+			https://autoroad.cz/testy-aut/99728-test-peugeot-208-1-5-bluehdi-100-gt-line-zaslouzene-autem-roku-2020 (recenze text)																																(auto)
+			
+			https://prazsky-zpravodaj.cz/technika/vrcholem-nabidky-opelu-je-grandland-xplug-in-hybrid4-221kw-300hp/ (specifikace)																													(auto)
+			
+			https://smartmania.cz/test-skoda-octavia-2020-bude-to-opet-prodejni-bestseller/#comment-360539 	(hodnoceni, hodně textu)																																		(auto)
+			
+			https://auto-mania.cz/test-mercedes-amg-a-45-s-4matic-2020/ (recenze text)																																											(auto)
+			https://auto-mania.cz/test-plug-in-hybridu-ford-kuga-phev-2020/ (recenze text)																																								(auto)
+			https://auto-mania.cz/test-mild-hybridu-ford-focus-kombi-10-ecoboost-hybrid-2020/(recenze text) 																																						(auto)
+					
+			https://vybermiauto.cz/recenze/test-fiat-tipo-hatchback (hodnoceni, recenze text)																																											(auto)
+			
+			https://www.autojournal.cz/test-peugeot-208-gt-line-na-pomezi-premiove-tridy/ (hodnoceni, recenze text)																																							(auto)
+			https://www.autojournal.cz/test-skoda-octavia-2-0-tdi-evo-pokrok-nezastavis/  (hodnoceni, recenze text)																																							(auto)
+			https://www.autojournal.cz/test-bmw-118d/ (hodnoceni, recenze text)																																																(auto)
+			https://www.autojournal.cz/test-yamaha-tracer-700/ (text)																																													(motorka)
+			
+			http://www.motoforum.cz/supersporty/aprilia-tuono-v4-x-221-koni-na-166-kilogramu/ (text)																																					(auto)
+			
+			http://motodenik.cz/clanek/2401-aprilia-dorsoduro-900-zabavny.html (text) 																																										(motorka)
+
+		SK:
+			https://androidportal.zoznam.sk/2020/04/elektricky-bicykel-fiido-m1-100-kilometrov/#comment-403483 																																		(motorka)
+
+
+
+
+		SK:
+			http://www.autoazena.sk/news/land-rover-defender-predstavuje-plug-in-hybrid-novy-sestvalcovy-diesel-a-vybavu-x-dynamic/ 																												(auto)
+			
+			https://www.topspeed.sk/novinky/vw-golf-variant-2021-oficialne-prekvapil-dlhsim-razvorom-aj-verziou-alltrack/18277 																														(auto)
+			https://www.topspeed.sk/testy-aut/suzuki-jimny-4x4-test/18285 																																											(auto)
+			https://www.topspeed.sk/testy-aut/test-audi-q7-60-tfsi-e-porucime-vetru-dazdu/18288 																																					(auto)
+			
+			https://automagazin.sk/2020/09/13/test-mercedes-amg-cla-45-s-4matic-poriadna-davka-adrenalinu/ 																																			(auto)
+			https://automagazin.sk/2020/09/13/test-mercedes-amg-cla-45-s-4matic-poriadna-davka-adrenalinu/ 																																			(auto)
+
+	hw:
+		CZ:
+			http://pctuning.tyden.cz/hardware/skrine-zdroje-chladice/60355-cooler-master-mastercase-h500-argb-nejnizsi-haf 																															(hw)
+			https://www.systemonline.cz/zpravy/wd-predstavuje-prvni-externi-disk-zabezpeceny-technologii-armorlock-z.htm 																															(hw)
+			https://www.svetandroida.cz/shelly-duo-recenze-chytra-zarovka/comment-page-1/#comment-1021454 																																			(hw)
+
+
+	notebook:
+		CZ:
+			https://notebook.cz/clanky/recenze-notebook/2020/11-generace-intel-core-acer-swift-5-sf514-55t 																																			(notebook)
+			http://www.hrej.cz/pr-clanek/asus-gaming-vg249q-6599/ 																																													(notebook)
+			https://smartmania.cz/recenze-microsoft-surface-book-3-vykonny-notebook-a-graficky-tablet-v-jednom/#comment-360421 																														(notebook)
+			https://diit.cz/clanek/recenze-asus-rog-strix-b550-f-gaming-wifi-ryzen-5-3600-pretaktovani	 																																			(notebook)
+		SK:
+			https://touchit.sk/recenzia-hp-elitebook-x360-1040-g6-jasny-biznis-notebook/307959 																																						(notebook)
+			https://touchit.sk/recenzia-asus-tuf-gaming-a15-laka-pomerom-cena-vykon-a-odolnym-sasi/307972 																																			(notebook)
+			https://techbox.dennikn.sk/hp-zbook-fury-15-a-17-ponuknu-desktopovy-vykon-v-telach-beznych-notebookov/ 																																	(notebook)
+
+	sluchatka:
+		CZ:
+			https://musicserver.cz/clanek/64151/honor-choice-earbuds-lepsi-bezdratova-sluchatka-za-899-kc-nesezenete/ 																																(sluchatka)
+			https://www.fullmoonzine.cz/novinky/honor-choice-earbuds-lepsi-bezdratova-sluchatka-za-899-kc-nesezenete 																																(sluchatka)
+			https://www.svetandroida.cz/realme-buds-air-neo-recenze/comment-page-1/#comment-1021344 																																				(sluchatka)
+			https://www.svetandroida.cz/samsung-galaxy-buds-live-recenze/comment-page-1/#comment-1021628 																																			(sluchatka)
+
+		SK:
+			https://touchit.sk/recenzia-sony-mdr-rf895rk/307895 																																													(sluchatka)
+
+
+
+
+
+
+https://www.autojournal.cz/test (hodnoceni, text)
+https://autoroad.cz/testy-aut/ (text (závěr))
+https://smartmania.cz/test (hodnoceni, text, + -)
+https://auto-mania.cz/test (text)
+https://vybermiauto.cz/recenze/ (hodnoceni po prokliku, text)
+
+
+
+
+https://www.autojournal.cz/test-hyundai-i30n-project-c/ G
+https://www.autojournal.cz/test-ojetiny-land-rover-discovery-4-schopny-stroj-s-posramocenou-povesti/ B    asdasd
+https://autoroad.cz/testy-aut/99728-test-peugeot-208-1-5-bluehdi-100-gt-line-zaslouzene-autem-roku-2020 G
+https://autoroad.cz/testy-aut/99727-kdyz-ma-elektromobil-jeden-kvalt-couva-stejne-rychle-jako-jede-dopredu B asdasd
+https://auto-mania.cz/test-mercedes-amg-a-45-s-4matic-2020/ G 
+https://smartmania.cz/test-skoda-octavia-2020-bude-to-opet-prodejni-bestseller/?utm_source=rss&utm_medium=rss&utm_campaign=test-skoda-octavia-2020-bude-to-opet-prodejni-bestseller G
+https://auto-mania.cz/test-plug-in-hybridu-ford-kuga-phev-2020/ G
+https://vybermiauto.cz/recenze/test-fiat-tipo-hatchback G
+https://www.autojournal.cz/test-peugeot-208-gt-line-na-pomezi-premiove-tridy/ G
+https://www.autojournal.cz/test-skoda-octavia-2-0-tdi-evo-pokrok-nezastavis/ G
+https://auto-mania.cz/test-plug-in-hybridu-peugeot-3008-gt-hybrid4-2020/ G
+https://www.autojournal.cz/test-bmw-118d/ G 
+https://www.autojournal.cz/test-yamaha-tracer-700/ B asdasd
+https://auto-mania.cz/test-mild-hybridu-ford-focus-kombi-10-ecoboost-hybrid-2020/ G
+https://www.autojournal.cz/test-peugeot-2008-1-5-bluehdi/ G
+https://auto-mania.cz/test-volkswagen-t-roc-cabriolet-1-5-tsi-110-kw-dsg-r-line-2020/ G
+
+
+
+
+
+pudb3 /mnt/data-2/feeds_crawling/big_brother/src/html_to_vert.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/workplace/3-vert/cs-media/2020-10-01_0045.vert.processing' -l -f -m 12 -t /mnt/data-2/feeds_crawling/big_brother/src/../library/morphodita/precompiled_bin/run_tokenizer -i /mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/workplace/2-downloaded/cs-media/2020-10-01_0045.warc.processing
+
+pudb3 /mnt/data-2/feeds_crawling/big_brother/src/html_to_vert.py -o '/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media/workplace/3-vert/cs-media/2020-10-01_0045.vert.processing -l -f -m 12 -t /mnt/data-2/feeds_crawling/big_brother/src/../library/morphodita/precompiled_bin/run_tokenizer /mnt/data-2/feeds_crawling/big_brother/src/../workplace/2-downloaded/cs_media/2020-10-01_0045.warc.processing
+
+python3 ./src/html_to_vert.py -o ./workplace/3-vert/cs_media/2020-10-01_0045.vert.processing -l -f -m 12 -t ./src/../library/morphodita/precompiled_bin/run_tokenizer -i ./workplace/2-downloaded/cs_media/2020-10-01_0045.warc.processing
+
+
+python3 ./src/html_to_vert.py -o ./workplace/3-vert/cs_media/2020-10-01_0045.vert.processing -t ./library/morphodita/precompiled_bin/run_tokenizer -i ./workplace/2-downloaded/cs_media/2020-10-01_0045.warc.processing
+
+
+domov můj:
+/mnt/minerva1/nlp/homes/xmatya11/BP/cs_media
+
+
+
+
+
+
+
+
+
+https://vybermiauto.cz/recenze/test-volkswagen-tiguan-allspace G
+https://auto-mania.cz/test-skoda-superb-scout-2-0-tsi-200-kw-dsg-4x4-2019/ G
+https://autoroad.cz/testy-aut/98200-test-peugeot-508-gt-line-jde-k-sobe-zakladni-benzin-a-grand-tourismo G
+https://vybermiauto.cz/recenze/test-bmw-x5 	G
+https://www.autojournal.cz/test-toyota-yaris-gr-sport-1-5/	G
+https://vybermiauto.cz/recenze/test-dacia-logan-mcv-stepway G
+https://www.autojournal.cz/test-mercedes-benz-v250-d-4matic-marco-polo/ G
+https://autoroad.cz/testy-aut/98214-test-hyundai-i30-kombi-1-4-t-gdi-opravdu-nejlepsi-ceske-kombi G
+https://vybermiauto.cz/recenze/test-toyota-corolla-touring-sports G
+https://auto-mania.cz/test-audi-tt-rs-coupe-2-5-tfsi-quattro-2019/ G
+https://autoroad.cz/testy-aut/98292-test-mitsubishi-eclipse-cross-1-5-turbo-cvt-4wd-crossover-nejen-do-mesta G
+https://vybermiauto.cz/recenze/test-mitsubishi-eclipse-cross G
+https://www.autojournal.cz/test-renault-clio-tce-100-demonstrator-pokroku/ G
+https://www.autojournal.cz/test-ojetiny-audi-a6-3-0-bi-tdi-avant/ 																	B ojetina
+https://vybermiauto.cz/recenze/test-honda-civic-type-r G
+https://vybermiauto.cz/recenze/test-kia-optima-sw G
+https://www.autojournal.cz/test-mini-john-cooper-works/ G
+https://vybermiauto.cz/recenze/test-audi-a6-avant G
+https://auto-mania.cz/test-bmw-m2-competition-2019/ G
+https://www.autojournal.cz/test-ojetiny-opel-astra-h-levna-ale-prehlizena-volba-2/ 													B ojetina
+https://vybermiauto.cz/recenze/test-skoda-scala G
+https://vybermiauto.cz/recenze/test-bmw-3-sedan G
+https://www.autojournal.cz/test-ojetiny-seat-leon-fr-3d/ 																			B ojetina
+https://vybermiauto.cz/recenze/test-honda-hr-v G
+https://vybermiauto.cz/recenze/test-volkswagen-t-cross G
+https://vybermiauto.cz/recenze/test-audi-e-tron G
+https://vybermiauto.cz/recenze/test-kia-ceed G
+https://auto-mania.cz/test-dacia-logan-mcv-blue-dci-70-kw-techroad-2019/ G
+https://vybermiauto.cz/recenze/test-hyundai-i30-fastback G
+https://vybermiauto.cz/recenze/test-kia-stonic G
+https://vybermiauto.cz/recenze/test-ford-edge G
+https://vybermiauto.cz/recenze/test-bmw-z4 G
+https://vybermiauto.cz/recenze/test-toyota-camry  G
+https://vybermiauto.cz/recenze/test-opel-insignia-liftback G
+https://vybermiauto.cz/recenze/test-skoda-kamiq G
+https://vybermiauto.cz/recenze/test-volkswagen-tiguan G
+https://vybermiauto.cz/recenze/test-seat-alhambra G
+https://vybermiauto.cz/recenze/test-mazda-cx-5 G
+https://auto-mania.cz/test-audi-a4-allroad-40-tdi-quattro-2019/ G
+https://auto-mania.cz/test-bmw-330d-xdrive-touring-2020/ G
+https://www.autojournal.cz/test-peugeot-508-sw-gt-bluehdi-180-neobycejne-kombi/ G
+https://auto-mania.cz/test-skoda-kamiq-1-0-tsi-70-kw-2019/ G
+https://auto-mania.cz/test-mitsubishi-l200-24-did-4x4-5at-rock-proof-2019/ G
+https://vybermiauto.cz/recenze/test-peugeot-508-sw G
+https://auto-mania.cz/test-mitsubishi-l200-2019/ G
+https://autoroad.cz/testy-aut/98594-test-honda-cr-v-2-0-hybrid-i-mmd-e-cvt-lifestyle-terapie-tichem G
+https://auto-mania.cz/test-ds-3-crossback-1-2-puretech-155-eat8-2019/ G
+https://www.autojournal.cz/test-mercedes-benz-a-160/ G
+https://auto-mania.cz/test-audi-q7-50-tdi-quattro-2019/ G
+https://www.autojournal.cz/test-toyota-corolla-sedan-1-8-hybrid-abstinent/ G
+https://www.autojournal.cz/test-audi-sq8-naskok-diky-technice/ G
+https://auto-mania.cz/test-kia-xceed-1-6-t-gdi-204-k-7dct-2019/ G
+https://www.autojournal.cz/test-jaguar-i-pace-s-ev400-elektricky-kral/ G
+https://vybermiauto.cz/recenze/test-skoda-superb-combi G
+https://www.autojournal.cz/test-audi-s6-avant-nafta-neni-mrtva/ G
+https://autoroad.cz/testy-aut/98518-test-mitsubishi-l200-double-cab-oldschoolovy-partak-s-diamanty-ve-znaku G
+https://www.autojournal.cz/test-ojetiny-peugeot-208/ 																			B ojetina
+https://auto-mania.cz/test-mazda3-hatchback-skyactiv-x-180-awd-2020/
+https://vybermiauto.cz/recenze/test-seat-leon-st
+https://auto-mania.cz/test-mitsubishi-eclipse-cross-1-5-turbo-mivec-cvt-s-awc-2019/
+https://auto-mania.cz/test-peugeot-508-sw-gt-puretech-225-2019/
+https://smartmania.cz/test-lexus-rx-wellness-na-kolech/
+https://autoroad.cz/testy-aut/98613-test-mercedes-benz-x350d-premiovy-pick-up-se-skvelym-motorem
